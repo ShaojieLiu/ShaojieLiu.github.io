@@ -111,7 +111,13 @@
 }
 /*其他*/
 .change{
+    transition: all .5s;
     -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+
+    transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
 }
 /*导航点点*/
 .indicater-cont{
