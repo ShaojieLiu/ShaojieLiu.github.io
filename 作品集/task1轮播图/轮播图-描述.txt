@@ -1,0 +1,16 @@
+实现5种不同形式的轮播图一键切换:
+旋转木马
+横向连续
+单画渐隐
+翻来覆去
+发牌模式
+
+引入组件后,设置基础参数,运行cs.main()
+
+基础参数:
+    with(cs) {
+        current = 0 // 第一张图片
+        mode = 0 // 初始模式
+        intervalTime = 1000 // 延迟时间
+        list = ["img/1.jpg","img/2.jpg", "img/3.jpg", "img/4.jpg", "img/5.jpg"] // 图片src
+    }

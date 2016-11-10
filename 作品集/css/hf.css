@@ -1,0 +1,24 @@
+html, body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+header{
+    flex: none;
+    background-color: #336699;
+    color: white;
+    font-size: 2em;
+    padding: 0.2em 0.5em;
+    box-shadow: 0 0.1em 0.1em #333;
+    -webkit-box-shadow: 0 0.1em 0.1em #333;
+    -moz-box-shadow: 0 0.1em 0.1em #333;
+    z-index: 100;
+}
+footer{
+    flex: none;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #336699;
+    color: white;
+    z-index: 0;
+}

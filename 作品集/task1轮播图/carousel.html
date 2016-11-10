@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://use.fontawesome.com/7c21822d4d.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="carousel.css">
+        <link rel="stylesheet" href="../css/hf.css">
+        <style media="screen">
+            *{
+                /*outline: thin dashed red;*/
+            }
+
+            mainCont{
+                flex: auto;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items:center;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <i class="fa fa-photo"></i>
+            <span>Carousel</span>
+        </header>
+        <mainCont>
+            <div class="poster-main example" onselectstart="return false">
+                <div class="poster-list">
+                    <div class="poster-btn poster-prev-btn"><</div>
+                    <div class="poster-btn poster-next-btn">></div>
+                    <div class="indicater-cont"></div>
+                </div>
+            </div>
+            <div class="switch">
+                <div class="btn btn-primary swi-btn">切换Carousel模式</div>
+            </div>
+        </mainCont>
+        <footer>By Shaojie Liu 2016-10-17</footer>
+<script type="text/javascript" src="carousel.js"></script>
+<script type="text/javascript">
+    with(cs) {
+        current = 0 // 第一张图片
+        mode = 0 // 初始模式
+        intervalTime = 1000 // 延迟时间
+        list = ["img/1.jpg","img/2.jpg", "img/3.jpg", "img/4.jpg", "img/5.jpg"] // 图片src
+    }
+    cs.main()
+</script>
+    </body>
+</html>

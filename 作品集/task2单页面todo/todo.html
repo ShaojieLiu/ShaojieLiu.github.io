@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://use.fontawesome.com/7c21822d4d.js"></script>
+        <link rel="stylesheet" href="../css/hf.css">
+        <style media="screen">
+            *{
+                /*outline: thin dashed red;*/
+            }
+            mainCont{
+                flex: auto;
+                position: relative;
+                display: flex;
+                align-items: stretch;
+                font-size: 1.2em;
+            }
+
+            .classlist{
+                flex: none;
+                width: 250px;
+                background-color: #ddd;
+                box-shadow: 0.1em 0 0.2em #777;
+                z-index: 30;
+                display: flex;
+                flex-direction: column;
+            }
+            .tasklist{
+                flex: none;
+                width: 250px;
+                background-color: #ddd;
+                box-shadow: 0.1em 0 0.2em #777;
+                z-index: 20;
+                display: flex;
+                flex-direction: column;
+            }
+            .txtarea{
+                flex: auto;
+                background-color: #eef;
+                display: flex;
+                flex-direction: column;
+            }
+
+
+            classlist-header, tasklist-header, txtarea-header{
+                flex: none;
+                /*height: 3em;*/
+                padding: 1em;
+                /*background-color: #369;*/
+                background-color: #9cf;
+                color: #000;
+                box-shadow: 0 0.1em 0.1em #333;
+                z-index: 31;
+            }
+            classlist-footer, tasklist-footer{
+                flex: none;
+                padding: 1em;
+                background-color: #9cf;
+                text-align: center;
+            }
+            .classlist-cont{
+                flex: auto;
+                overflow: scroll;
+                /*box-shadow: inset 0.1em 0 1em 0.1em #999;*/
+            }
+            .tasklist-cont{
+                flex: auto;
+                overflow: scroll;
+                /*box-shadow: inset 0.1em 0 1em 0.1em #999;*/
+            }
+
+            .classlist-folder p{
+                padding: 0.5em 1em;
+                margin: 0;
+            }
+            .classlist-file p{
+                padding: 0.5em 2.5em;
+            }
+            .classlist p:hover, .classlist-active{
+                background-color: #eee;
+                cursor: pointer;
+            }
+            .folder-active{
+                background-color: #eee;
+            }
+
+            .tasklist-cont-tab{
+                background-color: #eee;
+                display: flex;
+            }
+            .tasklist-cont-btn{
+                flex: auto;
+                text-align: center;
+                padding: 0.5em;
+                box-shadow: inset 0.1em 0 1em 0.2em #bbb;
+            }
+            .pointer:hover{
+                cursor: pointer;
+                opacity: 0.8;
+            }
+            .tasklist-cont-btn:hover, classlist-footer:hover, tasklist-footer:hover{
+                cursor: pointer;
+                opacity: 0.8;
+            }
+            .tasklist-cont-btn-active{
+                background-color: #ddd;
+                box-shadow: none;
+            }
+            .tasklist-cont-time{
+                padding-left: 1em;
+                background-color: #ddd;
+            }
+            .tasklist-cont-title{
+                background-color: #eee;
+                padding: 0 1em;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .txtarea-time{
+                background-color: #eee;
+                box-shadow: 0 0.1em 0.1em #555;
+                padding: 1em;
+            }
+            .txtarea-task{
+                padding: 1em;
+            }
+            txtarea-header{
+                display: flex;
+                padding-bottom: 0.5em;
+                justify-content: space-between;
+                z-index: 10;
+            }
+            txtarea-header i{
+                /*color: #9cf;*/
+                margin-right: 1em;
+                margin-top: -0.1em;
+            }
+
+            cover{
+                display: flex;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 90;
+                background-color: rgba(0, 0, 0, 0.7);
+                /*color: white;*/
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <i class="fa fa-calendar-check-o"></i>
+            <span>ToDo</span>
+        </header>
+        <mainCont>
+            <cover id="addingClass">
+                <span style="color:white;">请输入名称</span>
+                <input type="textarea" id=classname  placeholder="新分类的名称" value="">
+                <span>
+                    <i class="fa fa-2x fa-check pointer" id=classcheck style="color:green;"></i>
+                    <i class="fa fa-2x fa-close pointer" id=cancel style="color:red;"></i>
+                </span>
+                <i class=""></i>
+            </cover>
+            <cover id="addingTask">
+                <span style="color:white;">请输入名称</span>
+                <input type="textarea" id=taskname  placeholder="新分类的名称" value="">
+                <span>
+                    <i class="fa fa-2x fa-check pointer" id=taskcheck style="color:green;"></i>
+                    <i class="fa fa-2x fa-close pointer" id=cancel2 style="color:red;"></i>
+                </span>
+                <i class=""></i>
+            </cover>
+            <div class="classlist">
+                <classlist-header>
+                    <i class="fa fa-list-ul"></i>
+                    <span>分类列表</span>
+                </classlist-header>
+                <div class="classlist-cont">
+                    <div class="classlist-folder folder-active">
+                        <p>
+                            <i class="fa fa-globe"></i>
+                            <span>所有任务(1)</span>
+                        </p>
+                    </div>
+
+                    <div class="classlist-folder">
+                        <p>
+                            <i class="fa fa-folder-open-o"></i>
+                            <span>默认分类(1)</span>
+                        </p>
+                        <!-- <div class="classlist-file">
+                            <p>
+                                <i class="fa fa-file-o"></i>
+                                <span>默认事件(1)</span>
+                            </p>
+                        </div> -->
+                    </div>
+                </div>
+                <classlist-footer id="addClass">
+                    <i class="fa fa-plus"></i>
+                    <span>添加分类</span>
+                </classlist-footer>
+            </div>
+
+            <div class="tasklist">
+                <tasklist-header>
+                    <i class="fa fa-list-ul"></i>
+                    <span>任务列表</span>
+                </tasklist-header>
+                <div class="tasklist-cont">
+                    <div class="tasklist-cont-tab">
+                        <div class="tasklist-cont-btn tasklist-cont-btn-active">所有</div>
+                        <div class="tasklist-cont-btn ">未完成</div>
+                        <div class="tasklist-cont-btn">已完成</div>
+                    </div>
+                    <div class="tasklist-cont-time">
+                        2016-11-07
+                    </div>
+                    <div class="tasklist-cont-title">
+                        <span>写论文</span>
+                        <i class="fa fa-check"></i>
+                    </div>
+                </div>
+                <tasklist-footer id="addTask">
+                    <i class="fa fa-plus"></i>
+                    <span>添加任务</span>
+                </tasklist-footer>
+            </div>
+
+            <div class="txtarea">
+                <txtarea-header>
+                    <!-- <i class="fa fa-list-ul"></i> -->
+                    <span>Title: 写论文</span>
+                    <span>
+                        <i class="fa fa-edit fa-2x"></i>
+                        <i class="fa fa-check-square-o fa-2x"></i>
+                    </span>
+                </txtarea-header>
+                <div class="txtarea-time">
+                    <span>Date: 2016-11-07</span>
+                </div>
+                <div class="txtarea-task">
+                    写完result部分
+                </div>
+            </div>
+        </mainCont>
+        <footer>By Shaojie Liu 2016-11-07</footer>
+<script type="text/javascript">
+    var db = {
+        active:{
+            class:1,
+            task:1,
+            // thing:10100,
+        },
+        classes:[
+            {
+                id:0,
+                class:'所有任务',
+                icon:'globe',
+                comNum:0,
+                allNum:'?',
+            },
+            {
+                id:1,
+                class:'默认分类',
+                icon:'folder-open-o',
+                comNum:0,
+                allNum:1,
+            },
+        ],
+        // things:[
+            //     {
+            //         id:10100,
+            //         thing:'默认事件',
+            //     }
+            // ],
+        tasks:[
+            {
+                id: 1,
+                class_id: 1,
+                time:'2016-11-07',
+                title:'写论文',
+                task:'写完result部分',
+                completed:'check',
+            }
+        ],
+    }
+    db.getClassbyid = function (id) {
+        for (let prop of db.classes) {
+            if (prop.id == id) {
+                return prop.class
+            }
+        }
+    }
+    db.getTasksbyclassid = function (id) {
+        var tasks = []
+        for (let prop of db.tasks) {
+            if (prop.class_id == id) {
+                tasks.push(prop)
+            }
+        }
+        return tasks
+    }
+    db.newID = function (obj) {
+        for (var i = 1; i < 9999; i ++) {
+            var uniq = true
+            for (let prop in db[obj]) {
+                if (db.classes[prop].id == i) {
+                    uniq = false
+                }
+            }
+            if (uniq) {
+                // console.log(i, typeof(i))
+                return i
+            }
+        }
+    }
+    db.addClass = function (classname) {
+        var newClass = {
+            id:db.newID('classes'),
+            class:classname,
+            icon:'folder-open-o',
+            comNum:0,
+            allNum:0,
+        }
+        console.log('addClass', newClass)
+        db.classes.push(newClass)
+    }
+    db.addTask = function (taskname) {
+        var newTask = {
+            id:db.newID('tasks'),
+            class_id: db.active.class,
+            time:'2016-11-09',
+            title:taskname,
+            task:'',
+            completed:0,
+        }
+        console.log('addTask', newTask)
+        db.tasks.push(newTask)
+    }
+    db.activeit = function (level, id) {
+        db.active[level] = id
+    }
+    db.rend = function () {
+        // 加载类表
+        var where = $('.classlist-cont')
+        where.empty()
+        for (let prop of db.classes) {
+            classtemplate = `
+            <div class="classlist-folder" id=class${prop.id}>
+                <p>
+                    <i class="fa fa-${prop.icon}"></i>
+                    <span>${prop.class}(${prop.comNum}/${prop.allNum})</span>
+                </p>
+            </div>`
+            where.append(classtemplate)
+        }
+        // 加载任务表
+        where = $('.tasklist-cont')
+        where.empty()
+        where.append(`
+            <div class="tasklist-cont-tab">
+                <div class="tasklist-cont-btn">${db.getClassbyid(db.active.class)}</div>
+                <!--<div class="tasklist-cont-btn">未完成</div>
+                <div class="tasklist-cont-btn">已完成</div>-->
+            </div>`)
+        for (let prop of db.getTasksbyclassid(db.active.class)) {
+            tasktemplate = `
+            <div class="tasklist-cont-time">
+                ${prop.time}
+            </div>
+            <div class="tasklist-cont-title">
+                <span>${prop.title}</span>
+                <i class="fa fa-${prop.completed}"></i>
+            </div>`
+            where.append(tasktemplate)
+        }
+        // 激活
+        $('.folder-active').removeClass('folder-active')
+        $(`#class${db.active.class}`).addClass('folder-active')
+        bind.classlist()
+    }
+
+    var bind = {
+        Out: function () {$('cover').fadeOut()},
+        classIn: function () {
+            $('#addingClass').fadeIn()
+            $('#classname').focus()
+        },
+        taskIn: function () {
+            $('#addingTask').fadeIn()
+            $('#taskname').focus()
+        },
+    }
+    bind.classlist = function () {
+        $('.classlist-folder').on('click', function () {
+            $('.classlist-folder').removeClass('folder-active')
+            var div = $(event.target).closest('.classlist-folder')[0]
+            var id = div.id.split('class')[1]
+            db.activeit('class', id)
+            $(div).addClass('folder-active')
+            db.rend()
+        })
+    }
+    bind.cover = function () {
+        var coverClick = {
+            cancel1: bind.Out,
+            cancel2: bind.Out,
+            classcheck: function () {
+                bind.Out()
+                var name = $('#classname').val()
+                if (name) {
+                    db.addClass(name)
+                    $('#classname').val(undefined)
+                    db.rend()
+                }
+            },
+            taskcheck: function () {
+                bind.Out()
+                var name = $('#taskname').val()
+                if (name) {
+                    db.addTask(name)
+                    $('#taskname').val(undefined)
+                    db.rend()
+                }
+            },
+        }
+        $('cover i, #classcheck').on('click', function () {
+            coverClick[event.target.id]()
+        })
+        $('#classname').on('keyup', function () {
+            if (event.key == 'Enter') {coverClick.classcheck()}
+        })
+    }
+    bind.btn = function () {
+        $('#addClass').on('click', bind.classIn)
+        $('#addTask').on('click', bind.taskIn)
+
+    }
+
+    var onload = {
+        fade: function () {
+            $('cover').fadeOut(0)
+        }
+    }
+    onload.init = function () {
+        bind.cover()
+        bind.btn()
+        onload.fade()
+        db.rend()
+
+    }
+
+
+    // db.addClass('干嘛')
+    // db.addClass('??')
+    // console.log(db.classes)
+
+    onload.init()
+
+
+</script>
+    </body>
+</html>
