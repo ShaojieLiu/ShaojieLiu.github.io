@@ -456,20 +456,18 @@
             // addingClass: bind.Out,
             // addingTask: bind.Out,
             classcheck: function () {
-                bind.Out()
                 var name = $('#classname').val()
                 if (name) {
                     db.addClass(name)
-                    $('#classname').val(undefined)
+                    bind.Out()
                     db.rend()
                 }
             },
             taskcheck: function () {
-                bind.Out()
                 var name = $('#taskname').val()
                 if (name) {
                     db.addTask(name)
-                    $('#taskname').val(undefined)
+                    bind.Out()
                     db.rend()
                 }
             },
