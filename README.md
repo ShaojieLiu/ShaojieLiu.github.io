@@ -9,5 +9,5 @@
 ## 练习集预览
 
 |轮播图|3D横幅|
-|:-|:-|
+|:--|:--|
 |![task1](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task1.gif)|![task3](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task3.gif)|
