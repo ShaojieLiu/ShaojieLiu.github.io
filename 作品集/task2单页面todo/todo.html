@@ -83,9 +83,7 @@
                 background-color: #eee;
                 cursor: pointer;
             }
-            .folder-active{
-                background-color: #eee;
-            }
+
 
             .tasklist-cont-tab{
                 background-color: #eee;
@@ -147,10 +145,25 @@
                 height: 100%;
                 z-index: 90;
                 background-color: rgba(0, 0, 0, 0.7);
-                /*color: white;*/
+                color: white;
                 flex-direction: column;
-                justify-content: center;
+                justify-content:flex-start;;
                 align-items: center;
+                /*flex-wrap: wrap;*/
+            }
+            .space{
+                height: 25%;
+                width: 100%;
+            }
+            input{color: black;}
+            .tips{
+                /*width: 300px;*/
+                display: flex;
+                flex-direction: column;
+                color: white;
+            }
+            .folder-active{
+                background-color: #fff;
             }
         </style>
     </head>
@@ -161,22 +174,29 @@
         </header>
         <mainCont>
             <cover id="addingClass">
-                <span style="color:white;">请输入名称</span>
-                <input type="textarea" id=classname  placeholder="新分类的名称" value="">
+                <div class="space"></div>
                 <span>
                     <i class="fa fa-2x fa-check pointer" id=classcheck style="color:green;"></i>
-                    <i class="fa fa-2x fa-close pointer" id=cancel style="color:red;"></i>
-                </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-2x fa-close pointer" id=cancel1 style="color:red;"></i>
+                </span><br>
+                <input type="textarea" id=classname  placeholder="新分类的名称" value="">
+                <div class="tips">
+                    <span></span> <span></span> <span></span> <span></span> <span></span>
+                </div>
                 <i class=""></i>
             </cover>
             <cover id="addingTask">
-                <span style="color:white;">请输入名称</span>
-                <input type="textarea" id=taskname  placeholder="新分类的名称" value="">
+                <div class="space"></div>
                 <span>
                     <i class="fa fa-2x fa-check pointer" id=taskcheck style="color:green;"></i>
+                    &nbsp;&nbsp;
                     <i class="fa fa-2x fa-close pointer" id=cancel2 style="color:red;"></i>
-                </span>
-                <i class=""></i>
+                </span><br>
+                <input type="textarea" id=taskname  placeholder="新任务的名称" value="">
+                <div class="tips">
+                    <span></span> <span></span> <span></span> <span></span> <span></span>
+                </div>
             </cover>
             <div class="classlist">
                 <classlist-header>
@@ -184,7 +204,7 @@
                     <span>分类列表</span>
                 </classlist-header>
                 <div class="classlist-cont">
-                    <div class="classlist-folder folder-active">
+                    <!-- <div class="classlist-folder folder-active">
                         <p>
                             <i class="fa fa-globe"></i>
                             <span>所有任务(1)</span>
@@ -196,13 +216,13 @@
                             <i class="fa fa-folder-open-o"></i>
                             <span>默认分类(1)</span>
                         </p>
-                        <!-- <div class="classlist-file">
+                        <div class="classlist-file">
                             <p>
                                 <i class="fa fa-file-o"></i>
                                 <span>默认事件(1)</span>
                             </p>
-                        </div> -->
-                    </div>
+                        </div>
+                    </div> -->
                 </div>
                 <classlist-footer id="addClass">
                     <i class="fa fa-plus"></i>
@@ -216,7 +236,7 @@
                     <span>任务列表</span>
                 </tasklist-header>
                 <div class="tasklist-cont">
-                    <div class="tasklist-cont-tab">
+                    <!-- <div class="tasklist-cont-tab">
                         <div class="tasklist-cont-btn tasklist-cont-btn-active">所有</div>
                         <div class="tasklist-cont-btn ">未完成</div>
                         <div class="tasklist-cont-btn">已完成</div>
@@ -227,7 +247,7 @@
                     <div class="tasklist-cont-title">
                         <span>写论文</span>
                         <i class="fa fa-check"></i>
-                    </div>
+                    </div> -->
                 </div>
                 <tasklist-footer id="addTask">
                     <i class="fa fa-plus"></i>
@@ -303,7 +323,7 @@
     db.getTasksbyclassid = function (id) {
         var tasks = []
         for (let prop of db.tasks) {
-            if (prop.class_id == id) {
+            if (prop.class_id == id || id == 0) {
                 tasks.push(prop)
             }
         }
@@ -358,7 +378,8 @@
             <div class="classlist-folder" id=class${prop.id}>
                 <p>
                     <i class="fa fa-${prop.icon}"></i>
-                    <span>${prop.class}(${prop.comNum}/${prop.allNum})</span>
+                    <span>${prop.class}(${prop.comNum}/
+                        ${prop.allNum = db.getTasksbyclassid(prop.id).length})</span>
                 </p>
             </div>`
             where.append(classtemplate)
@@ -377,7 +398,7 @@
             <div class="tasklist-cont-time">
                 ${prop.time}
             </div>
-            <div class="tasklist-cont-title">
+            <div class="tasklist-cont-title" id="task${prop.id}">
                 <span>${prop.title}</span>
                 <i class="fa fa-${prop.completed}"></i>
             </div>`
@@ -387,10 +408,16 @@
         $('.folder-active').removeClass('folder-active')
         $(`#class${db.active.class}`).addClass('folder-active')
         bind.classlist()
+        bind.tasklist()
     }
 
     var bind = {
-        Out: function () {$('cover').fadeOut()},
+        Out: function () {
+            $('cover').fadeOut()
+            $('#classname').val(undefined)
+            $('#taskname').val(undefined)
+            bind.keyword('')
+        },
         classIn: function () {
             $('#addingClass').fadeIn()
             $('#classname').focus()
@@ -410,10 +437,23 @@
             db.rend()
         })
     }
+    bind.tasklist = function () {
+        $('.tasklist-cont-title').on('click', function () {
+            $('.tasklist-cont-title').removeClass('folder-active')
+            var cont = $(event.target).closest('.tasklist-cont-title')
+            cont.addClass('folder-active')
+            var id = cont[0].id.split('task')[1]
+            console.log(id)
+            db.activeit('task', id)
+            db.rend()
+        })
+    }
     bind.cover = function () {
         var coverClick = {
             cancel1: bind.Out,
             cancel2: bind.Out,
+            // addingClass: bind.Out,
+            // addingTask: bind.Out,
             classcheck: function () {
                 bind.Out()
                 var name = $('#classname').val()
@@ -433,11 +473,14 @@
                 }
             },
         }
-        $('cover i, #classcheck').on('click', function () {
+        $('cover i').on('click', function () {
             coverClick[event.target.id]()
         })
         $('#classname').on('keyup', function () {
             if (event.key == 'Enter') {coverClick.classcheck()}
+        })
+        $('#taskname').on('keyup', function () {
+            if (event.key == 'Enter') {coverClick.taskcheck()}
         })
     }
     bind.btn = function () {
@@ -445,7 +488,35 @@
         $('#addTask').on('click', bind.taskIn)
 
     }
+    bind.typing = function() {
+        $('#classname, #taskname').on('keyup', function () {
+            bind.keyword(event.target.value)
+        })
+    }
+    bind.keyword = function(content) {
+        //定义回调函数
+        window.baidu = {
+            sug: function(json) {
+                console.log(json)
+                for (let prop = 0; prop < 5; prop ++) {
+                    if (json.s[prop]) {
+                        $('#addingClass .tips>span')[prop].innerHTML = json.s[prop]
+                        $('#addingTask .tips>span')[prop].innerHTML = json.s[prop]
+                    } else {
+                        $('#addingClass .tips>span')[prop].innerHTML = ''
+                        $('#addingTask .tips>span')[prop].innerHTML = ''
+                    }
+                }
+            }
+        }
+        //组装查询地址
+        var src = `http://suggestion.baidu.com/su?wd=${content}&cb=window.baidu.sug`
+        //动态添加JS脚本
+        var script = document.createElement("script");
+        script.src = src;
+        document.getElementsByTagName("body")[0].appendChild(script);
 
+    }
     var onload = {
         fade: function () {
             $('cover').fadeOut(0)
@@ -456,7 +527,8 @@
         bind.btn()
         onload.fade()
         db.rend()
-
+        bind.typing()
+        // bind.keyword('刘少杰')
     }
 
 
