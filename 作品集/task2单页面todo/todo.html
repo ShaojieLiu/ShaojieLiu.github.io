@@ -156,12 +156,24 @@
                 height: 25%;
                 width: 100%;
             }
-            input{color: black;}
-            .tips{
+            input{
+                color: black;
+            }
+            .tips>div{
                 /*width: 300px;*/
                 display: flex;
                 flex-direction: column;
                 color: white;
+                border-width: 0.1px;
+                border-color: lightblue;
+                border-style: solid;
+                border-top-width: 0;
+                width: 193px;
+            }
+            .tips>div>span{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .folder-active{
                 background-color: #fff;
@@ -181,9 +193,9 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="fa fa-2x fa-close pointer" id=cancel1 style="color:red;"></i>
                 </span><br>
-                <input type="textarea" id=classname  placeholder="新分类的名称" value="">
                 <div class="tips">
-                    <span></span> <span></span> <span></span> <span></span> <span></span>
+                    <input type="textarea" id=classname  placeholder="新分类的名称" value="">
+                    <div><span></span> <span></span> <span></span> <span></span> <span></span></div>
                 </div>
                 <i class=""></i>
             </cover>
@@ -194,9 +206,9 @@
                     &nbsp;&nbsp;
                     <i class="fa fa-2x fa-close pointer" id=cancel2 style="color:red;"></i>
                 </span><br>
-                <input type="textarea" id=taskname  placeholder="新任务的名称" value="">
                 <div class="tips">
-                    <span></span> <span></span> <span></span> <span></span> <span></span>
+                    <input type="textarea" id=taskname  placeholder="新任务的名称" value="">
+                    <div><span></span> <span></span> <span></span> <span></span> <span></span></div>
                 </div>
             </cover>
             <div class="classlist">
@@ -497,13 +509,14 @@
         window.sogou = {
             sug: function(json) {
                 console.log(json)
+                $('#sc').remove()
                 for (let prop = 0; prop < 5; prop ++) {
                     if (json[1][prop]) {
-                        $('#addingClass .tips>span')[prop].innerHTML = json[1][prop]
-                        $('#addingTask .tips>span')[prop].innerHTML = json[1][prop]
+                        $('#addingClass .tips span')[prop].innerHTML = json[1][prop]
+                        $('#addingTask .tips span')[prop].innerHTML = json[1][prop]
                     } else {
-                        $('#addingClass .tips>span')[prop].innerHTML = ''
-                        $('#addingTask .tips>span')[prop].innerHTML = ''
+                        $('#addingClass .tips span')[prop].innerHTML = ''
+                        $('#addingTask .tips span')[prop].innerHTML = ''
                     }
                 }
             }
@@ -513,6 +526,7 @@
         //动态添加JS脚本
         var script = document.createElement("script");
         script.src = src;
+        script.id = 'sc'
         document.getElementsByTagName("body")[0].appendChild(script);
     }
     var onload = {
