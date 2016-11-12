@@ -45,11 +45,16 @@
 }
 
 .contact{
+    /*flex: none;
+    display: block;*/
+    position: relative;
+    left: -5%;
     color: white;
     background-color: #336699;
     /*border: medium solid;*/
-    padding: 1em 3em 1.5em 3em;
+    padding: 1em 3.5em 1.5em 3.5em;
     flex: none;
+    width: 110%
 }
 .method-txt a{text-decoration: underline;}
 .name{

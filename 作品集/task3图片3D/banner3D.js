@@ -1,21 +1,37 @@
-var prepare = function () {
+// br命名空间代表banner
+var br = {}
+br.prepare = function () {
     document.querySelector('#name').classList.add('type-name')
     var pList = document.querySelectorAll('.name>p')
     pList[0].classList.add('type-del')
     pList[1].classList.add('type-1st')
     pList[2].classList.add('type-2nd')
 }
-var threeD = function () {
+br.threeD = function () {
+    // 使横幅变宽, 看不见左右边界 CSS
     var threeD = document.querySelector('.threeD')
+    threeD.style.transition = `all .6s`
+    // 用百分比代替px, 使得不同宽度的屏幕效果一致
     threeD.addEventListener('mousemove', function(e) {
-        var y = event.clientY - threeD.offsetTop - threeD.offsetHeight/2
-        var x = event.clientX - threeD.offsetLeft - threeD.offsetWidth/2
-        // console.log(y, threeD.offsetHeight)
-        threeD.style.transform = `rotateY(${x/30}deg) rotateX(${-y/30}deg)`
+        var y = (event.clientY - threeD.offsetTop - threeD.offsetHeight/2) / threeD.offsetHeight
+        var x = (event.clientX - threeD.offsetLeft - threeD.offsetWidth/2) / threeD.offsetWidth
+        threeD.style.transform = `rotateY(${x*30}deg) rotateX(${-y*10}deg)`
+    })
+    // 移出时, 缓慢归位
+    threeD.addEventListener('mouseleave', function () {
+        threeD.style.transform = `rotateY(0deg) rotateX(0deg)`
+        threeD.style.transition = `all .6s`
+        if(br.timeid){clearTimeout(br.timeid)}
+    })
+    // 移入时, 刚开始缓慢跟随
+    threeD.addEventListener('mouseenter', function () {
+        br.timeid = setTimeout(function () {
+            threeD.style.transition = `all 0.1s`
+        }, 600)
     })
 }
 var __main = function () {
-    window.onload = function () {prepare()}
-    threeD()
+    window.onload = function () {br.prepare()}
+    br.threeD()
 }
 __main()
