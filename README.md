@@ -10,4 +10,4 @@
 
 |轮播图|3D横幅|
 |:--|:--|
-|![task1](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task1.gif)|![task3](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task3.gif)|
+|[![task1](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task1.gif)](http://ShaojieLiu.github.io/作品集/task1轮播图/carousel.html)|![task3](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task3.gif)|
