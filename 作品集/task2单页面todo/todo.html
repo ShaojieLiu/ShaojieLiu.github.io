@@ -80,7 +80,7 @@
             .classlist-file p{
                 padding: 0.5em 2.5em;
             }
-            .classlist p:hover, .classlist-active{
+            .classlist-active{
                 background-color: #eee;
                 cursor: pointer;
             }
@@ -98,11 +98,13 @@
             }
             .pointer:hover{
                 cursor: pointer;
-                opacity: 0.8;
+                /*opacity: 0.8;*/
+                box-shadow: inset 0.1em 0 1em 0.05em rgba(0,0,0,0.5);
             }
             .tasklist-cont-btn:hover, classlist-footer:hover, tasklist-footer:hover{
                 cursor: pointer;
-                opacity: 0.8;
+                /*opacity: 0.8;*/
+                box-shadow: inset 0.1em 0 1em 0.2em #bbb;
             }
             .tasklist-cont-btn-active{
                 background-color: #ddd;
@@ -153,11 +155,16 @@
                 /*flex-wrap: wrap;*/
             }
             .space{
-                height: 25%;
+                height: 20%;
                 width: 100%;
             }
             input{
                 color: black;
+            }
+            cover>span>i{
+                width: 96px;
+                text-align: center;
+                padding: 0.2em;
             }
             .tips>div{
                 /*width: 300px;*/
@@ -189,10 +196,9 @@
             <cover id="addingClass">
                 <div class="space"></div>
                 <span>
-                    <i class="fa fa-2x fa-check pointer" id=classcheck style="color:green;"></i>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-2x fa-close pointer" id=cancel1 style="color:red;"></i>
-                </span><br>
+                        <i class="fa fa-2x fa-check pointer" id=classcheck style="color:green;"></i>
+                        <i class="fa fa-2x fa-close pointer" id=cancel1 style="color:red;"></i>
+                </span>
                 <div class="tips">
                     <input type="textarea" id=classname  placeholder="新分类的名称" value="">
                     <div><span></span> <span></span> <span></span> <span></span> <span></span></div>
@@ -203,14 +209,14 @@
                 <div class="space"></div>
                 <span>
                     <i class="fa fa-2x fa-check pointer" id=taskcheck style="color:green;"></i>
-                    &nbsp;&nbsp;
                     <i class="fa fa-2x fa-close pointer" id=cancel2 style="color:red;"></i>
-                </span><br>
+                </span>
                 <div class="tips">
                     <input type="textarea" id=taskname  placeholder="新任务的名称" value="">
                     <div><span></span> <span></span> <span></span> <span></span> <span></span></div>
                 </div>
             </cover>
+
             <div class="classlist">
                 <classlist-header>
                     <i class="fa fa-list-ul"></i>
@@ -389,7 +395,7 @@
         for (let prop of db.classes) {
             classtemplate = `
             <div class="classlist-folder" id=class${prop.id}>
-                <p>
+                <p class=pointer>
                     <i class="fa fa-${prop.icon}"></i>
                     <span>${prop.class}(${prop.comNum}/
                         ${prop.allNum = db.getTasksbyclassid(prop.id).length})</span>
