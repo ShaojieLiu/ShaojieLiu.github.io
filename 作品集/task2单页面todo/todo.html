@@ -496,13 +496,13 @@
     }
     bind.keyword = function(content) {
         //定义回调函数
-        window.baidu = {
+        window.sogou = {
             sug: function(json) {
                 console.log(json)
                 for (let prop = 0; prop < 5; prop ++) {
-                    if (json.s[prop]) {
-                        $('#addingClass .tips>span')[prop].innerHTML = json.s[prop]
-                        $('#addingTask .tips>span')[prop].innerHTML = json.s[prop]
+                    if (json[1][prop]) {
+                        $('#addingClass .tips>span')[prop].innerHTML = json[1][prop]
+                        $('#addingTask .tips>span')[prop].innerHTML = json[1][prop]
                     } else {
                         $('#addingClass .tips>span')[prop].innerHTML = ''
                         $('#addingTask .tips>span')[prop].innerHTML = ''
@@ -511,7 +511,7 @@
             }
         }
         //组装查询地址
-        var src = `https://suggestion.baidu.com/su?wd=${content}&cb=window.baidu.sug`
+        var src = `https://www.sogou.com/suggnew/ajajjson?type=web&key=${content}`
         //动态添加JS脚本
         var script = document.createElement("script");
         script.src = src;
