@@ -94,7 +94,8 @@ a:hover{color: #99ccff;}
 }
 .name>p{
     transform: translateZ(70px);
-    text-shadow: 5px 4px 3px #333;
+    text-shadow: -3px 5px 10px #555;
+    /*filter: drop-shadow(-3px 2px 5px #333) blur(.5px);*/
 }
 .method{
     transform: translateZ(50px);
