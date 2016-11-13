@@ -9,26 +9,28 @@ br.prepare = function () {
 }
 br.threeD = function () {
     // 使横幅变宽, 看不见左右边界 CSS
+    var mainCont = document.querySelector('body')
     var threeD = document.querySelector('.threeD')
-    threeD.style.transition = `all .6s`
+    threeD.style.transition = `all .1s`
     // 用百分比代替px, 使得不同宽度的屏幕效果一致
-    threeD.addEventListener('mousemove', function(e) {
-        var y = (event.clientY - threeD.offsetTop - threeD.offsetHeight/2) / threeD.offsetHeight
-        var x = (event.clientX - threeD.offsetLeft - threeD.offsetWidth/2) / threeD.offsetWidth
+    mainCont.addEventListener('mousemove', function(e) {
+        console.log(this)
+        var y = (event.clientY - this.offsetTop - this.offsetHeight/2) / this.offsetHeight
+        var x = (event.clientX - this.offsetLeft - this.offsetWidth/2) / this.offsetWidth
         threeD.style.transform = `rotateY(${x*30}deg) rotateX(${-y*10}deg)`
     })
     // 移出时, 缓慢归位
-    threeD.addEventListener('mouseleave', function () {
-        threeD.style.transform = `rotateY(0deg) rotateX(0deg)`
-        threeD.style.transition = `all .6s`
-        if(br.timeid){clearTimeout(br.timeid)}
-    })
-    // 移入时, 刚开始缓慢跟随
-    threeD.addEventListener('mouseenter', function () {
-        br.timeid = setTimeout(function () {
-            threeD.style.transition = `all 0.1s`
-        }, 600)
-    })
+    // threeD.addEventListener('mouseleave', function () {
+    //     threeD.style.transform = `rotateY(0deg) rotateX(0deg)`
+    //     threeD.style.transition = `all .6s`
+    //     if(br.timeid){clearTimeout(br.timeid)}
+    // })
+    // // 移入时, 刚开始缓慢跟随
+    // threeD.addEventListener('mouseenter', function () {
+    //     br.timeid = setTimeout(function () {
+    //         threeD.style.transition = `all 0.1s`
+    //     }, 600)
+    // })
 }
 var __main = function () {
     window.onload = function () {br.prepare()}

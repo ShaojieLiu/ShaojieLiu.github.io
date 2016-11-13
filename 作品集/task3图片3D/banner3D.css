@@ -6,7 +6,7 @@
 .type-name{
     display: inline-block;
     font-size: 4em;
-    width: 3.1em;
+    width: 3em;
     white-space: nowrap;
     overflow: hidden;
     border-right: .1em solid transparent;
@@ -48,16 +48,19 @@
     /*flex: none;
     display: block;*/
     position: relative;
-    left: -5%;
+    left: -7%;
     color: white;
     background-color: #336699;
     /*border: medium solid;*/
-    padding: 1em 8% 1.5em 8%;
+    padding: 1em 10% 1.5em 10%;
     flex: none;
-    width: 110%;
-    box-shadow: inset 0px 0px 70px 13px rgba(0,0,0,0.3), 0px 0 50px 1px rgba(0,0,0,0.6);
+    width: 95%;
+    box-shadow: inset 0px 0px 70px 13px rgba(0,0,0,1), 0px 0 50px 1px rgba(0,0,0,0.6);
 }
-.method-txt a{text-decoration: underline;}
+.method-txt{
+    text-decoration: underline;
+    margin: 0.4em;
+}
 .name{
     text-align: center;
     padding: 0;
@@ -70,31 +73,48 @@
 .method{text-align: left;}
 a{color: inherit;}
 a:hover{color: #99ccff;}
-.image{
-    display: none;
-}
+.image{transition: all .5s;}
 .image>img{
     position: absolute;
     left: 45%;
     transform: translateX(-70%) translateZ(40px);
     width: 200px;
-    filter: drop-shadow(-3px 2px 5px #333) blur(.7px);
+    filter: drop-shadow(-3px 2px 5px #333) blur(.7px) contrast(1);
 }
 #html{
     transform: translateX(-20%) translateZ(80px) ;
-    filter: drop-shadow(-8px 2px 5px #444);
+    filter: drop-shadow(-8px 2px 5px #444)  contrast(1.2);
+    transition: all 1s ease-in-out;
 }
 
+.bg>img{
+    position: absolute;
+    left:0;
+    top:0;
+    width: 2048px;
+    height: 200%;
+    filter: blur(10px) brightness(120%) grayscale(0.6) contrast(1.5);
+    overflow: hidden;
+}
+.bg{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:0;
+    top:0;
+}
 .threeD{
     transform-style: preserve-3d;
+    border-radius: 2px;
 }
 #name{
     transform: translateZ(20px);
-    filter: drop-shadow(-3px 2px 5px #333) blur(.5px);
+    filter: drop-shadow(-3px 2px 5px #222) blur(.5px);
 }
 .name>p{
     transform: translateZ(70px);
-    text-shadow: -3px 5px 10px #555;
+    filter: drop-shadow(-3px 5px 5px #333);
     /*filter: drop-shadow(-3px 2px 5px #333) blur(.5px);*/
 }
 .method{

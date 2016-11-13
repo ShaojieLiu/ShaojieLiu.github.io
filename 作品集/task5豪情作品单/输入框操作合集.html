@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>输入框操作合集</title>
+        <style media="screen">
+            .txt-short{
+                width:25px;
+            }
+        </style>
+    </head>
+    <body>
+        <input class="txt" type="textarea" id=ortxt placeholder='输入你想去除空格的内容' value="[输入框_操作_合集_]"><br>
+        <span>设置:占位符</span><input class="txt-short" type="textarea" id=vactxt value='_'><br>
+        <span>设置:长度&nbsp; &nbsp; </span><input class="txt-short" type="number" id=lmtxt value=4><br>
+        <button class="btn set-btn"type="button" id=btn-reverse data-act=rv name="button">反转</button><br>
+        <button class="btn set-btn"type="button" id=btn-delsp data-act=ds name="button">删除占位符</button><br>
+        <button class="btn set-btn"type="button" id=btn-limit data-act=lm name="button">限制字符数</button><br>
+        <button class="btn set-btn"type="button" id=btn-fill-left data-act=fl name="button">从左填充占位符</button><br>
+        <button class="btn set-btn"type="button" id=btn-fill-both data-act=fb name="button">从左右两边填充占位符</button><br>
+    </body>
+<script type="text/javascript">
+// 这是第一种写法, 把每一个行为都写成一个对象
+    // ds means 'delete the space in the txtarea'
+    // var ds = {
+    //     txt : document.querySelector('#ortxt'),
+    //     btn : document.querySelector('#delsp-btn'),
+    //     ds : function (val) {
+    //         return val.split(' ').join('')
+    //     },
+    //     onload : function () {
+    //         var that = this
+    //         this.btn.addEventListener('click', function () {
+    //             var val = that.txt.value
+    //             var result = that.ds(val)
+    //             that.txt.value = result
+    //         })
+    //     },
+    // }
+    // // rv means 'reverse the string'
+    // var rv = {
+    //     txt : document.querySelector('#ortxt'),
+    //     btn : document.querySelector('#reverse-btn'),
+    //     rv : function (val) {
+    //         var result = val.split('').reverse().join('')
+    //         return result
+    //     },
+    //     onload : function () {
+    //         var that = this
+    //         this.btn.addEventListener('click', function () {
+    //             var val = that.txt.value
+    //             var result = that.rv(val)
+    //             that.txt.value = result
+    //         })
+    //     },
+    // }
+    // window.onload = function () {
+    //     ds.onload()
+    //     rv.onload()
+    // }
+
+// 这是第二种写法, 把所有行为写在了一起, 管理更加方便, 代码复用率高
+    // xop means text operation
+    var xop = {
+        txt : document.querySelector('#ortxt'),
+        setBtn : document.querySelectorAll('.set-btn'),
+        lmtxt : document.querySelector('#lmtxt'),
+        vactxt : document.querySelector('#vactxt'),
+        vac :'_',
+        lmNum : 4,
+        // ds means 'delete the space in the txtarea'
+        ds : function (val) {
+            return val.split(this.vac).join('')
+        },
+        // rv means 'reverse the string'
+        rv : function (val) {
+            var result = val.split('').reverse().join('')
+            return result
+        },
+        // lm meas limit the length of the string
+        lm : function (val) {
+            return val.split('').slice(0, this.lmNum).join('')
+        },
+        // fill left, 从左边开始填充占位符
+        fl : function (val) {
+            var arr = val
+            while (arr.length < this.lmNum) {
+                arr = this.vac + arr
+            }
+            return arr
+        },
+        // fill both, 从左右两边开始填充占位符
+        fb : function (val) {
+            var arr = val
+            var i = 0
+            while (arr.length < this.lmNum) {
+                if (i % 2 == 0) {
+                    arr = this.vac + arr
+                } else {
+                    arr = arr + this.vac
+                }
+                i++
+            }
+            return arr
+        },
+
+        onload : function () {
+            var that = this
+            // 注册 ortxt 和 所有set按钮
+            for (let prop of this.setBtn) {
+                prop.addEventListener('click', function () {
+                    var val = that.txt.value
+                    var result = that[prop.dataset.act](val)
+                    that.txt.value = result
+                })
+            }
+            // 注册 lmtxt 输入框
+            lmtxt.addEventListener('input', function () {
+                // console.log(this, event.target) // 在监听函数里this和event.target相同
+                that.lmNum = that.lmtxt.value
+            })
+            vactxt.addEventListener('input', function() {
+                that.vac = that.vactxt.value
+            })
+        },
+    }
+    window.onload = function () {
+        xop.onload()
+    }
+
+</script>
+</html>
