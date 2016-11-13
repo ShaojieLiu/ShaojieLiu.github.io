@@ -52,9 +52,10 @@
     color: white;
     background-color: #336699;
     /*border: medium solid;*/
-    padding: 1em 3.5em 1.5em 3.5em;
+    padding: 1em 8% 1.5em 8%;
     flex: none;
-    width: 110%
+    width: 110%;
+    box-shadow: inset 0px 0px 70px 13px rgba(0,0,0,0.3), 0px 0 50px 1px rgba(0,0,0,0.6);
 }
 .method-txt a{text-decoration: underline;}
 .name{
@@ -77,15 +78,20 @@ a:hover{color: #99ccff;}
     left: 45%;
     transform: translateX(-70%) translateZ(40px);
     width: 200px;
+    filter: drop-shadow(-3px 2px 5px #333) blur(.7px);
 }
 #html{
     transform: translateX(-20%) translateZ(80px) ;
+    filter: drop-shadow(-8px 2px 5px #444);
 }
 
 .threeD{
     transform-style: preserve-3d;
 }
-#name{transform: translateZ(20px);}
+#name{
+    transform: translateZ(20px);
+    filter: drop-shadow(-3px 2px 5px #333) blur(.5px);
+}
 .name>p{
     transform: translateZ(70px);
     text-shadow: 5px 4px 3px #333;
