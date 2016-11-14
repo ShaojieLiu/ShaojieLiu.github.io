@@ -5,7 +5,7 @@
 
 |[轮播](http://ShaojieLiu.github.io/tasklist/task1carousel/carousel.html)|[3D横幅](https://ShaojieLiu.github.io/tasklist/task3banner3D/banner3D.html)|[魔方](https://ShaojieLiu.github.io/tasklist/task6cube/cube3D.html)|
 |:--:|:--:|:--:|
-|[![task1](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task1.gif)](http://ShaojieLiu.github.io/作品集/task1轮播图/carousel.html)|[![task3](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task3.gif)](https://ShaojieLiu.github.io/tasklist/task3banner3D/banner3D.html)|[![task6](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task6.gif)](https://ShaojieLiu.github.io/tasklist/task6cube/cube3D.html)
+|[![task1](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task1.gif)](http://ShaojieLiu.github.io/tasklist/task1carousel/carousel.html)|[![task3](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task3.gif)](https://ShaojieLiu.github.io/tasklist/task3banner3D/banner3D.html)|[![task6](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task6.gif)](https://ShaojieLiu.github.io/tasklist/task6cube/cube3D.html)
 
 
 >这里是 [**少杰的简历**]() 和 [**练习集**]() , 欢迎跟我联系哈!<br>
@@ -15,7 +15,7 @@
 
 ## 练习集列表
 
-- [task1 - 各种轮播图](http://ShaojieLiu.github.io/作品集/task1轮播图/carousel.html)
+- [task1 - 各种轮播图](http://ShaojieLiu.github.io/tasklist/task1carousel/carousel.html)
 - [task2 - TODO单页面应用](https://ShaojieLiu.github.io/tasklist/task2todo/todo.html)
 - [task3 - banner3D](https://ShaojieLiu.github.io/tasklist/task3banner3D/banner3D.html)
 - [task5 - 文本操作](https://ShaojieLiu.github.io/tasklist/task5haoqing/txt_operation.html)
