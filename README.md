@@ -3,7 +3,8 @@
 
 
 
-|[轮播](http://ShaojieLiu.github.io/tasklist/task1carousel/carousel.html)|[3D横幅](https://ShaojieLiu.github.io/tasklist/task3banner3D/banner3D.html)|[魔方](https://ShaojieLiu.github.io/tasklist/task6cube/cube3D.html)|
+|[轮播](
+http://ShaojieLiu.github.io/tasklist/task1carousel/carousel.html)|[3D横幅](https://ShaojieLiu.github.io/tasklist/task3banner3D/banner3D.html)|[魔方](https://ShaojieLiu.github.io/tasklist/task6cube/cube3D.html)|
 |:--:|:--:|:--:|
 |[![task1](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task1.gif)](http://ShaojieLiu.github.io/tasklist/task1carousel/carousel.html)|[![task3](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task3.gif)](https://ShaojieLiu.github.io/tasklist/task3banner3D/banner3D.html)|[![task6](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task6.gif)](https://ShaojieLiu.github.io/tasklist/task6cube/cube3D.html)
 
