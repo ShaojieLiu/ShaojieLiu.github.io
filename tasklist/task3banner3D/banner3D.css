@@ -112,7 +112,7 @@ a:hover{color: #99ccff;}
 }
 #name{
     transform: translateZ(20px);
-    filter: drop-shadow(-3px 2px 5px #222) blur(.5px);
+    filter: drop-shadow(-3px 2px 5px #222);
 }
 .name>p{
     transform: translateZ(70px);

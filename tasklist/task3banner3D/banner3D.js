@@ -11,7 +11,7 @@ br.threeD = function () {
     // 使横幅变宽, 看不见左右边界 CSS
     var mainCont = document.querySelector('body')
     var threeD = document.querySelector('.threeD')
-    threeD.style.transition = `all .1s`
+    threeD.style.transition = `all .5s`
     // 用百分比代替px, 使得不同宽度的屏幕效果一致
     mainCont.addEventListener('mousemove', function(e) {
         console.log(this)
