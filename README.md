@@ -15,7 +15,7 @@
 
 ## 练习集列表
 
-|序号|题目|源码链接|
+|序号|题目 & Demo|源码链接|
 |:--|:--|:--|
 |task1|[各种轮播图](https://ShaojieLiu.github.io/tasklist/task1carousel/carousel.html)|[源码](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/tasklist/task1carousel/carousel.js)|
 |task2|[TODO单页面应用](https://ShaojieLiu.github.io/tasklist/task2todo/todo.html)|[源码](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/tasklist/task2todo/todo.html)|
