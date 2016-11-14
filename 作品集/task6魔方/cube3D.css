@@ -1,0 +1,42 @@
+mainCont:hover{
+    cursor: move;
+}
+.wrap{
+    width: 260px;
+    height: 260px;
+    position: relative;
+    display: inline-block;
+    transform-style: preserve-3d;
+    transition: all 1s;
+    /*border: medium solid red;*/
+    /*transform: scale(0.5);*/
+}
+.wrap-item{
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    left: 0;
+    top: 0;
+    transition: all 1s;
+}
+.trans{
+    opacity: .8;
+}
+#p1 { transform: rotateX(90deg)                     translateZ(130px); }
+#p2 { transform: rotateY(90deg)     rotateZ(-90deg) translateZ(130px); }
+#p3 { transform: rotateX(-90deg)    rotateZ(180deg) translateZ(130px); }
+#p4 { transform: rotateY(-90deg)    rotateZ(90deg)  translateZ(130px); }
+#p5 { transform: rotateY(180deg)                    translateZ(130px); }
+#p6 { transform:                                    translateZ(130px); }
+.wrap-state1{ transform: perspective(300px)                    rotateX(-90deg) ; }
+.wrap-state2{ transform: perspective(300px) rotateZ(90deg)     rotateY(-90deg) ; }
+.wrap-state3{ transform: perspective(300px) rotateZ(180deg)    rotateX(90deg)  ; }
+.wrap-state4{ transform: perspective(300px) rotateZ(-90deg)    rotateY(90deg)  ; }
+.wrap-state5{ transform: perspective(300px)                    rotateY(180deg) ; }
+.wrap-state6{ transform: perspective(300px) scale(1);}
+.wrap-state-S1{ scale(0.5) transform:                    rotateX(-90deg) ; }
+.wrap-state-S2{ scale(0.5) transform: rotateZ(90deg)     rotateY(-90deg) ; }
+.wrap-state-S3{ scale(0.5) transform: rotateZ(180deg)    rotateX(90deg)  ; }
+.wrap-state-S4{ scale(0.5) transform: rotateZ(-90deg)    rotateY(90deg)  ; }
+.wrap-state-S5{ scale(0.5) transform:                    rotateY(180deg) ; }
+.wrap-state-S6{ scale(0.5) }
