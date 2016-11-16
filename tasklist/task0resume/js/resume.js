@@ -52,15 +52,15 @@ var windowPrint = function () {
         if (state == 'complete') {
             html2canvas(document.getElementsByClassName('printWindow'), {
                 onrendered: function(canvas) {
-                    $('.content').append(canvas);//生成画布后如何处理，当然可以在新标签打开，在浮层展示等等
+                    $('.content').append(canvas);
+                    $('link').last().remove()
+                    $('.content canvas').remove()//生成画布后如何处理，当然可以在新标签打开，在浮层展示等等
                         var image = document.querySelector('.content canvas')
                         // console.log(image)
                         var mysrc =  image.toDataURL('image/png')
                         printWindow = window.open()
                         printWindow.document.write(`<img src=${mysrc}>`)
                         printWindow.print()
-                        $('link').last().remove()
-                        $('.content canvas').remove()
                 },
                 canvas_id: 'canvas1',
             });//通过修改html2canvas源码添加canvas的id
