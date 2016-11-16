@@ -1,0 +1,95 @@
+/*动画在此*/
+@-webkit-keyframes typing { from{width:0;} 20% { width: 0; } }
+@-webkit-keyframes blink-caret { 50% { border-color: white; } }
+@-webkit-keyframes typedel {from{width:0;} 10% { width: 0; } 50%{width:6.1em;} 80%{width:6.1em;} to{width:0;}}
+.type-name{
+    display: inline-block;
+    font-size: 4em;
+    width: 3.1em;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .1em solid transparent;
+    animation: typing 2s  steps(3,start), /* # of steps = # of chars */
+                blink-caret 1s 2;
+}
+.type-del{
+    display: inline-block;
+    width: 6.1em;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .1em solid transparent;
+    animation: typing 2s steps(1,end),
+                typedel 2s 2s steps(6,end) forwards,
+                blink-caret 1s 2s 2;
+}
+.type-1st{
+    display: inline-block;
+    width: 5.1em;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .1em solid transparent;
+    animation: typing 4s steps(1,end),
+                typing 1s 4s steps(9,end), /* # of steps = # of chars */
+                blink-caret 1s 4s 1;
+}
+.type-2nd{
+    display: inline-block;
+    width: 5.1em;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .1em solid transparent;
+    animation: typing 5s steps(1,end),
+                typing 1.5s 5s steps(5,end), /* # of steps = # of chars */
+                blink-caret 1s 5s 2;
+}
+/*布局在此*/
+.contact{
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    background-color: #336699;
+    padding: 10px 40px;
+    width: 100%;
+    box-shadow: inset 0px 0px 70px 13px rgba(0,0,0,1), 0px 0 50px 1px rgba(0,0,0,0.6);
+}
+.name{
+    display: flex;
+    width: 245px;
+    height: 150px;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: flex-start;
+}
+.method{
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: 1em 0;
+    }
+    .method-txt{
+        text-decoration: underline;
+        display: inline-block;
+        margin: 0.2em;
+    }
+    h4{width: 300px;}
+/*装饰在此*/
+a{color: inherit;}
+a:hover{color: #99ccff;}
+#name{
+    transform: translateZ(20px);
+    filter: drop-shadow(-3px 2px 5px #222);
+}
+.name>p{
+    transform: translateZ(70px);
+    filter: drop-shadow(-3px 5px 5px #333);
+}
+.method{
+    transform: translateZ(50px);
+    text-shadow: 5px 4px 3px #555;
+}
+
+.threeD{
+    transform-style: preserve-3d;
+    border-radius: 2px;
+}

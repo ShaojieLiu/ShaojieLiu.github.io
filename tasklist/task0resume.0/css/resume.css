@@ -1,0 +1,101 @@
+body {
+    /* 字体栈写在这: */
+    font-family: Georgia, "Times New Roman",
+        "Microsoft YaHei", "微软雅黑",
+        STXihei, "华文细黑",serif;
+    font-size: 20px;
+    width: 100%;
+    margin: 0;
+    position: relative;
+}
+
+
+.btn-primary{
+    height: 1.8em;
+    width: 5em;
+    padding: 2px;
+    z-index: 100;
+    position: relative;
+    bottom: 1px;
+    box-shadow: 2px 2px 2px black;
+}
+.topbar{
+    text-align:justify;
+    text-align-last:justify;
+    background-color: #336699;
+    color: white;
+    border-bottom: thick solid white;
+}
+.topbtn:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.topbar img{height: 2em;}
+.topbar span{
+    display: inline-block;
+    font: bold 1.5em arial;}
+
+.content{position: relative;}
+.leftpart, .rightpart{
+    text-align: left;
+    padding: 0;
+}
+.title1{font-weight: bold; position: relative; width: 100%;}
+.title1-icon{font-size: 2em; color: #336699; }
+.title1-txt{
+    display: inline-block;
+    top:0.5em;
+    background-color: #99ccff;
+    border: medium solid;
+    color: white;
+    width: 90%;
+    position: absolute;;
+    z-index: -10;
+    border-radius: 0.3em;
+    padding-left: 3em;
+    left: 2em;
+}
+.title1-txt-c{font-size: 1em;}
+.title1-txt-e{
+    color: #336699;
+    font-size: 1em;
+}
+
+.title2{
+    font-weight: bold;
+    padding-left: 0.5em;
+    position: relative;
+    left: -2.2em;
+    width: 100%;
+    z-index: 10;
+}
+.title2-icon{
+    font-size: 1.5em;
+    color: #99ccff;
+    position: relative;
+    left: 1.5em;
+}
+.title2-txt{
+    display: inline-block;
+    position: relative;
+    width: 80%;
+    left: 0em;
+    z-index: -10;
+    border-bottom: thin solid #99ccff;
+    padding-left: 2em;
+    z-index: -1;
+    /*background-color: red;*/
+    border-top-right-radius: 1em;
+}
+.demo{position: absolute; right: 10%; bottom: 28%; z-index: 100;}
+
+.title3 i{
+    margin-left: -1em;}
+.title3{
+    padding-left: 2.5em;
+    width: 90%;
+}
+
+.none{display: none;}
+.main{height:100%;}
+.clear{clear: both;height: 50px;}
