@@ -32,15 +32,14 @@ var init = function () {
             '4. 掌握 JS/ Ajax/ HTML5/ CSS3 等前端技术;',
             '5. 对 DNS / HTTP 和相关的其他底层网络协议有一定了解;',
             '6. 能实现各种网页产品的浏览器端和移动产品的各种 Web View 中的交互逻辑和业务逻辑的开发维护;',
-            '7. 非常期待能与您共事, 谢谢'
         ])
         addT1(where, 'user-plus', '其 他 技 能', 'Experience')
         addT3(where, ['star','star','star','star','star','star','star',], [
             '掌握 Photoshop: 鼠绘 / 设计 / 修图 ',
             '熟悉 Cinema4D: 建模 / Aftereffect: 特效剪辑',
+            '掌握 Markdown Github',
             'STM32 单片机 等硬件开发经验',
-            '低音提琴 八级',
-            '二胡 六级',
+            '低音提琴: 八级 / 二胡: 六级',
         ])
 
     where = 'rightpart'
