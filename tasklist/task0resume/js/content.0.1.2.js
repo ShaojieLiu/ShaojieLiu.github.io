@@ -31,7 +31,8 @@ var init = function () {
             '3. 熟悉Node.js后台技术, 对前后端联合开发的技术原理有全面认识;',
             '4. 掌握 JS/ Ajax/ HTML5/ CSS3 等前端技术;',
             '5. 对 DNS / HTTP 和相关的其他底层网络协议有一定了解;',
-            '6. 能实现各种网页产品的浏览器端和移动产品的各种 Web View 中的交互逻辑和业务逻辑的开发维护;'
+            '6. 能实现各种网页产品的浏览器端和移动产品的各种 Web View 中的交互逻辑和业务逻辑的开发维护;',
+            '7. 非常期待能与您共事, 谢谢'
         ])
         addT1(where, 'user-plus', '其 他 技 能', 'Experience')
         addT3(where, ['star','star','star','star','star','star','star',], [
@@ -44,47 +45,47 @@ var init = function () {
 
     where = 'rightpart'
         addT1(where, 'rocket', '前 端 经 验', 'Experience')
-        addT2(where, 'newspaper-o', `简历生成器`, 'resume.html')
+        addT2(where, 'newspaper-o', `简历生成器`, '#')
             addT3(where, ['star','gear','gear','gears'], [
                 '<st>自建框架</st>,生成预定样式的简历(本页面)',
                 '语义化的 HTML 模块化的 CSS 实现<st>响应式布局</st>',
                 '编写<st>JavaScript模块</st>生成html',
                 '采用<st>canvas画布绘制</st>,实现"所见即所得"打印(请点击"打印PDF")',
             ])
-        addT2(where, 'calendar-check-o', `ToDo 应用`, 'resume.html')
+        addT2(where, 'calendar-check-o', `ToDo 应用`, 'https://shaojieliu.github.io/tasklist/task2todo/todo.html')
             addT3(where, ['gear','gear','gear', 'gears'], [
                 '使用<st> HTML5的localStorage </st>新特性实现本地数据存储',
                 '利用<st> Ajax和JSON </st>实现前后端协同数据交互',
                 '采用<st> Node.js </st>编写后端程序',
                 '后端采用<st> Express框架 </st>和<st> fileSystem / bodyParser </st>组件实现与数据库的交互和读写'
             ])
-        addT2(where, 'weibo', `微博评论页面`, 'resume.html')
+        addT2(where, 'weibo', `微博评论页面`, '#')
             addT3(where, ['gear','gear','gear'], [
                 '利用<st>Ajax</st>和<st>localStorage</st>实现与服务器和本地的数据通信',
                 '基于<st>JavaScript</st>的逻辑校验和表单提交',
             ])
-        addT2(where, 'volume-up', `音乐播放器`, 'resume.html')
+        addT2(where, 'volume-up', `音乐播放器`, '#')
             addT3(where, ['gear','gear','gear'], [
                 '利用<st>Ajax</st>和<st>localStorage</st>实现与服务器和本地的数据通信',
                 '基于<st>HTML5新标签audio</st>实现音乐播放器',
             ])
-        addT2(where, 'calculator', `数字拼图 游戏`, 'resume.html')
+        addT2(where, 'calculator', `数字拼图 游戏`, '#')
             addT3(where, ['star','gear','gear'], [
                 '基于<st>HTML5</st> 的单页面游戏应用',
                 '<b>完美兼容</b> 桌面端和移动端',
                 '纯粹使用<st>原生JS</st>开发'
             ])
-        addT2(where, 'sign-in', `用户注册页面`, 'resume.html')
+        addT2(where, 'sign-in', `用户注册页面`, '#')
             addT3(where, ['star','gear','gear'], [
                 '对用户输入内容的<st>实时监听/反馈</st>',
                 '使用 jQuery 创建 逻辑校验和 <st>Ajax表单提交</st>',
             ])
-        addT2(where, 'photo', `天猫轮播图`, 'resume.html')
+        addT2(where, 'photo', `天猫轮播图`, 'https://shaojieliu.github.io/tasklist/task1carousel/carousel.html')
             addT3(where, ['gear','gear','gear'], [
                 '利用<st> jQuery 面向对象 </st>开发轮播图组件',
                 '基于<st> CSS3 </st>的新特性实现设计意图'
             ])
-        addT2(where, 'home', `个人小站搭建`, 'resume.html')
+        addT2(where, 'home', `个人小站搭建`, 'https://github.com/ShaojieLiu/ShaojieLiu.github.io')
             addT3(where, ['gear','gear','gear','gears'], [
                 '采用<st>腾讯云服务器</st>和<st>Apache</st>搭建个人小站',
                 '基于<st>FTP协议</st>的站点维护',
