@@ -89,7 +89,7 @@ with(cs) {
     }
     cs.swi = function () {
         var modelist = [
-            {func:cs.carousel0, name:'旋转木马'},
+            {func:cs.carousel0, name:' !<点 我>!'},
             {func:cs.carousel1, name:'横向连续'},
             {func:cs.carousel2, name:'单画渐隐'},
             {func:cs.carousel3, name:'卡片翻转'},

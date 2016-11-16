@@ -45,7 +45,7 @@ var init = function () {
 
     where = 'rightpart'
         addT1(where, 'rocket', '前 端 经 验', 'Experience')
-        addT2(where, 'newspaper-o', `简历生成器`, '#')
+        addT2(where, 'newspaper-o', `简历生成器`, 'https://shaojieliu.github.io/tasklist/task0resume/resume.0.1.1.html')
             addT3(where, ['star','gear','gear','gears'], [
                 '<st>自建框架</st>,生成预定样式的简历(本页面)',
                 '语义化的 HTML 模块化的 CSS 实现<st>响应式布局</st>',
@@ -85,7 +85,7 @@ var init = function () {
                 '利用<st> jQuery 面向对象 </st>开发轮播图组件',
                 '基于<st> CSS3 </st>的新特性实现设计意图'
             ])
-        addT2(where, 'home', `个人小站搭建`, 'https://github.com/ShaojieLiu/ShaojieLiu.github.io')
+        addT2(where, 'home', `个人小站搭建`, 'http://119.29.169.60')
             addT3(where, ['gear','gear','gear','gears'], [
                 '采用<st>腾讯云服务器</st>和<st>Apache</st>搭建个人小站',
                 '基于<st>FTP协议</st>的站点维护',
