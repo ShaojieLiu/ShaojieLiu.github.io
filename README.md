@@ -9,7 +9,7 @@
 
 
 >这里是 [**少杰的简历**](https://shaojieliu.github.io/tasklist/task0resume/resume.0.1.1.html) 和 [**练习集**](https://github.com/ShaojieLiu/ShaojieLiu.github.io/tree/master/tasklist) , 欢迎跟我联系哈!<br>
-兴趣: JavaScript, CSS3
+兴趣: JavaScript, CSS3, html5
 
 
 
