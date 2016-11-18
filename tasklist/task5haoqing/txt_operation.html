@@ -13,7 +13,9 @@
         <input class="txt" type="textarea" id=ortxt placeholder='输入你想去除空格的内容' value="[输入框_操作_合集_]"><br>
         <span>设置:占位符</span><input class="txt-short" type="textarea" id=vactxt value='_'><br>
         <span>设置:长度&nbsp; &nbsp; </span><input class="txt-short" type="number" id=lmtxt value=4><br>
-        <button class="btn set-btn"type="button" id=btn-reverse data-act=rv name="button">反转</button><br>
+        <button class="btn set-btn"type="button" id=btn-reverse data-act=rv name="button">按字符反转</button><br>
+        <button class="btn set-btn"type="button" id=btn-reverse1 data-act=rv1 name="button">按单词反转</button><br>
+        <button class="btn set-btn"type="button" id=btn-reverse2 data-act=rv2 name="button">单词内反转-加密</button><br>
         <button class="btn set-btn"type="button" id=btn-delsp data-act=ds name="button">删除占位符</button><br>
         <button class="btn set-btn"type="button" id=btn-limit data-act=lm name="button">限制字符数</button><br>
         <button class="btn set-btn"type="button" id=btn-fill-left data-act=fl name="button">从左填充占位符</button><br>
@@ -75,6 +77,18 @@
         // rv means 'reverse the string'
         rv : function (val) {
             var result = val.split('').reverse().join('')
+            return result
+        },
+        // 按单词翻转顺序
+        rv1 : function (val) {
+            var result = val.split(this.vac).reverse().join(this.vac)
+            return result
+        },
+        // 单词内反转-加密
+        rv2 : function (val) {
+            var result = val.split(this.vac).map(function (ele) {
+                return ele.split('').reverse().join('')
+            }).join(this.vac)
             return result
         },
         // lm meas limit the length of the string
