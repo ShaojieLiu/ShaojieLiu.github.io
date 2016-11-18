@@ -13,6 +13,7 @@
         <input class="txt" type="textarea" id=ortxt placeholder='输入你想去除空格的内容' value="[输入框_操作_合集_]"><br>
         <span>设置:占位符</span><input class="txt-short" type="textarea" id=vactxt value='_'><br>
         <span>设置:长度&nbsp; &nbsp; </span><input class="txt-short" type="number" id=lmtxt value=4><br>
+
         <button class="btn set-btn"type="button" id=btn-reverse data-act=rv name="button">按字符反转</button><br>
         <button class="btn set-btn"type="button" id=btn-reverse1 data-act=rv1 name="button">按单词反转</button><br>
         <button class="btn set-btn"type="button" id=btn-reverse2 data-act=rv2 name="button">单词内反转-加密</button><br>
@@ -20,52 +21,16 @@
         <button class="btn set-btn"type="button" id=btn-limit data-act=lm name="button">限制字符数</button><br>
         <button class="btn set-btn"type="button" id=btn-fill-left data-act=fl name="button">从左填充占位符</button><br>
         <button class="btn set-btn"type="button" id=btn-fill-both data-act=fb name="button">从左右两边填充占位符</button><br>
+
+        <span class="dis-span" data-act=most>此统计框当你键入字符才触发</span>
     </body>
 <script type="text/javascript">
-// 这是第一种写法, 把每一个行为都写成一个对象
-    // ds means 'delete the space in the txtarea'
-    // var ds = {
-    //     txt : document.querySelector('#ortxt'),
-    //     btn : document.querySelector('#delsp-btn'),
-    //     ds : function (val) {
-    //         return val.split(' ').join('')
-    //     },
-    //     onload : function () {
-    //         var that = this
-    //         this.btn.addEventListener('click', function () {
-    //             var val = that.txt.value
-    //             var result = that.ds(val)
-    //             that.txt.value = result
-    //         })
-    //     },
-    // }
-    // // rv means 'reverse the string'
-    // var rv = {
-    //     txt : document.querySelector('#ortxt'),
-    //     btn : document.querySelector('#reverse-btn'),
-    //     rv : function (val) {
-    //         var result = val.split('').reverse().join('')
-    //         return result
-    //     },
-    //     onload : function () {
-    //         var that = this
-    //         this.btn.addEventListener('click', function () {
-    //             var val = that.txt.value
-    //             var result = that.rv(val)
-    //             that.txt.value = result
-    //         })
-    //     },
-    // }
-    // window.onload = function () {
-    //     ds.onload()
-    //     rv.onload()
-    // }
-
 // 这是第二种写法, 把所有行为写在了一起, 管理更加方便, 代码复用率高
     // xop means text operation
     var xop = {
         txt : document.querySelector('#ortxt'),
         setBtn : document.querySelectorAll('.set-btn'),
+        disSpan : document.querySelectorAll('.dis-span'),
         lmtxt : document.querySelector('#lmtxt'),
         vactxt : document.querySelector('#vactxt'),
         vac :'_',
@@ -117,7 +82,38 @@
             }
             return arr
         },
-
+        // 长度 / 统计次数最多 / 去重复
+        most : function (val) {
+            var arr0 = val.split('')
+            var arr1 = arr0.map(function() {return 0})
+            var len = arr0.length
+            arr0.forEach(function (char, index) {
+                arr0.forEach(function (ele) {
+                    if (char == ele) {
+                        arr1[index]++
+                    }
+                })
+            })
+            // arr1 记录了每个字符出现的次数
+            var maxCount = Math.max.apply(Math, arr1)
+            var maxIndex = arr1.indexOf(maxCount)
+            var maxVal = arr0[maxIndex]
+            // 为了清晰起见,我把 去重 单独写出来,而不是复合在上面的循环中
+            var uniq = []
+            var o = {}
+            arr0.forEach(function (char, index) {
+                console.log(o[char])
+                if (!o[char]) {
+                    o[char] = 1
+                    uniq.push(char)
+                }
+            })
+            console.log(uniq)
+            // uniq = uniq.join('')
+            return `字符串长度为${len}
+字符"${maxVal}"出现次数最多,${maxCount}次
+去重复之后: "${uniq.join('')}"`
+        },
         onload : function () {
             var that = this
             // 注册 ortxt 和 所有set按钮
@@ -128,6 +124,13 @@
                     that.txt.value = result
                 })
             }
+            this.txt.addEventListener('input', function () {
+            // 所有被动检测,注册所有 display-span
+                for (let prop of that.disSpan) {
+                    var val = that.txt.value
+                    prop.innerText = that[prop.dataset.act](val)
+                }
+            })
             // 注册 lmtxt 输入框
             lmtxt.addEventListener('input', function () {
                 // console.log(this, event.target) // 在监听函数里this和event.target相同
@@ -141,6 +144,43 @@
     window.onload = function () {
         xop.onload()
     }
-
+// 这是第一种写法, 把每一个行为都写成一个对象
+        // ds means 'delete the space in the txtarea'
+        // var ds = {
+        //     txt : document.querySelector('#ortxt'),
+        //     btn : document.querySelector('#delsp-btn'),
+        //     ds : function (val) {
+        //         return val.split(' ').join('')
+        //     },
+        //     onload : function () {
+        //         var that = this
+        //         this.btn.addEventListener('click', function () {
+        //             var val = that.txt.value
+        //             var result = that.ds(val)
+        //             that.txt.value = result
+        //         })
+        //     },
+        // }
+        // // rv means 'reverse the string'
+        // var rv = {
+        //     txt : document.querySelector('#ortxt'),
+        //     btn : document.querySelector('#reverse-btn'),
+        //     rv : function (val) {
+        //         var result = val.split('').reverse().join('')
+        //         return result
+        //     },
+        //     onload : function () {
+        //         var that = this
+        //         this.btn.addEventListener('click', function () {
+        //             var val = that.txt.value
+        //             var result = that.rv(val)
+        //             that.txt.value = result
+        //         })
+        //     },
+        // }
+        // window.onload = function () {
+        //     ds.onload()
+        //     rv.onload()
+        // }
 </script>
 </html>
