@@ -58,11 +58,17 @@ with(cb){
             cb.hold = false
         })
     }
+    cb.init = function () {
+        threeD.classList.add('wrap-state0')
+        for (let prop of items) {prop.classList.add('trans')}
+        
+    }
     cb.onload = function () {
         // 使横幅变宽, 看不见左右边界 CSS
         cb.drag()
-        cb.carousel()
+        // cb.carousel()
         cb.hover()
+        cb.init()
     }
 }
 __main = function () {
