@@ -57,6 +57,7 @@ player.prototype.update = function() {
     $('.time1').text(`${timeformat(currentTime)}`)
     $('.time2').text(`${timeformat(duration)}`)
     $('.current').text(`${this.list[this.curr].singer} - ${this.list[this.curr].name}`)
+    this.coverChange(this.list[this.curr].pic)
 }
 player.prototype.end = function() {
     switch (this.mode) {
@@ -99,18 +100,27 @@ player.prototype.switchMode = function() {
     console.log(self.mode,list.indexOf(self.mode),this.mode)
 }
 player.prototype.toggleList = function() {
-    $('.songlist').toggle()}
+    $('.songlist').toggle(1000)
+    $('.circle').toggle(1000)
+    $('.background').fadeIn(300)
+}
 player.prototype.switch = function() {
     if(!this.ele[0].paused) {
         $('#play').removeClass('glyphicon-pause')
+        $('.circle').css("animation-play-state", "paused")
         this.ele[0].pause()
     } else {
         $('#play').addClass('glyphicon-pause')
+        $('.circle').css("animation-play-state", "running")
         this.ele[0].play()
     }
 }
 player.prototype.changeTime = function() {
     this.ele[0].currentTime = this.slider.val() / 100 * this.ele[0].duration
+}
+player.prototype.coverChange = function(url) {
+    $('.background').css("background-image", `url('${url}')`)
+    $('.circle').css("background-image", `url('${url}')`)
 }
 player.prototype.changeVol = function() {
     console.log('changevol', this)
@@ -151,5 +161,7 @@ player.prototype.initPlayer = function () {
     $('.songlist').on('click', 'li', function() {
         self.curr = $('.songlist li').index(event.target)
         self.reload()
+        $('.background').fadeOut(200)
+        self.toggleList()
     })
 }

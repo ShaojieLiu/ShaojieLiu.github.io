@@ -18,6 +18,9 @@
             <audio src="" id="audioPlayer" ></audio>
             <div class="controls">
                 <div class="title">Music Player</div>
+                <!-- 列表区域 -->
+                <ul class=songlist >
+                </ul>
                 <div class="bg">
                     <div class="circle"></div>
                 </div>
@@ -36,9 +39,6 @@
                     <!-- 右时间 -->
                     <span class="time2">_</span>
                 </div>
-                <!-- 列表区域 -->
-                <ul class=songlist >
-                </ul>
                 <!-- 一排按钮 -->
                 <div class="btnArea">
                     <!-- <span class=listbtn-cont> -->
@@ -64,24 +64,26 @@
 <script type="text/javascript">
     var __main = function() {
         var givenlist = [
-                {name:'片头',
-                                src:'music/30秒片头音乐.mp3',
-                                singer:'佚名'},
-                {name:'大野克夫',
-                                src:'music/大野克夫.mp3',
-                                singer:'日本人'},
-                {name:'今夜月',
-                                src:'music/今夜月.mp3',
-                                singer:'日本人'},
-                {name:'光辉岁月',
-                                src:'music/光辉.mp3',
-                                singer:'Beyond'},
-                {name:'泡沫',
-                                src:'music/泡.mp3',
-                                singer:'G.E.M'},
-                {name:'喜欢你',
-                                src:'music/喜欢.mp3',
-                                singer:'G.E.M'}
+                {name:'海阔天空',
+                                src:'music/Beyond-海阔天空.mp3',
+                                singer:'Beyond',
+                                pic:'./res/黄家驹.jpg'},
+                {name:'谁伴我闯荡',
+                                src:'music/Beyond-谁伴我闯荡.mp3',
+                                singer:'Beyond',
+                                pic:'./res/黄家驹.jpg'},
+                {name:'真的爱你',
+                                src:'music/Beyond-真的爱你.mp3',
+                                singer:'Beyond',
+                                pic:'./res/黄家驹.jpg'},
+                {name:'Bad Romance',
+                                src:'music/Lady GaGa-Bad Romance.mp3',
+                                singer:'Lady GaGa',
+                                pic:'./res/ladygaga.jpg'},
+                {name:'Poker Face',
+                                src:'music/Lady GaGa-Poker Face.mp3',
+                                singer:'Lady GaGa',
+                                pic:'./res/ladygaga.jpg'}
         ]
         var p = new player(givenlist)
         p.initPlayer()

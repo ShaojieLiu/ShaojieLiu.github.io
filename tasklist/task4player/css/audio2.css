@@ -14,7 +14,12 @@ html, body, .audio, .controls{height: 100%;}
 }
 .songlist{
     display: none;
+    padding: 20px;
+    font-size: 20px;
+    z-index: 10;
 }
+.songlist:hover{cursor: pointer;}
+.songlist li:hover{color: white;}
 .slider-vol-cont, #vol{
     display: none;
 }
@@ -25,7 +30,7 @@ html, body, .audio, .controls{height: 100%;}
 .none{
     opacity: 0;
 }
-
+.audio{background-color: black;}
 .controls{
     display: flex;
     flex-direction: column;
@@ -37,12 +42,13 @@ html, body, .audio, .controls{height: 100%;}
 }
 .title{
     align-self: stretch;
-    border-bottom: thin solid gray;
+    border-bottom: thin solid black;
+    z-index: 10;
 }
 .current{
     text-align: center;
     margin: 20px 20px 0px 20px;
-    font-size: 30px;
+    font-size: 20px;
     z-index: 9;
 }
 .btnArea{
@@ -63,6 +69,10 @@ html, body, .audio, .controls{height: 100%;}
     align-items: center;
     justify-content: center;
 }
+.sliderArea>span{
+    z-index: 10;
+}
+.slider-cont *:hover{cursor: pointer;}
 .slider-cont{
     flex:auto;
     display: flex;
@@ -90,12 +100,12 @@ range{
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('../res/黄家驹.jpg');
+    /*background-image: url('../res/黄家驹.jpg');*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    filter: brightness(0.3) blur(10px);
-    z-index: -1;
+    filter: contrast(1.3) brightness(0.5) blur(10px);
+    z-index: 0;
 }
 .bg{
     flex: auto;
@@ -108,12 +118,15 @@ range{
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    background-image: url('../res/黄家驹.jpg');
+    /*background-image: url('../res/黄家驹.jpg');*/
     background-position: center;
     background-size: 100%;
     border: 25px solid black;
     filter: contrast(.8);
-    animation: rotate 10s infinite linear;
+    animation: rotate 20s infinite linear;
+}
+.paus{
+    animation-play-state: paused;
 }
 .empty{
     height: 30px;
