@@ -14,7 +14,7 @@ var player = function(givenlist) {
     this.list = givenlist
     this.curr = 0
     this.ele = $('audio')
-    this.mode = 'order' //order random replay
+    this.mode = 'random' //order random replay
     this.slider = $('.slider')
     this.volslider = $('.slider-vol')
 }
@@ -82,15 +82,15 @@ player.prototype.switchMode = function() {
     var modelist = {
         random: function() {
             // self.mode = 'random'
-            $('#mode').addClass('btn fa fa-random')
+            $('#mode').addClass('btn glyphicon glyphicon-random')
         },
         order: function() {
             // self.mode = 'order'
-            $('#mode').addClass('btn fa fa-sort-amount-asc')
+            $('#mode').addClass('btn glyphicon glyphicon-sort-by-order')
         },
         replay: function() {
             // self.mode = 'replay'
-            $('#mode').addClass('btn fa fa-refresh')
+            $('#mode').addClass('btn glyphicon glyphicon-retweet')
         }
     }
     $('#mode').removeClass()
@@ -99,9 +99,9 @@ player.prototype.switchMode = function() {
     console.log(self.mode,list.indexOf(self.mode),this.mode)
 }
 player.prototype.toggleList = function() {
-    $('.songlist').toggle(1000)
+    $('.songlist').fadeToggle(1000)
     $('.circle').toggle(1000)
-    $('.background').fadeIn(300)
+    // $('.background').fadeIn(300)
     this.coverChange(this.list[this.curr].pic)
 }
 player.prototype.switch = function() {
@@ -164,7 +164,7 @@ player.prototype.initPlayer = function () {
     $('.songlist').on('click', 'li', function() {
         self.curr = $('.songlist li').index(event.target)
         self.reload()
-        $('.background').fadeOut(200)
+        // $('.background').fadeOut(200)
         self.toggleList()
     })
 }
