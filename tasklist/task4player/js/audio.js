@@ -57,7 +57,6 @@ player.prototype.update = function() {
     $('.time1').text(`${timeformat(currentTime)}`)
     $('.time2').text(`${timeformat(duration)}`)
     $('.current').text(`${this.list[this.curr].singer} - ${this.list[this.curr].name}`)
-    this.coverChange(this.list[this.curr].pic)
 }
 player.prototype.end = function() {
     switch (this.mode) {
@@ -103,15 +102,18 @@ player.prototype.toggleList = function() {
     $('.songlist').toggle(1000)
     $('.circle').toggle(1000)
     $('.background').fadeIn(300)
+    this.coverChange(this.list[this.curr].pic)
 }
 player.prototype.switch = function() {
     if(!this.ele[0].paused) {
         $('#play').removeClass('glyphicon-pause')
         $('.circle').css("animation-play-state", "paused")
+        this.ele[0].autoplay = false
         this.ele[0].pause()
     } else {
         $('#play').addClass('glyphicon-pause')
         $('.circle').css("animation-play-state", "running")
+        this.ele[0].autoplay = true
         this.ele[0].play()
     }
 }
@@ -157,6 +159,7 @@ player.prototype.initPlayer = function () {
     // register the buttons, songlist
     $('.btnArea').on('click', '.btn', function() {
         self[event.target.dataset.action]()
+        self.coverChange(self.list[self.curr].pic)
     })
     $('.songlist').on('click', 'li', function() {
         self.curr = $('.songlist li').index(event.target)
