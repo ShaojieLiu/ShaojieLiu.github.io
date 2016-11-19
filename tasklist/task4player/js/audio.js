@@ -75,6 +75,7 @@ player.prototype.end = function() {
             this.curr = (this.curr + 1) % this.list.length
             this.reload()
     }
+    this.coverChange(this.list[this.curr].pic)
 }
 player.prototype.switchMode = function() {
     var self = this
