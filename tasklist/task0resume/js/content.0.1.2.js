@@ -28,7 +28,7 @@ var init = function () {
         addT3(where, ['star','star','star','star','star','star','star',], [
             '1. 丰富的编码实战经验, 热爱计算机编程;',
             '2. 有激情, 有创造力, 有逻辑性, 喜欢研究新技术\/新标准;',
-            '3. 熟悉Node.js后台技术, 对前后端联合开发的技术原理有全面认识;',
+            '3. 熟悉Node.js后台技术, 对前后端联合开发的技术有一定认识;',
             '4. 掌握 JS/ Ajax/ HTML5/ CSS3 等前端技术;',
             '5. 对 DNS / HTTP 和相关的其他底层网络协议有一定了解;',
             '6. 能实现各种网页产品的浏览器端和移动产品的各种 Web View 中的交互逻辑和业务逻辑的开发维护;',
@@ -37,7 +37,7 @@ var init = function () {
         addT3(where, ['star','star','star','star','star','star','star',], [
             '掌握 Photoshop: 鼠绘 / 设计 / 修图 ',
             '熟悉 Cinema4D: 建模 / Aftereffect: 特效剪辑',
-            '掌握 Markdown Github',
+            '常用 Github Markdown StackOverflow',
             'STM32 单片机 等硬件开发经验',
             '低音提琴: 八级 / 二胡: 六级',
         ])

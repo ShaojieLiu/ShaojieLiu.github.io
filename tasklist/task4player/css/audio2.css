@@ -1,0 +1,121 @@
+*{
+    box-sizing: border-box;
+}
+@-webkit-keyframes rotate {
+    from{transform: rotateZ(0)}
+    33%{transform: rotateZ(120deg)}
+    66%{transform: rotateZ(240deg)}
+    100%{transform: rotateZ(360deg)}
+}
+html, body, .audio, .controls{height: 100%;}
+.slider{
+    opacity: 0;
+    z-index: 10;
+}
+.songlist{
+    display: none;
+}
+.slider-vol-cont, #vol{
+    display: none;
+}
+#timeshow{
+    position: relative;;
+    color: lightgray;
+}
+.none{
+    opacity: 0;
+}
+
+.controls{
+    display: flex;
+    flex-direction: column;
+    /*align-items:stretch;*/
+    justify-content: space-around;
+    color: lightgray;
+    font-size: 15px;
+    padding: 20px 30px;
+}
+.title{
+    align-self: stretch;
+    border-bottom: thin solid gray;
+}
+.current{
+    text-align: center;
+    margin: 20px 20px 0px 20px;
+    font-size: 30px;
+    z-index: 9;
+}
+.btnArea{
+    flex: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+.btn{
+    font-size: 30px;
+}
+#menu{
+    order: 1;
+}
+.sliderArea{
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.slider-cont{
+    flex:auto;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin: 10px;
+}
+range{
+    width: 98%;
+    left: 1%;
+    flex: auto;
+    top: 4px;
+    background-color: lightgray;
+    /*border: thin solid gray;*/
+    border-radius: 5px;
+    position: absolute;
+    overflow: hidden;
+}
+.prog{
+    border: medium solid red;
+    border-radius: 5px;
+    width: 50%;
+}
+.background{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../res/黄家驹.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: brightness(0.3) blur(10px);
+    z-index: -1;
+}
+.bg{
+    flex: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bg .circle{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-image: url('../res/黄家驹.jpg');
+    background-position: center;
+    background-size: 100%;
+    border: 25px solid black;
+    filter: contrast(.8);
+    animation: rotate 10s infinite linear;
+}
+.empty{
+    height: 30px;
+    width: 100%;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>少杰Audio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/7c21822d4d.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="./css/audio1.css" media="screen" title="no title"> -->
+        <link rel="stylesheet" href="./css/audio2.css" media="screen" title="no title">
+    </head>
+    <body>
+        <div class="audio">
+            <div class="background"></div>
+            <!--  悬浮即时显示进度-->
+            <audio src="" id="audioPlayer" ></audio>
+            <div class="controls">
+                <div class="title">Music Player</div>
+                <div class="bg">
+                    <div class="circle"></div>
+                </div>
+                <div class=current>当前歌曲: 无</div>
+                <span class="timeshow none" id="timeshow">00:00</span>
+                <div class="sliderArea">
+                    <!-- 左时间 -->
+                    <span class="time1">_</span>
+                    <!-- 进度条 -->
+                    <div class="slider-cont">
+                        <range>
+                            <div class=prog></div>
+                        </range>
+                        <input class="slider" type="range" name="name" value=0>
+                    </div>
+                    <!-- 右时间 -->
+                    <span class="time2">_</span>
+                </div>
+                <!-- 列表区域 -->
+                <ul class=songlist >
+                </ul>
+                <!-- 一排按钮 -->
+                <div class="btnArea">
+                    <!-- <span class=listbtn-cont> -->
+                    <span class="btn glyphicon glyphicon-retweet" data-action=switchMode id="mode"></span>
+                    <!-- </span> -->
+                    <span class="btn glyphicon glyphicon-step-backward" data-action=prev id="prev"></span>
+                        <!-- <span class="btn btn-primary fa fa-backward" id="prev"></span> -->
+                    <i class="btn glyphicon glyphicon-play glyphicon-pause" data-action=switch id="play"></i>
+                        <!-- <span class="btn btn-primary fa fa-forward" id="prev"></span> -->
+                    <span class="btn glyphicon glyphicon-step-forward" data-action=next id="next"></span>
+                    <span class="btn glyphicon glyphicon-th-list" data-action=toggleList id="menu"></span>
+                </div>
+            </div>
+        </div>
+
+        <span class="vol-cont">
+            <span class="btn fa fa-volume-off fa-volume-up" data-action=toggleMuted id="vol"></span>
+            <span class="slider-vol-cont">
+                <input class="slider-vol" type="range" id="slider-vol" value=10>
+            </span>
+        </span>
+<script src="./js/audio.js"></script>
+<script type="text/javascript">
+    var __main = function() {
+        var givenlist = [
+                {name:'片头',
+                                src:'music/30秒片头音乐.mp3',
+                                singer:'佚名'},
+                {name:'大野克夫',
+                                src:'music/大野克夫.mp3',
+                                singer:'日本人'},
+                {name:'今夜月',
+                                src:'music/今夜月.mp3',
+                                singer:'日本人'},
+                {name:'光辉岁月',
+                                src:'music/光辉.mp3',
+                                singer:'Beyond'},
+                {name:'泡沫',
+                                src:'music/泡.mp3',
+                                singer:'G.E.M'},
+                {name:'喜欢你',
+                                src:'music/喜欢.mp3',
+                                singer:'G.E.M'}
+        ]
+        var p = new player(givenlist)
+        p.initPlayer()
+    }
+    __main()
+</script>
+    </body>
+</html>
