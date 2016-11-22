@@ -20,8 +20,8 @@ var player = function(givenlist) {
 }
 player.prototype.reload = function() {
     this.ele[0].src = this.list[this.curr].src
-    $('.songlist li .fa-music').remove()
-    $($('.songlist li')[this.curr]).append(`<span class="fa fa-music"></span>`)
+    $('.songlist li .glyphicon').remove()
+    $($('.songlist li')[this.curr]).append(`<span class="glyphicon glyphicon-music"></span>`)
     // console.log(`reloading`,this,this.list[this.curr].src)
 }
 player.prototype.prev = function() {

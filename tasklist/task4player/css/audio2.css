@@ -20,6 +20,12 @@ html, body, .audio, .controls{height: 100%;}
     font-size: 20px;
     z-index: 10;
 }
+li{position: relative;}
+li .glyphicon{
+    color: pink;
+    position: absolute;
+    left: 300px;
+}
 .songlist:hover{cursor: pointer;}
 .songlist li:hover{color: white;}
 .slider-vol-cont, #vol{
