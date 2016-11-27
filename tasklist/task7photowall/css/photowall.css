@@ -1,0 +1,22 @@
+wrap img{
+    width: 300px;
+    height: 300px;
+}
+wrap{
+    font-size: 0;
+    width: 1200px;
+    height: 900px;
+    position: relative;
+    display: inline-block;
+    transform-style: preserve-3d;
+    transition: all 1s;
+    /*border: medium solid red;*/
+    /*transform: scale(0.5);*/
+}
+wrap>col>img{
+    transition: all 1s;
+}
+wrap>col:nth-child(1){
+
+}
+wrap{ transform: perspective(300px) rotateY(-200deg);}
