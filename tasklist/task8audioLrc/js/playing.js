@@ -4,6 +4,7 @@
     document.querySelector('#current-time').innerText = formatTime(this.currentTime)
     document.querySelector('#duration').innerText = formatTime(this.duration)
     // console.log(this.currentTime)
+    var activeTop = 0
     document.querySelectorAll('#lrc>li').forEach(function(ele, index) {
       // console.log(ele.dataset.time)
       // console.log(ele)
@@ -17,10 +18,10 @@
       var diff = audio.currentTime - ele.dataset.time
       diff>0 && diff<3 ? activeTop = active(ele) : 1
     })
-      // console.log('activeTop', activeTop, 'scrollTop', document.querySelector('#lrc').scrollTop)
-      var speed = (activeTop - 140 - document.querySelector('#lrc').scrollTop) / 10
-      if ( speed > 0 ) {
-        document.querySelector('#lrc').scrollTop += speed
+    // console.log('activeTop', activeTop, 'scrollTop', document.querySelector('#lrc').scrollTop)
+    var speed = (activeTop - 140 - document.querySelector('#lrc').scrollTop) / 10
+    if ( speed > 0 ) {
+      document.querySelector('#lrc').scrollTop += speed
     }
   })
 })()
