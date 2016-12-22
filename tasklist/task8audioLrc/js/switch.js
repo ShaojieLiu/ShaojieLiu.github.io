@@ -13,6 +13,8 @@ var switchSong = function(num) {
     console.log(result, typeof(result))
     document.querySelector('#lrc').innerHTML = ''
     var time = 0
+    result = ''
+    result = resultLrc[current]
     result.split('\n').forEach(function(ele, index) {
       var patt1 = new RegExp(/\[.+?\]/)
       var patt2 = new RegExp(/\[.+?\]/)
