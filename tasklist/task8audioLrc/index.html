@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>audio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="./css/index.css" rel="stylesheet"></link>
+    <style media="screen">
+      /**{border: thin solid red;}*/
+    </style>
+  </head>
+
+  <body>
+    <audio autoplay="autoplay" src=""></audio>
+    <div class="main">
+      <div class="main-img"></div>
+      <div class="main-header">
+        <span id="songName"></span>
+        <span id="singer"></span>
+        <img src="" alt="">
+      </div>
+
+      <div class="main-body">
+        <div class="left">
+          <div class="left-img"></div>
+          <h4 style="text-align:center;">--歌单--</h4>
+          <ol id="songlist"></ol>
+        </div>
+        <div class="right">
+          <ol id="lrc"></ol>
+        </div>
+      </div>
+
+      <div class="area-btn">
+        <button type="button" name="play" id="playpause" class="btn glyphicon glyphicon-play glyphicon-pause" data-action="playpause"></button>
+        <button type="button" name="next" id="next" class="btn glyphicon glyphicon-step-forward" data-action="next"></button>
+        <span id="current-time"></span>
+        <input type="range" name="" id="progress" value="0">
+        <span id="duration"></span>
+        <input type="range" name="" id="volume" value="0.5">
+      </div>
+
+    </div>
+  </body>
+
+  <script src="./js/songlist.js"></script>
+  <script src="./js/button.js"></script>
+  <script src="./js/switch.js"></script>
+  <script src="./js/slider.js"></script>
+  <script src="./js/playing.js"></script>
+  <script src="./js/song-service.js"></script>
+
+  <script type="text/javascript">
+    current = 0
+    var __main = function () {
+      switchSong(current)
+      audio.volume = document.querySelector('#volume').value / 100
+    }
+    __main()
+  </script>
+
+</html>

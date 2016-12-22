@@ -1,0 +1,90 @@
+body{
+  color: white;
+}
+button{
+  background-color: transparent;
+}
+.main{
+  padding: 5px;
+  position: relative;
+}
+.main-img{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: url(http://img0.imgtn.bdimg.com/it/u=2614206062,808958344&fm=21&gp=0.jpg);
+  background-size: cover;
+  filter: blur(20px) brightness(0.8);
+  z-index: -1;
+}
+.left-img{
+  width: 100%;
+  height: 50px;
+  background-image: url(http://img0.imgtn.bdimg.com/it/u=2614206062,808958344&fm=21&gp=0.jpg);
+  background-size: cover;
+}
+#songName{
+  font-size: 1.7em;
+  font-weight: bold;
+}
+.area-btn{
+  display: flex;
+  align-items: center;
+}
+.area-btn>*+*{
+  margin: 5px;
+}
+li{
+  list-style: none;
+  margin-bottom: 5px;
+  text-align: center;
+}
+#progress{
+  flex:auto;
+}
+#volume{
+  display: inline-block;
+  width: 50px;
+}
+.red{
+  color: pink;
+}
+.active{
+  color: lightgreen;
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-shadow: rgb(3, 3, 3) 2px 2px 4px;
+}
+.left{
+  padding: 10px;
+}
+#songlist{
+  text-align: center;
+  margin-left: -40px;
+  width: 120px;
+  overflow: scroll;
+}
+.right{
+  flex: auto;
+  display: flex;
+  justify-content: center;
+}
+#lrc{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  overflow: scroll;
+  font-size: 1.2em;
+  transition: all 1s;
+}
+.main-body{
+  display: flex;
+  border-top: thin solid gray;
+  border-bottom: thin solid gray;
+}
+.main-body>div+div{
+  border-left: thin solid gray;
+  margin: 5px;
+}

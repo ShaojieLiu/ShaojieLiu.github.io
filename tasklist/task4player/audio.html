@@ -42,13 +42,9 @@
                 </div>
                 <!-- 一排按钮 -->
                 <div class="btnArea">
-                    <!-- <span class=listbtn-cont> -->
                     <span class="btn glyphicon glyphicon-random" data-action=switchMode id="mode"></span>
-                    <!-- </span> -->
                     <span class="btn glyphicon glyphicon-step-backward" data-action=prev id="prev"></span>
-                        <!-- <span class="btn btn-primary fa fa-backward" id="prev"></span> -->
                     <i class="btn glyphicon glyphicon-play glyphicon-pause" data-action=switch id="play"></i>
-                        <!-- <span class="btn btn-primary fa fa-forward" id="prev"></span> -->
                     <span class="btn glyphicon glyphicon-step-forward" data-action=next id="next"></span>
                     <span class="btn glyphicon glyphicon-th-list" data-action=toggleList id="menu"></span>
                 </div>
@@ -61,32 +57,12 @@
                 <input class="slider-vol" type="range" id="slider-vol" value=100>
             </span>
         </span>
+
 <script src="./js/audio.js"></script>
+<script src="./js/list.js"></script>
 <script type="text/javascript">
     var __main = function() {
-        var givenlist = [
-                {name:'海阔天空',
-                                src:'music/Beyond-海阔天空.mp3',
-                                singer:'Beyond',
-                                pic:'./res/黄家驹.jpg'},
-                {name:'谁伴我闯荡',
-                                src:'music/Beyond-谁伴我闯荡.mp3',
-                                singer:'Beyond',
-                                pic:'./res/黄家驹.jpg'},
-                {name:'真的爱你',
-                                src:'music/Beyond-真的爱你.mp3',
-                                singer:'Beyond',
-                                pic:'./res/黄家驹.jpg'},
-                {name:'Bad Romance',
-                                src:'music/Lady GaGa-Bad Romance.mp3',
-                                singer:'Lady GaGa',
-                                pic:'./res/ladygaga.jpg'},
-                {name:'Poker Face',
-                                src:'music/Lady GaGa-Poker Face.mp3',
-                                singer:'Lady GaGa',
-                                pic:'./res/ladygaga.jpg'}
-        ]
-        var p = new player(givenlist)
+        var p = new player(getlist())
         p.initPlayer()
     }
     __main()
