@@ -29,5 +29,6 @@ var switchSong = function(num) {
       ele.replace(/\[.+?\]/g, '') != '' ? document.querySelector('#lrc').insertAdjacentHTML('beforeend', `<li data-time=${time}>${ele.replace(/\[.+?\]/g, '')}</li>`) : 1
     })
   }
-  songService.getLrc(getlist()[current].lrcLink, success)
+  // songService.getLrc(getlist()[current].lrcLink, success)
+  success(1)
 }
