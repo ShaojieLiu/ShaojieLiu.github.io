@@ -1,4 +1,5 @@
 (function() {
+  // audio.addEventListener('timeupdate', function(e) {
   audio.addEventListener('timeupdate', function(e) {
     document.querySelector('#progress').value = 100 * this.currentTime / this.duration
     document.querySelector('#current-time').innerText = formatTime(this.currentTime)
