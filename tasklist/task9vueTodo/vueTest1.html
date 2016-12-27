@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>VueTest1</title>
+        <style type="text/css">
+            *{}
+            html{
+                background-color: rgb(0, 121, 191);
+            }
+            #app{
+                display: flex;
+                flex-direction: column;
+                width: 350px;
+                align-items: stretch;
+            }
+            .btn-control{
+                display: flex;
+                justify-content: center;
+            }
+            .btn-control>.btn{
+                flex: auto;
+            }
+            ul{
+                /*border: thin solid black;*/
+                background-color: lightgray;
+                border-radius: 5px;
+                padding: 10px;
+                box-shadow: 1px 1px 1px 1px gray;
+            }
+            li{
+                list-style-type: none;
+                display: flex;
+                flex-direction: column;
+                background-color: white;
+                border-radius: 5px;
+                padding: 3px;
+                box-shadow: 1px 1px 1px 1px gray;
+                margin-top: 5px;
+            }
+            li:hover{
+                opacity: .8;
+            }
+            .btn-area{
+                display: flex;
+                justify-content: flex-start;
+            }
+            .btn{
+                border: none;
+                background-color: lightgray;
+                border-radius: 5px;
+                margin: 3px;
+                box-shadow: 1px 1px 1px 1px gray;
+            }
+            .btn:hover{
+                cursor: pointer;
+                opacity: 0.7;
+            }
+            .date{
+                line-height: 1.8em;
+            }
+            .finished{
+                color: gray;
+                background-color: #aaa;
+            }
+            .todoList{background-color: pink;}
+            .finiList{background-color: lightgreen;}
+        </style>
+        <script src='/Users/liushaojie/Downloads/前端/ku/vue.js'></script>
+    </head>
+    <body>
+        <div id=app>
+            <input v-model=newTodo v-on:keyup.enter=addTodo placeholder="Press enter to add a new todo"></input>
+            <div class="btn-control">
+                <button class="btn" v-on:click="toggle">切换列表</button>
+                <button class="btn" v-on:click="save">保存数据</button>
+            </div>
+            <ul v-if="display=='todoList'" class="todoList">
+                <span>未完成列表</span>
+                <todo-li v-bind:todos="todos" fini=0 ></todo-li>
+            </ul>
+            <ul v-if="display=='finiList'" class="finiList">
+                <span>已完成列表</span>
+                <todo-li v-bind:todos="todos" fini=1 ></todo-li>
+            </ul>
+            <ul v-if="display=='allList'" class="allList">
+                <span>所有任务列表</span>
+                <todo-li v-bind:todos="todos" fini=all ></todo-li>
+            </ul>
+        </div>
+    </body>
+<script type="text/javascript">
+    Vue.filter('time1', function (value) {
+        date = new Date(parseInt(value)).toLocaleString().split(' ')
+        date = date[0] + ' ' + date[1].slice(0,-3)
+        return date
+    })
+    Vue.filter('judge', function (value, fini) {
+        if (fini != '0' && fini !='1') {return true}
+        return String(value) == fini
+    })
+    Vue.component('todo-li', {
+        props: ['todos', 'fini'],
+        template: '\
+        <li v-for="todo in todos" \
+            v-on:mouseenter="showBtn($index)" \
+            v-on:mouseleave="hideBtn($index)" \
+            v-if="todo.finished | judge fini" \
+            v-bind:class="{finished : todo.finished==1}"> \
+            <span class="btn-area">\
+                <span class=date>{{todo.time | time1}}&nbsp;&nbsp;&nbsp;</span>\
+                <button v-show=todo.hover class="btn btn-finish" v-on:click="finishTodo($index)">完成</button>\
+                <button v-show=todo.hover class="btn btn-edit" v-on:click="editTodo($index)">编辑</button>\
+                <button v-show=todo.hover class="btn btn-remove" v-on:click="removeTodo($index)">删除</button>\
+            </span>\
+            <span>{{todo.text}}</span>\
+        </li>',
+        methods: {
+            showBtn: function (index) {
+                this.todos[index].hover = true
+            },
+            hideBtn: function (index) {
+                this.todos[index].hover = false
+            },
+            removeTodo: function (index) {
+                this.todos.splice(index, 1)
+            },
+            finishTodo: function (index) {
+                console.log(this.todos[index].finished)
+                this.todos[index].finished = (this.todos[index].finished + 1) % 2
+            },
+        }
+    })
+    new Vue({
+        el: '#app',
+        data: {
+            newTodo: '',
+            display: 'todoList',
+            disList: ['todoList','finiList','allList'],
+            todos: [
+                {
+                    text: 'The first todo',
+                    time: new Date().getTime(),
+                    finished: 0,
+                    hover: false,
+                }
+            ],
+        },
+        methods: {
+            addTodo: function() {
+                var text = this.newTodo.trim()
+                if (text) {
+                    this.todos.push({   text: text,
+                                        time: new Date().getTime(),
+                                        finished: 0,
+                                        hover: false,})
+                    this.newTodo = ''
+                }
+            },
+            toggle: function() {
+                this.display = this.disList[(this.disList.indexOf(this.display)+1) % this.disList.length]
+            },
+            save: function() {
+                localStorage.todos = JSON.stringify(this.todos)
+                console.log(this.todos)
+            },
+        },
+        ready: function () {
+            console.log(localStorage.todos)
+            if (localStorage.todos) {
+                this.todos = JSON.parse(localStorage.todos)
+            }
+        }
+    })
+</script>
+</html>
