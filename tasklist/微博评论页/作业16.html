@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>微博评论页面</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="https://use.fontawesome.com/7c21822d4d.js"></script>
+    <style media="screen">
+        * {
+            /*outline:thin dotted red;*/
+            text-align: center;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #uurupylp {
+            width: 400px;
+            height: 100px;
+            margin: 10px 20px 10px 20px;
+            resize: none;
+            text-align: left;
+        }
+
+        .yshu {
+            position: relative;
+            text-align: left;
+            padding: 0 20px 0 20px;
+        }
+
+        .rebo {
+            position: absolute;
+            right: 20px;
+            bottom: 0;
+            color: darkblue;
+            font-size: 7px;
+        }
+
+        .mrtx,
+        .opt {
+            width: 25px;
+            height: 30px;
+        }
+
+        .rebo:hover {
+            text-decoration: underline;
+        }
+
+        .mrtx:hover,
+        .opt:hover,
+        .fa:hover,
+        .rebo:hover {
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .option {
+            position: absolute;
+            text-align: left;
+            outline: thin solid gray;
+            background-color: white;
+            width: auto;
+            padding: 3px;
+        }
+
+        .opt-descript {
+            display: inline-block;
+            color: darkgray;
+        }
+
+        .discuss {
+            display: inline-block;
+            position: relative;
+            border: thin solid darkgray;
+            box-shadow: 2px 2px 2px;
+            padding-top: 10px;
+            background-color: rgba(172, 207, 231, 0.1);
+        }
+
+        .count-btn {
+            text-align: right;
+            padding: 0 20px 10px 20px;
+            border-bottom: thin solid black;
+            border-radius: 0px;
+        }
+
+        .count-btn button {
+            width: 100px;
+        }
+
+        .icon {
+            color: darkgreen;
+            display: inline-block;
+            position: absolute;
+            font-size: 24px;
+            left: 20px;
+        }
+
+        #wordCount {
+            color: darkblue;
+            font-size: medium;
+        }
+
+        .name {
+            color: darkorange;
+        }
+
+        .cell {
+            padding: 10px 20px 10px 20px;
+            border-radius: 0px;
+            text-align: left;
+            position: relative;
+            min-height: 60px;
+            overflow: scroll;
+            display: block;
+        }
+        .cell+.cell{
+            border-top: thin dashed black;
+        }
+
+        .tbxd {
+            width: 50px;
+            height: 60px;
+            position: absolute;
+
+        }
+
+        .nzrs {
+            padding-left: 70px;
+            display: inline-block;
+            position: relative;;
+            margin-left: 5px;
+            width: 345px;
+            min-height: 60px;
+            text-align: left;
+            overflow: visible;
+        }
+
+        .time {
+            color: #2d5c9e;
+            font-size: 70%;
+            line-height: 300%;
+        }
+
+        .warning {
+            background-color: pink;
+        }
+    </style>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="discuss">
+        <div class="yshu">
+            <img src="img/1.jpg" class="mrtx" alt="默认头像" />
+            <input type="text" id="yshumy" placeholder="请输入用户名" value="">
+            <span class="rebo">李晨泡妞神器石头心 24小时热博</span>
+            <div class="option none">
+                <img class="opt" src="img/1.jpg" alt="" />
+                <img class="opt" src="img/2.jpg" alt="" />
+                <img class="opt" src="img/3.jpg" alt="" />
+                <img class="opt" src="img/4.jpg" alt="" />
+                <img class="opt" src="img/5.jpg" alt="" />
+                <img class="opt" src="img/6.jpg" alt="" />
+                <img class="opt" src="img/7.jpg" alt="" />
+                <span class="opt-descript">请选择你的头像</span>
+            </div>
+        </div>
+        <textarea type="text" id="uurupylp" value="" placeholder="你此时的想法"></textarea>
+        <div class="count-btn">
+            <span class="icon"><i class="fa fa-smile-o"></i> <i class="fa fa-photo"></i></span>
+            <span> 还能输入 </span>
+            <span id="wordCount">140</span>
+            <span> 个字 </span>
+            <button type="button" class="btn btn-primary submit">提 交</button>
+        </div>
+        <div class="comment">
+            <!-- <div class="cell">
+                    <img class="tbxd" src="img/3.jpg" alt="头像" />
+                    <div class="nzrs">
+                        <span class="name">大香蕉 </span><span>: 香蕉好吃好吃!</span><br>
+                        <span class="time">2016年10月23日01:29:21</span>
+                    </div>
+                </div>
+                <div class="cell">
+                    <img class="tbxd" src="img/2.jpg" alt="头像" />
+                    <div class="nzrs">
+                        <span class="name">大海 </span><span>: 大海好大好大!</span><br>
+                        <span class="time">2016年10月23日00:29:21</span>
+                    </div>
+                </div> -->
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var bondCount = function() {
+            var path = `img/${Math.floor(Math.random() * 7) + 1}.jpg`
+            console.log(path)
+            $('.mrtx').attr('src', path)
+            // console.log($($('#uurupylp')))
+            $('#uurupylp').on('input', function() {
+                $(this).val($(this).val().slice(0, 140))
+                var count = 140 - $(this).val().length
+                $('#wordCount').text(`${count}`)
+            })
+        }
+        var bondPic = function() {
+            $('.mrtx').on('click', function() {
+                $('.option').fadeIn()
+            })
+            $('.option').on('mouseleave', function() {
+                $('.option').fadeOut()
+                console.log('blur')
+            })
+            $('.option .opt').on('click', function() {
+                $('.mrtx').attr('src', $(this).attr('src'))
+                $('.option').fadeOut()
+            })
+        }
+        var addCell = function(name, src, cont, time) {
+            $('.comment').prepend(`
+            <div class="cell">
+                <img class="tbxd" src="${src}" alt="头像" />
+                <div class="nzrs">
+                    <span class="name">${name} </span><span> : ${cont}</span><br>
+                    <span class="time">${time}</span>
+                </div>
+            </div>`)
+        }
+        var warning = function(ele) {
+            ele.addClass('warning')
+            var temp = ele.attr('placeholder')
+            ele.attr('placeholder', `不能为空`)
+            setTimeout(() => {
+                ele.removeClass('warning')
+            }, 500)
+            setTimeout(() => {
+                ele.addClass('warning')
+            }, 1000)
+            setTimeout(() => {
+                ele.removeClass('warning')
+                ele.attr('placeholder', temp)
+            }, 1500)
+        }
+        var bondSubmit = function() {
+            var getTime = function() {
+                // 时间标准库
+                // ===
+                // 常用用法如下
+                /*
+                var d = new Date()
+                d.getFullYear()
+                年份, 2016
+                d.getMonth()
+                月份, 0-11
+                d.getDate()
+                日期, 1-31
+                d.getHours()
+                小时, 0-23
+                d.getMinutes()
+                分钟, 0-59
+                d.getSeconds()
+                秒数, 0-59
+                d.getMilliseconds()
+                毫秒, 0-999
+                d.getDay()
+                星期几, 0-6
+                */
+                var d = new Date()
+                var fill = function(x) {
+                    x = String(x)
+                    if (x.length < 2) {
+                        return ['0'] + x
+                    }
+                    return x
+                }
+                var result = `${d.getFullYear()}年${fill(d.getMonth()+1)}月${fill(d.getDate())}日${fill(d.getHours())}:${fill(d.getMinutes())}:${fill(d.getSeconds())}`
+                return result
+            }
+
+            $('.submit').on('click', function() {
+                if ($('#yshumy').val() == '') {
+                    warning($('#yshumy'))
+                } else if ($('#uurupylp').val().length < 1) {
+                    warning($('#uurupylp'))
+                } else {
+                    console.log($('.comment'))
+                    var name = $('#yshumy').val()
+                    var src = $('.yshu img').attr('src')
+                    var cont = $('#uurupylp').val()
+                    var time = getTime()
+                    addCell(name, src, cont, time)
+                        // if (localStorage.commentList != undefined) {
+                        //     commentList.push(JSON.parse(localStorage.commentList))
+                        // }
+                    var list = {
+                        name: name,
+                        tbxd: src,
+                        cont: cont,
+                        time: time,
+                    }
+                    commentList.push(list)
+                    localStorage.commentList = JSON.stringify(commentList)
+                    console.log(commentList, localStorage.commentList)
+                }
+            })
+        }
+        var loadList = function () {
+            commentList = JSON.parse(localStorage.commentList)
+            console.log(commentList)
+            for (let list of commentList) {
+                addCell(list.name, list.tbxd, list.cont, list.time)
+            }
+        }
+        var clc = function () {
+            commentList = [{
+                name: `大海`,
+                tbxd: `img/2.jpg`,
+                cont: `我很好奇,大海的那边是什么?`,
+                time: `2016年10月23日00:29:21`,
+            }, {
+                name: `大香蕉`,
+                tbxd: `img/3.jpg`,
+                cont: `你知道吗?香蕉也能思考.`,
+                time: `2016年10月23日01:29:21`,
+            }, {
+                name: `我是阿童木`,
+                tbxd: `img/1.jpg`,
+                cont: `一直往东飞,能看到世界的尽头.`,
+                time: `2016年10月24日01:29:21`,
+            }]
+            localStorage.commentList = JSON.stringify(commentList)
+            location.reload()
+        }
+        var clear = function () {
+            localStorage.commentList = ''
+            location.reload()
+        }
+        var __main = function() {
+            commentList = []
+            bondPic()
+            bondCount()
+            bondSubmit()
+            loadList()
+        }
+        __main()
+    </script>
+</body>
+
+</html>

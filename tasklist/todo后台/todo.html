@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>待办事件列表</title>
+        <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <style media="screen">
+            *{
+                margin: 2px;
+                /*border: thin solid red;*/
+            }
+            body{min-width: 300px;}
+            .main {
+                width: 100%;
+            }
+            .typeArea input {
+                display: inline-block;
+                border-radius: 5px;
+                position: absolute;
+                width: calc(80%);
+                margin-left: 10px;
+            }
+            .listArea {
+                display: block;
+                position: absolute;
+                width: 90%;
+                background-color: royalblue;
+                border-radius: 5px;
+                box-shadow: 2px 2px 2px 2px;
+                /*min-width: 500px;*/
+            }
+            .listCell {
+                width: auto;
+                display: block;
+                color: white;
+                padding: 5px;
+            }
+            .comp {
+                text-decoration: line-through;;
+                color: rgba(0, 0, 0, 0.4);
+                background-color: gray;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div class="typeArea">
+                <button type="button" class="btn btn-success" name="tmjw">添加</button>
+                <input type="text" class="form-control" name="uuru" placeholder="输入待办事件">
+            </div>
+            <div class="listArea">
+                
+            </div>
+
+        </div>
+<script type="text/javascript">
+    var log = function() {console.log.apply(console, arguments)}
+    var typeArea = document.querySelector('.typeArea')
+    var typeInput = document.querySelector('.typeArea input')
+    var listArea = document.querySelector('.listArea')
+    var list = []
+    // log(typeInput)
+    // 按钮 '添加' '文本框'
+    var bindClkType = function() {
+        typeArea.addEventListener('click', function() {
+        if (event.target.name == 'tmjw') {
+        // log('点击添加')
+            tmjw()
+        // log(list)
+        } else if (event.target.name == 'uuru') {
+            event.target.select()
+        }
+        // saveList()
+    })
+    }
+    // 回车
+    var bindEntType = function () {
+        typeInput.addEventListener('keydown', function() {
+        if (event.key == 'Enter') {
+            tmjw()
+        }
+    })
+    }
+    var bl = function() {
+        log('blur')
+        var self = event.target
+        event.preventDefault()
+        //以前时间没有分开显示的时候
+        // var str = self.innerHTML.slice(24)
+        var str = self.innerHTML
+        log(str)
+        list[indexOfEle(self)].task = str
+        saveList()
+        self.contentEditable='false'
+        typeInput.focus()
+    }
+    var enter = function() {
+        if (event.key == 'Enter') {
+            bl(event)
+        }
+    }
+    var bindEntList = function() {
+        listArea.addEventListener('keydown', enter)
+    }
+    // listArea.addEventListener('blur', enter)
+    // 按钮 '完成' '删除' '编辑'
+    var bindClkList = function() {
+        $(listArea).on('click', 'button', function() {
+        var self = event.target
+        var index = indexOfEle(self)
+        if (self.name == 'wjig') {
+            self.parentElement.classList.toggle('comp')
+            list[index].stat *= -1
+            log('状态-1为完成', list[index].stat)
+        } else if (self.name == 'ujiu') {
+            log('已删除', list[index].time)
+            list.splice(index, 1)
+            self.parentElement.remove()
+        } else if (self.name == 'bmji') {
+            log('bmji',self.parentElement.children[4])
+            self.parentElement.children[4].contentEditable='true'
+            self.parentElement.children[4].focus()
+        }
+        saveList()
+    })
+    }
+    //事件单元的模板
+    var tmjw = function () {
+        var time = getTime()
+        var txt = typeInput.value
+        var todo = {
+            time:getTime(),
+            task:typeInput.value,
+            stat:1}
+        list.push(todo)
+        listArea.insertAdjacentHTML('afterbegin', templateTodo(time, txt))
+        var txts = document.querySelectorAll('.listCell span')
+        var tt = txts[0]
+        tt.addEventListener('blur', bl)
+    }
+    var templateTodo = function (time, txt, stat = 1) {
+        var isComp = ''
+        if (stat == -1) {isComp = 'comp'}
+        var text = `
+        <div class="listCell ${isComp}">
+            <button type="button" class="btn btn-success" name="wjig">完成</button>
+            <button type="button" class="btn btn-success" name="ujiu">删除</button>
+            <button type="button" class="btn btn-success" name="bmji">编辑</button>
+            <span class="label" contenteditable='false'>${time} ~~~ </span>
+            <span class="label" contenteditable='false'>${txt}</span>
+
+        </div>`
+        saveList()
+        return text
+    }
+    var getTime = function () {
+        // 时间标准库
+        // ===
+        // 常用用法如下
+        /*
+        var d = new Date()
+        d.getFullYear()
+        年份, 2016
+        d.getMonth()
+        月份, 0-11
+        d.getDate()
+        日期, 1-31
+        d.getHours()
+        小时, 0-23
+        d.getMinutes()
+        分钟, 0-59
+        d.getSeconds()
+        秒数, 0-59
+        d.getMilliseconds()
+        毫秒, 0-999
+        d.getDay()
+        星期几, 0-6
+        */
+        var d = new Date()
+        var fill = function (x) {
+            x = String(x)
+            if (x.length < 2) {
+                return ['0']+x
+            }
+            return x
+        }
+        var result = `${d.getFullYear()}年${fill(d.getMonth()+1)}月${fill(d.getDate())}日${fill(d.getHours())}:${fill(d.getMinutes())}:${fill(d.getSeconds())}`
+        return result
+    }
+
+    var indexOfEle = function (self) {
+        var p = self.parentElement
+        var c = p.parentElement.children
+        for (var i = 0; i < c.length; i++) {
+            if (c[i] == p) {
+                return c.length - 1 - i
+            }
+        }
+    }
+    var saveList = function () {
+        ajaxSave()
+        console.log('数据已保存')
+//以下是使用localStorage,现在改为ajax保存
+        // var s = JSON.stringify(list)
+        // localStorage.list = s
+    }
+    var ajaxSave = function () {
+        var listJSON = JSON.stringify(list)
+        console.log('listbefore', list,'after', listJSON)
+        $.ajax({
+            type: 'post',
+            url: '/todo/save',
+            data: listJSON,
+            success: function() {
+                console.log('list数据已发送至服务端')
+            },
+            contentype: 'application/json'
+        })
+    }
+    var loadList = function () {
+        ajaxLoad()
+//以下是使用localStorage,现在改为使用ajax载入
+        // var s = JSON.parse(localStorage.list)
+        // log(s)
+        // list = s
+        // for (var i = 0; i < list.length; i++) {
+        //     var txt = list[i].task
+        //     var time = list[i].time
+        //     var stat = list[i].stat
+        //     listArea.insertAdjacentHTML('afterbegin', templateTodo(time, txt, stat))
+        // }
+        // var txts = document.querySelectorAll('.listCell span')
+        // for (let x of txts) {
+        //     x.addEventListener('blur', bl)
+        // }
+    }
+    var ajaxLoad = function () {
+        $.ajax({
+            type: 'get',
+            url: 'http://localhost:3000/todo/all',
+            success: function(r) {
+                var s = JSON.parse(r)
+                console.log(typeof(s), s)
+                list = s
+                for (var i = 0; i < list.length; i++) {
+                    var txt = list[i].task
+                    var time = list[i].time
+                    var stat = list[i].stat
+                    listArea.insertAdjacentHTML('afterbegin', templateTodo(time, txt, stat))
+                }
+                var txts = document.querySelectorAll('.listCell span')
+                for (let x of txts) {
+                    x.addEventListener('blur', bl)
+                }
+            }
+        })
+    }
+    var __main = function () {
+        bindClkType()
+        bindEntType()
+        bindClkList()
+        bindEntList()
+        loadList()
+        typeInput.focus()
+        typeInput.select()
+        }
+    __main()
+</script>
+    </body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>格子拼图</title>
+        <style media="screen">
+
+            /** {
+                border-width: thin;
+                border-style: dashed;
+            }*/
+
+            #idMain {
+                display: block;
+                position: absolute;
+                /*left: 230px;
+                top: 80px;*/
+                left:30px;
+                top:30px;
+                width: 293px;
+                height: 300px;
+                background-color: rgba(197, 134, 249, 0.5);
+                box-shadow: 5px 5px 15px rgb(160, 42, 249);
+                border-radius: 5px;
+                z-index: 9999;
+            }
+
+            .card {
+                font-size: 98px;
+                font-family: monospace;
+                text-align: center;
+                color: white;
+                display: block;
+                position: absolute;
+                padding-left: 0;
+                width: 95px;
+                padding-top: 0;
+                padding-bottom: 0;
+                line-height: 100%;
+                border-radius: 5px;
+                box-shadow: 2px 2px 2px rgb(17, 67, 244);
+                background-color: rgba(64, 79, 219, 0.7);
+                --transTime1:0.7s;
+                transition: top var(--transTime1), left var(--transTime1);
+                -moz-transition: top var(--transTime1), left var(--transTime1); /* Firefox 4 */
+                -webkit-transition: top var(--transTime1), left var(--transTime1); /* Safari and Chrome */
+                -o-transition: top var(--transTime1), left var(--transTime1);
+            }
+
+            .buttArea {
+                display: block;
+                position: absolute;;
+                /*left: 480px;
+                top: 130px;*/
+                left:310px;
+                top:30px;
+                width: 300px;
+                height: 300px;
+                /*background-color: gray;*/
+                text-align: center;
+                padding: 20px;
+                z-index: 9999;
+            }
+
+            .butt {
+                font-size: 20px;
+                color: white;
+                background-color: rgba(67, 149, 224, 0.9);
+                margin: 5px;
+                padding: 10px;
+                width: 100px;
+                border-radius: 5px;
+                box-shadow: 2px 2px 2px rgb(17, 67, 244);
+
+            }
+        </style>
+    </head>
+    <body>
+        <box class="main" id="idMain">
+            <span id="id1" class="card">1</span>
+            <span id="id2" class="card">2</span>
+            <span id="id3" class="card">3</span>
+            <span id="id4" class="card">4</span>
+
+            <span id="id5" class="card">5</span>
+            <span id="id6" class="card">6</span>
+            <span id="id7" class="card">7</span>
+            <span id="id8" class="card">8</span>
+            <span id="id9" class="card"></span>
+        </box>
+        <div class="buttArea" id="buttArea">
+            <button type="button" class="butt" id="U">Up</button><br />
+            <button type="button" class="butt" id="L">Left</button>
+            <button type="button" class="butt" id="R">Right</button><br />
+            <button type="button" class="butt" id="D">Down</button><br />
+            <button type="button" class="butt" id="new">New Game</button>
+        </div>
+<script type="text/javascript">
+    var log =function () {console.log.apply(console,arguments)}
+    var wid = 98;
+    var hei = 100;
+    var cardInit = []
+    var cards = document.querySelectorAll('.card')
+    //卡片的所有数据:0是元素名;1是值;2是位置
+    var dataCard = []
+    var range9 = []
+    var range08 = []
+    // po是按位置索引,po[0]元素,po[1]数值
+    var po0 = []
+    var po1 = []
+    var poSearch = []
+    poSearch[0] = po1
+    poSearch[1] = po1
+    // 那个空的的序号
+    var empty
+    for (var i = 0; i < 9; i++) {
+        range9[i] = Number(i) + 1;
+        range08[i] = Number(i)
+    }
+    // function randomsort(a, b) {
+    //     return Math.random()>.5 ? -1 : 1;
+    // }
+    // // 返回随机 0~8
+    // var randNum8 = function () {
+    //     var ran = []
+    //     for (var i = 0; i < 8; i++) {ran[i] = i}
+    //     return ran.sort(randomsort)
+    // }
+    // 初始化随机获得位置
+    // 输入序号获得位置
+    var position = function (num) {
+        var result = []
+        var col = num % 3
+        var row = Math.floor(num / 3)
+        // log(row, col)
+        col = `${col * wid+1}px`
+        row = `${row * hei+1}px`
+        result.push(row)
+        result.push(col)
+        // log(result)
+        return result
+    }
+    // 刷新位置
+    var setpos = function () {
+        for (var i = 0; i < 9; i++) {
+            // log(dataCard[0][i])
+            // log(position(i)[0])
+            var xx = dataCard[0][i]
+            var p = dataCard[2][i]
+            // log(p)
+            xx.style.top = position(p)[0]
+            xx.style.left = position(p)[1]
+            // log(position(i)[0], position(i)[1])
+        }
+    }
+    // 是否赢了
+    var win = function () {
+        var range8 = []
+        for (var i = 0; i < 9; i++) {
+            range8[i] = Number(i)
+        }
+        // log(poSearch[1], range8)
+        var ks = document.querySelector('#id9')
+        if (poSearch[1].join('') == range8.join('')) {
+            ks.style.fontSize = '24px'
+            ks.innerHTML =
+            `Well
+            Done
+            Good
+            Job`
+            console.log('GG')
+        } else {
+            ks.innerHTML = ''
+        }
+    }
+    // 输入2个序号,交换dataCard里的位置
+    var swi = function (a, b) {
+        // log(dataCard[2])
+        var temp = dataCard[2][poSearch[1][a]]
+        dataCard[2][poSearch[1][a]] = dataCard[2][poSearch[1][b]]
+        dataCard[2][poSearch[1][b]] = temp
+        // log(dataCard[2])
+
+        temp = poSearch[0][a]
+        poSearch[0][a] = poSearch[0][b]
+        poSearch[0][b] = temp
+
+        temp = poSearch[1][a]
+        poSearch[1][a] = poSearch[1][b]
+        poSearch[1][b] = temp
+
+        empty = b
+        win()
+    }
+    var rowcol = function (num) {
+        var col = (num) % 3
+        var row = Math.floor(num / 3)
+        var result = [row, col]
+        return result
+    }
+    var judge = function (event) {
+        var key = event.keyIdentifier
+        log(key)
+        switch (key) {
+            case 'Up':
+            case 'U+0057':
+                up()
+                break
+            case 'Left':
+            case 'U+0041':
+                left()
+                break
+            case 'Right':
+            case 'U+0044':
+                right()
+                break
+            case 'Down':
+            case 'U+0053':
+                down()
+                break
+            default:break
+        }
+    }
+    // 四个键分别被按下的时候
+    var add = function () {
+        var start = document.querySelector('#new')
+        var butt = document.querySelectorAll('.butt')
+        butt[0].addEventListener('click', up)
+        butt[1].addEventListener('click', left)
+        butt[2].addEventListener('click', right)
+        butt[3].addEventListener('click', down)
+        document.addEventListener('keydown', judge)
+        start.addEventListener('click', rand)
+    }
+    var down = function () {
+        switch (rowcol(empty)[0]) {
+            case 1:
+            case 2:
+                swi(empty, empty-3)
+                setpos()
+                break
+            case 0:
+            default:
+                break
+        }
+    }
+    var up = function () {
+        switch (rowcol(empty)[0]) {
+            case 1:
+            case 0:
+                swi(empty, empty+3)
+                setpos()
+                break
+            case 2:
+            default:
+                break
+        }
+    }
+    var left = function () {
+        switch (rowcol(empty)[1]) {
+            case 1:
+            case 0:
+                swi(empty, empty+1)
+                setpos()
+                break
+            case 2:
+            default:
+                break
+        }
+    }
+    var right = function () {
+        switch (rowcol(empty)[1]) {
+            case 1:
+            case 2:
+                swi(empty, empty-1)
+                setpos()
+                break
+            case 0:
+            default:
+                break
+        }
+    }
+    // 打乱
+    var rand = function () {
+        log('rand()')
+        for (var i = 0; i < 999; i++){
+            var operation = Math.floor(4*Math.random())
+
+            switch (operation) {
+                case 0:
+                    up()
+                    break
+                case 1:
+                    left()
+                    break
+                case 2:
+                    right()
+                    break
+                case 3:
+                    down()
+                    break
+                default:break
+
+            }
+        }
+        setpos()
+    }
+    var init = function () {
+        dataCard[0] = cards
+        dataCard[1] = range9
+        dataCard[2] = range08
+        dataCard[2][8] = 8
+        empty = 8
+        for(i in dataCard[2]) {
+            po1[dataCard[2][i]] = i
+            po0[dataCard[2][i]] = dataCard[0][i]
+        }
+        poSearch[0] = po0
+        poSearch[1] = po1
+    }
+
+    add()
+    init()
+    setpos()
+    win()
+
+
+
+
+
+
+</script>
+    </body>
+</html>
