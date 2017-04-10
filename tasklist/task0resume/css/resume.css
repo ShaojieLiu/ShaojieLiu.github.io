@@ -30,28 +30,18 @@ body {
     opacity: 0.8;
     cursor: pointer;
 }
-.topbar img{
-  height: 2em;
-}
+.topbar img{height: 2em;}
 .topbar span{
     display: inline-block;
-    font: bold 1.5em arial;
-}
+    font: bold 1.5em arial;}
 
 .content{position: relative;}
 .leftpart, .rightpart{
     text-align: left;
     padding: 0;
 }
-.title1{
-  font-weight: bold;
-  position: relative;
-  width: 100%;
-}
-.title1-icon{
-  font-size: 2em;
-  color: #336699;
-}
+.title1{font-weight: bold; position: relative; width: 100%;}
+.title1-icon{font-size: 2em; color: #336699; }
 .title1-txt{
     display: inline-block;
     top:0.5em;
@@ -65,9 +55,7 @@ body {
     padding-left: 3em;
     left: 2em;
 }
-.title1-txt-c{
-  font-size: 1em;
-}
+.title1-txt-c{font-size: 1em;}
 .title1-txt-e{
     color: #336699;
     font-size: 1em;
@@ -99,16 +87,10 @@ body {
     /*background-color: red;*/
     border-top-right-radius: 1em;
 }
-.demo{
-  position: absolute;
-  right: 10%;
-  bottom: 28%;
-  z-index: 100;
-}
+.demo{position: absolute; right: 10%; bottom: 28%; z-index: 100;}
 
 .title3 i{
-    margin-left: -1em;
-}
+    margin-left: -1em;}
 .title3{
     padding-left: 2.5em;
     width: 90%;

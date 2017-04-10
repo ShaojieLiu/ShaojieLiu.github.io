@@ -51,34 +51,33 @@ var init = function () {
                 '编写<st>JavaScript模块</st>生成html',
                 '采用<st>canvas画布绘制</st>,实现"所见即所得"打印(请点击"打印PDF")',
             ])
-        addT2(where, 'calendar-check-o', `ToDo 应用`, 'http://localhost:3000/')
+        addT2(where, 'calendar-check-o', `ToDo 应用`, 'https://shaojieliu.github.io/tasklist/task2todo/todo.html')
             addT3(where, ['gear','gear','gear', 'gears'], [
-                '使用<st> vue </st>框架实现',
+                '使用<st> HTML5的localStorage </st>新特性实现本地数据存储',
                 '利用<st> Ajax和JSON </st>实现前后端协同数据交互',
                 '采用<st> Node.js </st>编写后端程序',
                 '后端采用<st> Express框架 </st>和<st> fileSystem / bodyParser </st>组件实现与数据库的交互和读写'
             ])
-        addT2(where, 'weibo', `微博评论页面`, 'file:///Users/liushaojie/Downloads/%E5%89%8D%E7%AB%AF/ShaojieLiu.github.io/tasklist/%E5%BE%AE%E5%8D%9A%E8%AF%84%E8%AE%BA%E9%A1%B5/%E4%BD%9C%E4%B8%9A16.html')
+        addT2(where, 'weibo', `微博评论页面`, '#')
             addT3(where, ['gear','gear','gear'], [
                 '利用<st>Ajax</st>和<st>localStorage</st>实现与服务器和本地的数据通信',
-                '对用户输入内容的<st>实时监听/反馈</st>',
                 '基于<st>JavaScript</st>的逻辑校验和表单提交',
             ])
-        addT2(where, 'volume-up', `音乐播放器`, 'file:///Users/liushaojie/Downloads/%E5%89%8D%E7%AB%AF/ShaojieLiu.github.io/tasklist/task4player/audio.html')
+        addT2(where, 'volume-up', `音乐播放器`, '#')
             addT3(where, ['gear','gear','gear'], [
-                'bootstrap框架',
+                '利用<st>Ajax</st>和<st>localStorage</st>实现与服务器和本地的数据通信',
                 '基于<st>HTML5新标签audio</st>实现音乐播放器',
             ])
-        addT2(where, 'calculator', `数字拼图 游戏`, 'file:///Users/liushaojie/Downloads/%E5%89%8D%E7%AB%AF/ShaojieLiu.github.io/tasklist/numPuzzle.html')
+        addT2(where, 'calculator', `数字拼图 游戏`, '#')
             addT3(where, ['star','gear','gear'], [
                 '基于<st>HTML5</st> 的单页面游戏应用',
                 '<b>完美兼容</b> 桌面端和移动端',
                 '纯粹使用<st>原生JS</st>开发'
             ])
-        addT2(where, 'cube', `3D轮播图`, 'file:///Users/liushaojie/Downloads/%E5%89%8D%E7%AB%AF/ShaojieLiu.github.io/tasklist/task6cube/cube3D.html')
+        addT2(where, 'sign-in', `用户注册页面`, '#')
             addT3(where, ['star','gear','gear'], [
-                '利用CSS3新特性实现3维效果',
-                '利用事件监听实现鼠标拖拽等交互效果',
+                '对用户输入内容的<st>实时监听/反馈</st>',
+                '使用 jQuery 创建 逻辑校验和 <st>Ajax表单提交</st>',
             ])
         addT2(where, 'photo', `天猫轮播图`, 'https://shaojieliu.github.io/tasklist/task1carousel/carousel.html')
             addT3(where, ['gear','gear','gear'], [
