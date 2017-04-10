@@ -15,6 +15,7 @@ header{
     -moz-box-shadow: 0 0.1em 0.1em #333;
     z-index: 100;
     width: 100%;
+    box-sizing: border-box;
 }
 footer{
     flex: none;

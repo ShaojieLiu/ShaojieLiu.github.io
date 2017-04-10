@@ -199,23 +199,24 @@
         return result
     }
     var judge = function (event) {
-        var key = event.keyIdentifier
-        log(key)
+        var key = event.key
+        // console.log(event)
+        console.log("KeyPress")
         switch (key) {
-            case 'Up':
-            case 'U+0057':
+            case 'ArrowUp':
+            case 'w':
                 up()
                 break
-            case 'Left':
-            case 'U+0041':
+            case 'ArrowLeft':
+            case 'a':
                 left()
                 break
-            case 'Right':
-            case 'U+0044':
+            case 'ArrowRight':
+            case 'd':
                 right()
                 break
-            case 'Down':
-            case 'U+0053':
+            case 'ArrowDown':
+            case 's':
                 down()
                 break
             default:break
