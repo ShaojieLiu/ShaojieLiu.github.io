@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "dev": "webpack-dev-server --devtool eval --progress --colors",
+    "deploy": "NODE_ENV=production webpack -p"
+  },
+  "name": "fconsole",
+  "description": "-----",
+  "version": "1.0.0",
+  "main": "fastconsole.js",
+  "dependencies": {
+    "express": "^4.15.2",
+    "express-generator": "^4.14.1",
+    "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.27.3",
+    "file-loader": "^0.10.1",
+    "style-loader": "^0.14.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitdojo.gz.cvte.cn:intern_web_2017/liushaojie.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

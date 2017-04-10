@@ -1,0 +1,137 @@
+*{
+  /*border: 1px solid red;*/
+}
+.btn-open{
+  background-color: lightgray;
+  display: inline-block;
+  position: fixed;
+  opacity: 0.6;
+  right: 10px;
+  bottom: 10px;
+  z-index: 10;
+}
+.btn-open:active{
+  background-color: lightblue;
+}
+
+.console-window{
+  /*background-color: rgba(200,200,200,0.5);*/
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.95;
+}
+.window-console-top btn, .window-storage-top btn, .window-network-top btn{
+  font-size: 7px;
+}
+.window-console, .window-storage, .window-network{
+  height: 85%;
+  overflow-y: scroll;
+}
+.window-console-display, .window-storage-display, .window-network-display{
+  /*height: 95%;*/
+  padding-left: 0px;
+}
+.console-window li{
+  list-style-position: inside;
+  list-style-type: decimal-leading-zero;
+  border-radius: 7px;
+  /*margin-left: 15px;*/
+  padding-left: 10px;
+  word-break: break-all;
+  border-bottom: 1px solid black;
+  background-color: #eee;
+}
+
+div .window-console-display-error{
+  color: darkred;
+  background-color: pink;
+}
+div .window-console-display-warn{
+  color: darkorange;
+  background-color: khaki;
+}
+div .window-console-display-info{
+  color: darkblue;
+  background-color: lightblue;
+}
+div .window-console-display-log{
+  color: black;
+  background-color: #eee;
+}
+div .window-console-display-js{
+  color: darkred;
+  background-color: pink;
+}
+
+div .network-script{color: darkblue;}
+div .network-link{color: darkgreen;}
+div .network-img, div .network-video, div .network-audio{color: black;}
+
+div .window-storage-display-localStorage{
+  color: darkgreen;
+}
+div .window-storage-display-cookie{
+  color: darkblue;
+}
+
+.console-window li+li{
+  margin-top: 1px;
+}
+.console-window li p{
+  word-break: keep-all;
+  overflow-x: scroll;
+}
+.console-window li p::-webkit-scrollbar {display:none}
+
+.none{
+  display: none
+}
+.tool-group{
+  display: inline-block;
+  z-index: 10;
+  position: fixed;
+  border-radius: 5px;
+  left: 15px;
+  bottom: 15px;
+}
+.tool-btn{
+  display: inline-block;
+  background-color: white;
+  border-radius: 50%;
+  border: normal solid lightblue;
+}
+.tool-btn:active{
+  background-color: lightblue;
+}
+.tool-btn>span{
+  font-size: 30px;
+  position: relative;
+  top: 2px;
+}
+.green{color: green;}
+
+.echartWin{
+  background-color: rgba(180,180,255,0.7);
+}
+.red{
+  color: red;
+}
+div .error{
+  color: darkred;
+  background-color: pink;
+}
+.eye{
+  position: fixed;
+  z-index: 10;
+  bottom: 15px;
+  right: 110px
+}
+html .through{
+  pointer-events: none;
+  opacity: 0.7;
+  background-color: transparent;
+}

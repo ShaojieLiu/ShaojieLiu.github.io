@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style media="screen">
+      .page{
+        text-align: center;
+      }
+      .page>p{
+        background-color: lightblue;
+        color: darkblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <p>这是一个测试页面, 和工具本身无关.<br>这里一共四个东西: 两个按钮功能如下;<br> 还有两个图, 一个正常, 另一个src错误</p>
+      <button class="btn" type="button" id="addpic">按下: {发送Ajax请求;<br>按照返回的链接创建img}</button>
+      <button class="btn" type="button" id="adderr">按下: {发送错误Ajax;<br>创建无效img}</button>
+      <br><br>
+      <img style="width:33.33%; height:100px;" src="http://7xr4g8.com1.z0.glb.clouddn.com/879"><!--
+   --><img style="width:33%; height:100px;" src="http://c.com/there_is_nothing.png" alt="">
+      <!-- <video src="http://c.com/There_is_nothing.mp4"></video> -->
+    </div>
+
+
+<script src="fastconsole.js"></script>
+
+<script src="js/ajax.js"></script>
+<script type="text/javascript">
+  function _test() {
+    document.querySelector('#addpic').addEventListener('click', function() {
+      let aj = new Ajax('get', '/rand', '', function(data){
+        data = JSON.parse(data)
+        document.querySelector('img').insertAdjacentHTML('beforebegin', `<img style="width:33.33%; height:100px;" src="${data}">`)
+      })
+    })
+    document.querySelector('#adderr').addEventListener('click', function() {
+      let aj = new Ajax('get', '/err', '', function(data){
+      })
+      document.querySelector('img').insertAdjacentHTML('beforebegin', `
+      <img style="width:33.33%; height:100px;" src="http://no_pic_${Math.floor(Math.random()*9999)}">`)
+    })
+  }
+
+  _test()
+  here_is_an_error()
+</script>
+  </body>
+</html>
