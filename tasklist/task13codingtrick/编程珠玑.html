@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> 编程珠玑</title>
+  </head>
+  <body>
+
+<script src="./kyj.js"></script>
+<script type="text/javascript">
+
+let kFromN = function(k, n) {
+
+  console.log('***随机输出 k 个小于 n 且不重复的整数')
+  let line = [], result = []
+
+  for (let count = 0; count < k;) {
+    let pos = Math.floor(Math.random() * n)
+    if(!line[pos]) {
+      line[pos] = 1
+      count += 1
+      result.push(pos)
+    }
+  }
+
+  console.log(`${k} from ${n}:` + '\n', result)
+  return result
+}
+
+let wztuSort = function(arr) {
+
+  console.log('***把一个不重复的随机整数数组利用位图排序法增序')
+  let line = [], result = []
+
+  for (let prop of arr) {
+    line[prop] = 1
+  }
+
+  for (let prop in line) {
+    if(line[prop] == 1) {
+      result.push(Number(prop))
+    }
+  }
+
+  console.log(`位图排序:` + '\n', result)
+  return result
+}
+
+let _run = function() {
+  
+  let array40 = kFromN(40, 9999)
+  wztuSort(array40)
+}
+_run()
+</script>
+  </body>
+</html>
