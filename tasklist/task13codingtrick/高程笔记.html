@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> 高程笔记</title>
+  </head>
+  <body>
+
+
+<script src="./kyj.js"></script>
+<script type="text/javascript">
+
+
+let p141 = function() {
+  log('第六章 P141 getter 和 setter')
+
+  let person = {
+    性别: "男",
+    变性手术次数: 0
+  }
+
+  Object.defineProperties(person, {
+
+    _原始性别: {value: "男"},
+
+    _变性手术次数: {value: 0},
+
+    变性手术次数: {
+      get: function() {return this._变性手术次数},
+
+      set: function(newValue) {
+        this._变性手术次数 = newValue
+        if (newValue % 2 === 0) {
+          this._sexChange = false
+          this.性别 = this._原始性别
+        } else {
+          this._sexChange = true
+          if (this._原始性别 === "男") {
+            this.性别 = '女'
+          } else{
+            this.性别 = '男'
+          }
+        }
+      }
+    }
+  })
+
+  log('默认性别', person.性别)
+
+  person.变性手术次数 = 1
+
+  log('做了一次手术之后', person.性别)
+}
+
+let __run = function() {
+  p141()
+}
+
+__run()
+
+</script>
+  </body>
+</html>
