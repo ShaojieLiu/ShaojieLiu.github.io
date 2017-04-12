@@ -46,10 +46,38 @@ let wztuSort = function(arr) {
   return result
 }
 
+let findIndex = function(sorted, ele, start = 0) {
+// ***用二分法查找增序数组中的某值的序号，没有则返回-1
+  // console.log(`length = ${sorted.length}`)
+
+  let half = Math.floor(sorted.length / 2)
+  // console.log('中间元素相等？', sorted[half] == ele, '数组长为1？', sorted.length == 1)
+  if (sorted[half] == ele) {
+    return half + start
+  } else {
+    if (sorted.length == 1) {
+      // console.log('进入了-1的分支')
+      return -1
+    } else {
+      if (sorted[half] < ele) {
+        let newArr = sorted.slice(half)
+        return findIndex(newArr, ele, half + start)
+      } else {
+        let newArr = sorted.slice(0, half)
+        return findIndex(newArr, ele, start)
+      }
+    }
+  }
+}
+
 let _run = function() {
-  
+
   let array40 = kFromN(40, 9999)
-  wztuSort(array40)
+  let sorted40 = wztuSort(array40)
+  console.log('***用二分法查找增序数组中的某值的序号，没有则返回-1')
+  let index = findIndex(sorted40, 12)
+  // let index = findIndex(sorted40, sorted40[12])
+  console.log('查找序号结果：', index)
 }
 _run()
 </script>
