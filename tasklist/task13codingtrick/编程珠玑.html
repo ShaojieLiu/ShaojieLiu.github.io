@@ -5,13 +5,14 @@
     <title> 编程珠玑</title>
   </head>
   <body>
+    <canvas id="myCanvas" width="1000" height="300"></canvas>
 
 <script src="./kyj.js"></script>
 <script type="text/javascript">
 
 let kFromN = function(k, n) {
 
-  console.log('***随机输出 k 个小于 n 且不重复的整数')
+  // console.log('***随机输出 k 个小于 n 且不重复的整数')
   let line = [], result = []
 
   for (let count = 0; count < k;) {
@@ -23,7 +24,7 @@ let kFromN = function(k, n) {
     }
   }
 
-  console.log(`${k} from ${n}:` + '\n', result)
+  // console.log(`${k} from ${n}:` + '\n', result)
   return result
 }
 
@@ -47,16 +48,18 @@ let wztuSort = function(arr) {
 }
 
 let findIndex = function(sorted, ele, start = 0) {
-// ***用二分法查找增序数组中的某值的序号，没有则返回-1
+  // ***用二分法查找增序数组中的某值的序号，没有则返回-1
   // console.log(`length = ${sorted.length}`)
 
   let half = Math.floor(sorted.length / 2)
   // console.log('中间元素相等？', sorted[half] == ele, '数组长为1？', sorted.length == 1)
   if (sorted[half] == ele) {
+    console.log('查找序号结果：\n', half + start)
     return half + start
   } else {
     if (sorted.length == 1) {
       // console.log('进入了-1的分支')
+      console.log('查找序号结果：\n', -1)
       return -1
     } else {
       if (sorted[half] < ele) {
@@ -70,14 +73,51 @@ let findIndex = function(sorted, ele, start = 0) {
   }
 }
 
+let timeTest = function(num, step, func) {
+  let pointArr = []
+
+  let drawTimeFunc = function(arr) {
+    let canvas = e('#myCanvas')
+    let ctx = canvas.getContext('2d')
+    let height = canvas.clientHeight
+
+    ctx.moveTo(0, height)
+    for (let i = 0; i < arr.length; i++) {
+      // console.log(arr[i].i, arr[i].time)
+      ctx.lineTo(arr[i].i, height - arr[i].time)
+    }
+    ctx.stroke()
+  }
+
+  let getTimeArr = function() {
+    for (let i = 1; i < num; i++) {
+      let time1 = new Date
+      func(i * step)
+      let time2 = new Date
+      let time = time2 - time1
+      pointArr.push({i, time})
+    }
+    console.log(pointArr)
+  }
+
+  let __main = function() {
+    getTimeArr()
+    drawTimeFunc(pointArr)
+  }
+
+  __main()
+}
+
 let _run = function() {
 
   let array40 = kFromN(40, 9999)
   let sorted40 = wztuSort(array40)
   console.log('***用二分法查找增序数组中的某值的序号，没有则返回-1')
-  let index = findIndex(sorted40, 12)
-  // let index = findIndex(sorted40, sorted40[12])
-  console.log('查找序号结果：', index)
+  let index = findIndex(sorted40, sorted40[12])
+  timeTest(1000, 100, function(i) {
+    kFromN(i, 999999)
+  })
+
 }
 _run()
 </script>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Game_2048</title>
+    <link rel="stylesheet" href="../css/hf.css">
+    <style media="screen">
+      mainCont{
+        display: flex;
+        justify-content: center;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .mainWindow{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        background-color: rgba(31, 182, 212, 0.57);
+        border-radius: 5px;
+        margin: 25px;
+        padding: 5px;
+      }
+      .view{
+        margin: 5px;
+      }
+      .card{
+        position: relative;
+        display: inline-flex;
+        width: 50px;
+        height: 50px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;;
+        border-radius: 5px;
+        margin: 1px;
+        color: black;
+        font-weight: 900;
+        border: 1px solid lightgray;
+        z-index: 1;
+        box-shadow: 1px 1px 1px gray;
+      }
+      @keyframes zoomOut {
+        from {transform: scale(0.1);}
+        to {transform: scale(1.0);}
+      }
+      @keyframes zoomIn {
+        from {transform: scale(2.0);}
+        to {transform: scale(1.0);}
+      }
+      .card-zoomOut {
+        z-index: 10;
+        -webkit-animation: zoomOut 0.7s;
+      }
+      .card-zoomIn {
+        z-index: 10;
+        -webkit-animation: zoomIn 0.7s;
+      }
+      .num0{background-color: hsl(226, 78%, 95%); color: hsl(226, 78%, 95%);}
+      .num1{background-color: hsl(226, 78%, 85%);}
+      .num2{background-color: hsl(226, 78%, 75%);}
+      .num3{background-color: hsl(226, 78%, 65%);}
+
+      .num4{background-color: hsl(226, 78%, 55%);}
+      .num5{background-color: hsl(226, 78%, 45%); color: lightgray;}
+      .num6{background-color: hsl(246, 78%, 45%); color: white;}
+      .num7{background-color: hsl(266, 78%, 45%); color: white;}
+
+      .num8{background-color: hsl(286, 78%, 45%); color: white;}
+      .num9{background-color: hsl(306, 78%, 45%); color: white;}
+      .num10{background-color: hsl(326, 78%, 45%); color: white;}
+      .num11{background-color: hsl(246, 78%, 45%); color: white;}
+
+      .btn-area{
+        flex: auto;
+        display: flex;
+        justify-content: space-around;
+      }
+      .btn{
+        flex: auto;
+        color: white;
+        background-color: royalblue;
+        padding: 5px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 1px gray;
+        text-align: center;
+      }
+      .count-area{
+        flex: auto;
+        display: flex;
+        justify-content: space-around;
+      }
+      .count{
+        flex: 1;
+        font-size: 10px;
+        color: white;
+        background-color: rgb(52, 191, 103);
+        padding: 5px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        text-align: center;
+      }
+      .btn:hover{
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+    </style>
+    <link href="https://cdn.bootcss.com/alertify.js/0.3.10/alertify.core.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/alertify.js/0.3.10/alertify.default.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+        <i class="fa fa-cube"></i>
+        <span>Game_2048</span>
+    </header>
+    <mainCont>
+      <div class="mainWindow">
+        <div class="control">
+          <div class="count-area">
+
+          </div>
+          <div class="btn-area">
+            <span class="btn btn-prev">悔棋</span>
+            <span class="btn btn-new">新局</span>
+          </div>
+        </div>
+        <div class="view">
+
+        </div>
+      </div>
+    </mainCont>
+    <footer>By Shaojie Liu 2017-4-12</footer>
+
+<!-- <script src="https://cdn.bootcss.com/alertify.js/0.5.0/alertify.min.js"></script> -->
+<script src="https://cdn.bootcss.com/alertify.js/0.3.10/alertify.min.js"></script>
+<script type="text/javascript">
+
+let e = sel => document.querySelector(sel)
+let es = sel => document.querySelectorAll(sel)
+
+let game = function() {
+
+  let maxNum = 4
+
+  let matrix0 = function(n, m) {
+    let result = []
+    for (let i = 0; i < n; i++) {
+      let temp = []
+      for (let j = 0; j < m; j++) {
+        temp.push(0)
+      }
+      result.push(temp)
+    }
+    return result
+  }
+
+  this.arr = []
+  this.zoom = []
+  this.path = []
+  this.score = 0
+  if (window.localStorage.highest) {this.highest = window.localStorage.highest}
+  else {this.highest = 0}
+
+  let bindDirection = function() {
+
+    let del0 = function(arr, zoomRow) {
+      // console.log('del0', arr, zoomRow)
+      let j = 0, newArr = [], newZoom = []
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i]) {
+          newArr[j] = arr[i]
+          newZoom[j] = zoomRow[i]
+          j++
+        }
+      }
+      for (; j < arr.length; j++) {
+        newArr[j] = 0
+        newZoom[j] = 0
+      }
+      arr = newArr
+      zoomRow = newZoom
+      return [newArr, newZoom]
+    }
+
+    let merge = function(arr, zoomRow) {
+      // console.log('merge', arr, zoomRow)
+      var newArr = arr, newZoom = []
+      for (var i = 0; i < arr.length - 1; i++) {
+        if (arr[i] == arr[i + 1] && arr[i] != 0) {
+          score += pow2(newArr[i])
+          if (score > highest) {
+            highest = score
+            window.localStorage.highest = highest
+          }
+          console.log('新分数', score, highest)
+          newArr[i] = arr[i] + 1
+          newArr[i + 1] = 0
+          newZoom[i] = 1
+        } else {
+          newZoom[i] = 0
+        }
+      }
+      newZoom.push(0)
+      arr = newArr
+      zoomRow = newZoom
+      return [newArr, newZoom]
+    }
+
+    let operation = function(arr, zoomRow) {
+      let a, b, c, d, e, f
+      [a, b] = del0(arr, zoomRow)
+      // console.log('a,b', a, b)
+      let temp = merge(a, b)
+      c = temp[0]
+      d = temp[1]
+      // console.log('c,d', c, d)
+      temp = del0(c, d)
+      e = temp[0]
+      f = temp[1]
+      // console.log('e,f', e, f)
+      return [e, f]
+    }
+
+    let up = function() {
+      console.log('up')
+      for (let i = 0; i < arr.length; i++) {
+        let newRow = [],
+            len = arr[0].length
+        for (let j = 0; j < len; j++) {
+          newRow.push(arr[j][i])
+        }
+        [newRow, zoomRow] = operation(newRow, [0,0,0,0])
+        for (let j = 0; j < len; j++) {
+          arr[j][i] = newRow[j]
+          zoom[j][i] = zoomRow[j]
+        }
+      }
+    }
+
+    let down = function() {
+      console.log('down')
+      for (let i = 0; i < arr.length; i++) {
+        let newRow = [],
+            len = arr[0].length
+        for (let j = len - 1; j >= 0; j--) {
+          newRow.push(arr[j][i])
+        }
+        [newRow, zoomRow] = operation(newRow, [0,0,0,0])
+        for (let j = 0; j < len; j++) {
+          arr[len - 1 - j][i] = newRow[j]
+          zoom[len - 1 - j][i] = zoomRow[j]
+        }
+      }
+    }
+
+    let left = function() {
+      console.log('left')
+      for (let i = 0; i < arr.length; i++) {
+        let newRow = [],
+            len = arr[0].length
+        for (let j = 0; j < len; j++) {
+          newRow.push(arr[i][j])
+        }
+        [newRow, zoomRow] = operation(newRow, [0,0,0,0])
+        for (let j = 0; j < len; j++) {
+          arr[i][j] = newRow[j]
+          zoom[i][j] = zoomRow[j]
+        }
+      }
+    }
+
+    let right = function() {
+      console.log('right')
+      for (let i = 0; i < arr.length; i++) {
+        let newRow = [],
+            len = arr[0].length
+        for (let j = len - 1; j >= 0; j--) {
+          newRow.push(arr[i][j])
+        }
+        [newRow, zoomRow] = operation(newRow, [0,0,0,0])
+        for (let j = 0; j < len; j++) {
+          arr[i][len - 1 - j] = newRow[j]
+          zoom[i][len - 1 - j] = zoomRow[j]
+        }
+      }
+    }
+
+    let bindKeybord = function(keyList, funList) {
+      e('html').addEventListener('keyup', function(ev) {
+        for (let prop in keyList) {
+          if (ev.key == keyList[prop]) {
+            funList[prop]()
+            arr = randNum(arr, 1)
+            // console.log(arr)
+            addPath(arr, zoom, score)
+            rend(arr, zoom, score)
+          }
+        }
+      })
+    }
+
+    let keyList = ['w', 's', 'a', 'd']
+    let funList = [up, down, left, right]
+    bindKeybord(keyList, funList)
+  }
+
+  let addPath = function(arr, zoom, score) {
+    path.push({
+      arr: JSON.parse(JSON.stringify(arr)),
+      zoom: JSON.parse(JSON.stringify(zoom)),
+      score: score
+    })
+    // console.log(path)
+  }
+
+  // 在 arr 里的空白处产生 num 个随机的 1 或者 2
+  let randNum = function(arr, num) {
+    if (num == 0) {
+      return arr
+    } else {
+      let row = Math.floor(Math.random() * maxNum)
+      let col = Math.floor(Math.random() * maxNum)
+      if (arr[row][col] == 0) {
+        let maxRand = 2
+        let rand = Math.floor(Math.random() * maxRand) + 1
+        // console.log(`随机的行列：${row}, ${col}; 数字：${rand}`)
+        arr[row][col] = rand
+        zoom[row][col] = -1
+        return randNum(arr, --num)
+      } else{
+        return randNum(arr, num)
+      }
+    }
+  }
+
+  // 把单独一个数转为 2 的次方， 或者 0 或 空
+  let pow2 = function(num) {
+    if (num == 0) {
+      return 0
+    } else {
+      return Math.pow(2, num)
+    }
+  }
+
+  // 千位空格
+  let thousand = function(num) {
+    return num && num.toString().replace(/(?=(?!^)(\d{3})+$)/g, ',')
+  }
+
+  let rend = function(arr, zoom, score) {
+    let view = e('.view'),
+        viewHTML = ''
+
+    for (var i = 0; i < arr.length; i++) {
+      let arrRow = arr[i],
+          rowHTML = '',
+          rowStart = `<div class="row row-${i}">`
+          rowEnd = `</div>`
+
+      for (var j = 0; j < arrRow.length; j++) {
+        let spanHTML = `<div class="card col-${j} num${arrRow[j]}">${pow2(arrRow[j])}</div>`
+        rowHTML += spanHTML
+      }
+
+      rowHTML = rowStart + rowHTML + rowEnd
+      viewHTML += rowHTML
+    }
+    e('.count-area').innerHTML = `
+      <span class="count count-now"> 得分<br>${score} </span>
+      <span class="count count-highest"> 最高<br>${thousand(highest)} </span>`
+
+    view.innerHTML = viewHTML
+
+    for (var i = 0; i < arr.length; i++) {
+      for (var j = 0; j < arr[0].length; j++) {
+        if (zoom[i][j] == -1) {
+          e(`.row-${i} .col-${j}`).classList.add('card-zoomOut')
+        } else if (zoom[i][j] == 1) {
+          e(`.row-${i} .col-${j}`).classList.add('card-zoomIn')
+        }
+      }
+    }
+    zoom = matrix0(4, 4)
+  }
+
+  let bindNew = function() {
+    e('.btn-new').addEventListener('click', function() {
+      alertify.confirm('放下一切，重新开始？', function(ev) {
+        if (ev) {__init()}
+        else {}
+      })
+    })
+  }
+
+  let bindRegret = function() {
+    e('.btn-prev').addEventListener('click', function() {
+      if (path.length > 1) {
+        path.splice(-1, 1)
+        let prev = path.slice(-1)[0]
+        arr = JSON.parse(JSON.stringify(prev.arr))
+        zoom = JSON.parse(JSON.stringify(prev.zoom))
+        score = prev.score
+        rend(arr, zoom, score)
+      }
+    })
+  }
+
+  let bindAll = function() {
+    bindDirection()
+    bindRegret()
+    bindNew()
+  }
+
+  let __init = function() {
+    arr = matrix0(maxNum, maxNum)
+    zoom = matrix0(maxNum, maxNum)
+    arr = randNum(arr, 2)
+    path = []
+    score = 0
+    rend(arr, zoom, score)
+  }
+
+  bindAll()
+  __init()
+}
+
+let __main = function() {
+  game()
+}
+
+__main()
+
+</script>
+  </body>
+</html>
