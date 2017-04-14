@@ -3,11 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title>Game_2048</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/hf.css">
     <style media="screen">
+      html{font-size: 20px;}
+      body{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
       mainCont{
+        flex: auto;
         display: flex;
         justify-content: center;
+        align-items: center;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
@@ -16,6 +25,7 @@
         user-select: none;
       }
       .mainWindow{
+        flex: none;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -28,11 +38,16 @@
       .view{
         margin: 5px;
       }
+      .row{
+        display: flex;
+        justify-content: center;
+      }
       .card{
+        font-size: 1.5rem;
         position: relative;
         display: inline-flex;
-        width: 50px;
-        height: 50px;
+        width: 5rem;
+        height: 5rem;
         box-sizing: border-box;
         justify-content: center;
         align-items: center;;
@@ -66,14 +81,19 @@
       .num3{background-color: hsl(226, 78%, 65%);}
 
       .num4{background-color: hsl(226, 78%, 55%);}
-      .num5{background-color: hsl(226, 78%, 45%); color: lightgray;}
+      .num5{background-color: hsl(226, 78%, 45%); color: white;}
       .num6{background-color: hsl(246, 78%, 45%); color: white;}
       .num7{background-color: hsl(266, 78%, 45%); color: white;}
 
       .num8{background-color: hsl(286, 78%, 45%); color: white;}
       .num9{background-color: hsl(306, 78%, 45%); color: white;}
       .num10{background-color: hsl(326, 78%, 45%); color: white;}
-      .num11{background-color: hsl(246, 78%, 45%); color: white;}
+      .num11{background-color: hsl(0, 78%, 45%); color: white;}
+
+      .num12{background-color: hsl(20, 80%, 50%); color: white;}
+      .num13{background-color: hsl(40, 80%, 50%); color: white;}
+      .num14{background-color: hsl(60, 80%, 50%); color: black;}
+      .num15{background-color: hsl(80, 80%, 50%); color: black;}
 
       .btn-area{
         flex: auto;
@@ -97,7 +117,7 @@
       }
       .count{
         flex: 1;
-        font-size: 10px;
+        font-size: 1rem;
         color: white;
         background-color: rgb(52, 191, 103);
         padding: 5px 15px;
@@ -109,7 +129,15 @@
         cursor: pointer;
         transform: scale(1.05);
       }
+      @media (max-width: 1024px) {
+        mainCont{background-color: rgba(173, 223, 223, 0.5);}
+        html{font-size: 30px;}
+      }
+      @media (max-width: 414px) {
+        html{font-size: 12px;}
+      }
     </style>
+
     <link href="https://cdn.bootcss.com/alertify.js/0.3.10/alertify.core.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/alertify.js/0.3.10/alertify.default.min.css" rel="stylesheet">
   </head>
@@ -136,7 +164,7 @@
     </mainCont>
     <footer>By Shaojie Liu 2017-4-12</footer>
 
-<!-- <script src="https://cdn.bootcss.com/alertify.js/0.5.0/alertify.min.js"></script> -->
+<script src="https://cdn.bootcss.com/hammer.js/2.0.8/hammer.min.js"></script>
 <script src="https://cdn.bootcss.com/alertify.js/0.3.10/alertify.min.js"></script>
 <script type="text/javascript">
 
@@ -147,12 +175,12 @@ let game = function() {
 
   let maxNum = 4
 
-  let matrix0 = function(n, m) {
+  let matrix0 = function(num, n, m) {
     let result = []
     for (let i = 0; i < n; i++) {
       let temp = []
       for (let j = 0; j < m; j++) {
-        temp.push(0)
+        temp.push(num)
       }
       result.push(temp)
     }
@@ -227,7 +255,7 @@ let game = function() {
     }
 
     let up = function() {
-      console.log('up')
+      // console.log('up')
       for (let i = 0; i < arr.length; i++) {
         let newRow = [],
             len = arr[0].length
@@ -243,7 +271,7 @@ let game = function() {
     }
 
     let down = function() {
-      console.log('down')
+      // console.log('down')
       for (let i = 0; i < arr.length; i++) {
         let newRow = [],
             len = arr[0].length
@@ -259,7 +287,7 @@ let game = function() {
     }
 
     let left = function() {
-      console.log('left')
+      // console.log('left')
       for (let i = 0; i < arr.length; i++) {
         let newRow = [],
             len = arr[0].length
@@ -275,7 +303,7 @@ let game = function() {
     }
 
     let right = function() {
-      console.log('right')
+      // console.log('right')
       for (let i = 0; i < arr.length; i++) {
         let newRow = [],
             len = arr[0].length
@@ -290,23 +318,49 @@ let game = function() {
       }
     }
 
+    let op = function() {
+      // console.log(`arr \n ${JSON.stringify(arr)} \npath \n ${JSON.stringify(path.slice(-1)[0].arr)}`)
+      if (JSON.stringify(arr) != JSON.stringify(path.slice(-1)[0].arr)) {
+        arr = randNum(arr, 1)
+        addPath(arr, zoom, score)
+        rend(arr, zoom, score)
+      } else {
+        console.log('无效步')
+      }
+    }
+
     let bindKeybord = function(keyList, funList) {
       e('html').addEventListener('keyup', function(ev) {
         for (let prop in keyList) {
           if (ev.key == keyList[prop]) {
             funList[prop]()
-            arr = randNum(arr, 1)
-            // console.log(arr)
-            addPath(arr, zoom, score)
-            rend(arr, zoom, score)
+            op()
           }
         }
       })
     }
 
+    let bindSwipe = function(swipeList, funList) {
+      let mc = new Hammer(e('mainCont'))
+      mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+      for (let swipeEvent of swipeList) {
+        mc.on(swipeEvent, function(ev) {
+          console.log(ev)
+          for (let prop in swipeList) {
+            if (ev.type == swipeList[prop]) {
+              funList[prop]()
+              op()
+            }
+          }
+        })
+      }
+    }
+
     let keyList = ['w', 's', 'a', 'd']
     let funList = [up, down, left, right]
     bindKeybord(keyList, funList)
+    let swipeList = ['swipeup', 'swipedown', 'swipeleft', 'swiperight']
+    bindSwipe(swipeList, funList)
   }
 
   let addPath = function(arr, zoom, score) {
@@ -371,7 +425,7 @@ let game = function() {
       viewHTML += rowHTML
     }
     e('.count-area').innerHTML = `
-      <span class="count count-now"> 得分<br>${score} </span>
+      <span class="count count-now"> 得分<br>${thousand(score)} </span>
       <span class="count count-highest"> 最高<br>${thousand(highest)} </span>`
 
     view.innerHTML = viewHTML
@@ -385,7 +439,7 @@ let game = function() {
         }
       }
     }
-    zoom = matrix0(4, 4)
+    zoom = matrix0(0, 4, 4)
   }
 
   let bindNew = function() {
@@ -417,16 +471,34 @@ let game = function() {
   }
 
   let __init = function() {
-    arr = matrix0(maxNum, maxNum)
-    zoom = matrix0(maxNum, maxNum)
+    arr = matrix0(0, maxNum, maxNum)
+    zoom = matrix0(0, maxNum, maxNum)
     arr = randNum(arr, 2)
     path = []
+    addPath(arr, zoom, score)
     score = 0
+    rend(arr, zoom, score)
+  }
+
+  let testColor = function() {
+    let result = []
+    for (let i = 0; i < maxNum; i++) {
+      let temp = []
+      for (let j = 0; j < maxNum; j++) {
+        temp.push(i*4 + j)
+      }
+      result.push(temp)
+    }
+    arr = result
+    let zoom = matrix0(-1, maxNum, maxNum)
+    score = 0
+    addPath(arr, zoom, score)
     rend(arr, zoom, score)
   }
 
   bindAll()
   __init()
+  testColor()
 }
 
 let __main = function() {
