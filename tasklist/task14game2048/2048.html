@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Game_2048</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/hf.css">
+    <link rel="stylesheet" href="./2048.css">
+
+    <style media="screen">
+
+      html{font-size: 20px;}
+
+      @media (max-width: 1024px) {
+        mainCont{background-color: rgba(173, 223, 223, 0.5);}
+        html{font-size: 30px;}
+      }
+
+      @media (max-width: 414px) {
+        html{font-size: 12px;}
+      }
+    </style>
+
+    <link href="https://cdn.bootcss.com/alertify.js/0.3.10/alertify.core.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/alertify.js/0.3.10/alertify.default.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+        <i class="fa fa-cube"></i>
+        <span>Game_2048</span>
+    </header>
+    <mainCont>
+      <div class="mainWindow">
+        <div class="control">
+          <div class="count-area">
+
+          </div>
+          <div class="btn-area">
+            <span class="btn btn-prev">悔棋</span>
+            <span class="btn btn-new">新局</span>
+          </div>
+        </div>
+        <div class="view">
+
+        </div>
+      </div>
+    </mainCont>
+    <footer>By Shaojie Liu 2017-4-12</footer>
+
+<script src="https://cdn.bootcss.com/hammer.js/2.0.8/hammer.min.js"></script>
+<script src="https://cdn.bootcss.com/alertify.js/0.3.10/alertify.min.js"></script>
+<script src="./2048.js"></script>
+  </body>
+</html>

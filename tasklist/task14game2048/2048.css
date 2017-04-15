@@ -1,0 +1,122 @@
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+mainCont{
+  flex: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.mainWindow{
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  background-color: rgba(31, 182, 212, 0.57);
+  border-radius: 5px;
+  margin: 25px;
+  padding: 5px;
+}
+.view{
+  margin: 5px;
+}
+.row{
+  display: flex;
+  justify-content: center;
+}
+.card{
+  font-size: 1.5rem;
+  position: relative;
+  display: inline-flex;
+  width: 5rem;
+  height: 5rem;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;;
+  border-radius: 5px;
+  margin: 1px;
+  color: black;
+  font-weight: 900;
+  border: 1px solid lightgray;
+  z-index: 1;
+  box-shadow: 1px 1px 1px gray;
+}
+@keyframes zoomOut {
+  from {transform: scale(0.1);}
+  to {transform: scale(1.0);}
+}
+@keyframes zoomIn {
+  from {transform: scale(2.0);}
+  to {transform: scale(1.0);}
+}
+.card-zoomOut {
+  z-index: 10;
+  -webkit-animation: zoomOut 0.7s;
+}
+.card-zoomIn {
+  z-index: 10;
+  -webkit-animation: zoomIn 0.7s;
+}
+.num0{background-color: hsl(226, 78%, 95%); color: hsl(226, 78%, 95%);}
+.num1{background-color: hsl(226, 78%, 85%);}
+.num2{background-color: hsl(226, 78%, 75%);}
+.num3{background-color: hsl(226, 78%, 65%);}
+
+.num4{background-color: hsl(226, 78%, 55%);}
+.num5{background-color: hsl(226, 78%, 45%); color: white;}
+.num6{background-color: hsl(246, 78%, 45%); color: white;}
+.num7{background-color: hsl(266, 78%, 45%); color: white;}
+
+.num8{background-color: hsl(286, 78%, 45%); color: white;}
+.num9{background-color: hsl(306, 78%, 45%); color: white;}
+.num10{background-color: hsl(326, 78%, 45%); color: white;}
+.num11{background-color: hsl(0, 78%, 45%); color: white;}
+
+.num12{background-color: hsl(20, 80%, 50%); color: white;}
+.num13{background-color: hsl(40, 80%, 50%); color: white;}
+.num14{background-color: hsl(60, 80%, 50%); color: black;}
+.num15{background-color: hsl(80, 80%, 50%); color: black;}
+
+.btn-area{
+  flex: auto;
+  display: flex;
+  justify-content: space-around;
+}
+.btn{
+  flex: auto;
+  color: white;
+  background-color: royalblue;
+  padding: 5px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px gray;
+  text-align: center;
+}
+.count-area{
+  flex: auto;
+  display: flex;
+  justify-content: space-around;
+}
+.count{
+  flex: 1;
+  font-size: 1rem;
+  color: white;
+  background-color: rgb(52, 191, 103);
+  padding: 5px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+.btn:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
