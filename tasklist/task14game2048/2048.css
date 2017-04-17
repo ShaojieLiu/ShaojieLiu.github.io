@@ -1,8 +1,4 @@
-body{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+
 mainCont{
   flex: auto;
   display: flex;
