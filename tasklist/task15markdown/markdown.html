@@ -28,14 +28,19 @@
         display: flex;
         justify-content: space-around;
         align-items: stretch;
+        width: 100%;
         height: 100%;
       }
       .ctn-editor{
-        flex: 1 1 auto;
+        flex: 1 1 50%;
         display: flex;
         height: auto;
         /*width: 48%;*/
+        overflow-x: scroll;
         border-right: 1px solid lightgray;
+      }
+      .CodeMirror{
+        overflow-x: scroll;
       }
       .ctn-editor form{
         width: 100%;
@@ -44,20 +49,22 @@
         height: 100%;
       }
       .ctn-display{
-        flex: 1 1 auto;
+        flex: 1 1 50%;
         display: flex;
         height: auto;
         overflow: scroll;
         /*width: 48%;*/
         border-left: 1px solid lightgray;
       }
+      .ctn-display img{
+        width: 50%;
+      }
       .ctn-toolbar{
-        flex: 0.1 1 auto;
+        flex: 0.1 0.1 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
         height: auto;
-        /*width: 3%;*/
         color: gray;
       }
       .ctn-toolbar .tool{margin: 5px 0;}
@@ -81,52 +88,55 @@
       <div class="mainWindow">
         <div class="ctn-editor">
           <form><textarea class="md-input" name="name" rows="8" cols="80">
-# 标题
+[Markdown介绍链接](https://sspai.com/post/36610)
+
+![Markdown图片](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1492420743950&di=f4a74f42729bc32b4bcea4492d53b13d&imgtype=jpg&src=http%3A%2F%2Fcdn.sspai.com%2Fattachment%2Fthumbnail%2F2014%2F04%2F15%2Fd38aa229b1c8c9119b6a03a61ba113b810f9a_mw_800.jpg)
+
+___
+# 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+___
 
 > 这是一个引用
 
-**加粗**
+**加粗** *斜体*
+___
 
-*斜体*
+* 无序列表
+* 无序列表
+* 无序列表
 
-————————
+1. 有序列表
+1. 有序列表
+1. 有序列表
 
-上面是分割线，下面是列表
+___
+
+上面是分割线，下面是表格
 
 |列表|第 一 列|第 二 列|第 三 列|第 四 列|
 |:-|:-:|:-:|:-:|:-:|
 |项目1|1-1|1-2|1-3|1-4|
 |项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
-|项目1|1-1|1-2|1-3|1-4|
-|项目2|2-1|2-2|2-3|2-4|
+|项目3|3-1|3-2|3-3|3-4|
+|项目4|4-1|4-2|4-3|4-4|
+
+___
+
++ 演示列表
+    + 列表还可以有层级
+    	+ 再来一级
+___
+尼采说：
+> Was mich nicht umbringt, macht mich **stärker**.
+___
+
+[少数派](https://sspai.com)
+
+![](https://cdn.sspai.com/attachment/thumbnail/2016/11/04/264631b984633898c415a818b181e5205653e_mw_640.jpg)
 
 </textarea></form>
         </div>
@@ -193,33 +203,27 @@ let md = function() {
       // }
     })
 
-    // 这段代码解决了 A 与 B 同步时 不停互相反馈，导致滚动颤抖
+  // 这段代码解决了 A 与 B 同步时 不停互相反馈，导致滚动颤抖
     let syncA2B = function(a, b) {
       let prog = a.scrollTop / (a.scrollHeight - a.clientHeight)
       b.scrollTop = (b.scrollHeight - b.clientHeight) * prog
     }
     let timeID
-    let editorSync = (ev) => {
-      e('.ctn-display').removeEventListener('scroll', disSync)
-      syncA2B(ev.target, e('.ctn-display'))
+    // 当 ev 触发时，把 a 上监听的 funA 阻塞掉，直到 200ms 之后 再重新监听
+    let blockA = function(ev, a, funA) {
+      a.removeEventListener('scroll', funA)
+      syncA2B(ev.target, a)
       clearTimeout(timeID)
       timeID = setTimeout(() => {
-        e('.ctn-display').addEventListener('scroll', disSync)
+        a.addEventListener('scroll', funA)
       }, 200)
     }
 
-    let disSync = (ev) => {
-      e('.CodeMirror-scroll').removeEventListener('scroll', editorSync)
-      syncA2B(ev.target, e('.CodeMirror-scroll'))
-      clearTimeout(timeID)
-      timeID = setTimeout(() => {
-        e('.CodeMirror-scroll').addEventListener('scroll', editorSync)
-      }, 200)
-    }
+    let editorSync = (ev) => {blockA(ev, e('.ctn-display'), disSync)}
+    let disSync = (ev) => {blockA(ev, e('.CodeMirror-scroll'), editorSync)}
 
     e('.CodeMirror-scroll').addEventListener('scroll', editorSync)
     e('.ctn-display').addEventListener('scroll', disSync)
-
   }
 
   let __init = function() {
