@@ -25,4 +25,7 @@
 |task5|[文本操作](https://ShaojieLiu.github.io/tasklist/task5haoqing/txt_operation.html)|[源码](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/tasklist/task5haoqing/txt_operation.html)|
 |task6|[3D魔方轮播图](https://ShaojieLiu.github.io/tasklist/task6cube/cube3D.html)|[源码](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/tasklist/task6cube/cube3D.js)|
 
+## todo列表
 
+1. 把 markdown 利用 electron 打包成 mac 和 win 的应用
+1.
