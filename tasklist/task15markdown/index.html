@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>markdown</title>
+    <link rel="stylesheet" href="../css/hf.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./lib/codemirror.css">
+    <link rel="stylesheet" href="./lib/duotone-light.css">
+    <style media="screen">
+
+      /**{outline: 1px dashed red;}*/
+      html{font-size: 15px;}
+      body{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      mainCont{
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .mainWindow{
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: stretch;
+        width: 100%;
+        height: 100%;
+      }
+      .ctn-editor{
+        flex: 1 1 50%;
+        display: flex;
+        height: auto;
+        /*width: 48%;*/
+        overflow-x: scroll;
+        border-right: 1px solid lightgray;
+      }
+      .CodeMirror{
+        /*overflow-x: scroll;*/
+      }
+      .ctn-editor form{
+        width: 100%;
+      }
+      .ctn-editor .CodeMirror{
+        height: 100%;
+      }
+      .ctn-display{
+        flex: 1 1 50%;
+        display: flex;
+        height: auto;
+        overflow: scroll;
+        /*width: 48%;*/
+        border-left: 1px solid lightgray;
+      }
+      .ctn-display::-webkit-scrollbar{width: 0;}
+      .ctn-display img{
+        width: 50%;
+      }
+      .ctn-toolbar{
+        padding-top: 20px;
+        flex: 0.1 0.1 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        color: gray;
+      }
+      .ctn-toolbar .tool{margin: 5px 0;}
+      .none{display: none;}
+
+      @media (max-width: 1024px) {
+        html{font-size: 35px;}
+        .ctn-display img{
+          width: 90%;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+        <i class="fa fa-book"></i>
+        <span>MarkDown</span>
+    </header>
+    <mainCont>
+      <div class="mainWindow">
+        <div class="ctn-editor">
+          <form><textarea class="md-input" name="name" rows="8" cols="80">
+[Markdown介绍链接](https://sspai.com/post/36610)
+
+![Markdown图片](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1492420743950&di=f4a74f42729bc32b4bcea4492d53b13d&imgtype=jpg&src=http%3A%2F%2Fcdn.sspai.com%2Fattachment%2Fthumbnail%2F2014%2F04%2F15%2Fd38aa229b1c8c9119b6a03a61ba113b810f9a_mw_800.jpg)
+
+# 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+___
+
+> 这是一个引用
+
+**加粗** *斜体* ~~这是删除线~~
+___
+
+* 无序列表
+* 无序列表
+* 无序列表
+
+1. 有序列表
+1. 有序列表
+1. 有序列表
+
+___
+
+上面是分割线，下面是表格
+
+|列表|第 一 列|第 二 列|第 三 列|第 四 列|
+|:-|:-:|:-:|:-:|:-:|
+|项目1|1-1|1-2|1-3|1-4|
+|项目2|2-1|2-2|2-3|2-4|
+|项目3|3-1|3-2|3-3|3-4|
+|项目4|4-1|4-2|4-3|4-4|
+
+___
+
++ 演示列表
+    + 列表还可以有层级
+    	+ 再来一级
+___
+尼采说：
+> Was mich nicht umbringt, macht mich **stärker**.
+___
+
+如果想要首行缩进，请使用`& emsp;`
+
+长段落测试：
+
+富文本编辑器以 Word 为例，输入文字后，选择不同的功能（通常是通过点击某个图标），例如加粗或者调整字体大小，处理后的效果直接显示在屏幕上，与打印出来的效果相同。所以富文本编辑器又叫「所见即所得」编辑器。
+
+而 Markdown 编辑器则不同，输入文字后通常是在文字的前后同时输入一些标记字符，输入后在编辑窗口也不会即时的显示出效果。需要手动切换进预览模式查看处理效果。因为这些标记字符的存在，所以 Markdown 本身是一种标记语言。
+
+如果仔细观察这两种编辑器和我们日常使用它们的习惯，就能更深一步理解这两种工具的差异。在编辑文稿时，我们其实不是像小时候在格子纸中写文章那样一气呵成，而是不断的在「输入文字」和「编辑文字」两个状态中切换。
+富文本编辑器「编辑文字」是通过点击图形化的功能按钮来实现，Markdown 编辑器则是通过标记字符去编辑。所以 Markdown 的核心就在于通过输入字符同时进行排版和内容输入。
+___
+
+[少数派](https://sspai.com)
+
+![](https://cdn.sspai.com/attachment/thumbnail/2016/11/04/264631b984633898c415a818b181e5205653e_mw_640.jpg)
+
+</textarea></form>
+        </div>
+
+        <div class="ctn-toolbar">
+          <div class="tool editor"><i class="fa fa-pencil-square-o fa-ban"></i></div>
+          <div class="tool visible"><i class="fa fa-eye"></i></div>
+          <div class="tool save"><i class="fa fa-save"></i></div>
+          <div class="tool folder"><i class="fa fa-folder-open-o"></i></div>
+          <div class="tool theme"><i class="fa fa-font"></i></div>
+        </div>
+
+        <div class="ctn-display">
+          <div class="md-dis">
+
+          </div>
+        </div>
+
+      </div>
+    </mainCont>
+    <footer>By Shaojie Liu 2017-4-15</footer>
+
+<script src="http://cdn.bootcss.com/marked/0.3.6/marked.min.js"></script>
+<script src=http://cdn.bootcss.com/remarkable/1.7.1/remarkable.min.js></script>
+<script src="./lib/codemirror.js"></script>
+<script src="./lib/markdown.js"></script>
+<script src="./lib/active-line.js"></script>
+<script src="./lib/matchbrackets.js"></script>
+<script>
+let e = sel => document.querySelector(sel)
+let md = function() {
+  let editor = CodeMirror.fromTextArea(e('.md-input'), {
+    lineNumbers: true,
+    styleActiveLine: true,
+    matchBrackets: true
+  })
+
+  let themeList = ['default', 'duotone-light']
+
+  let render = function() {
+    // console.log('input')
+    let md = new Remarkable()
+    let src = editor.getValue()
+    let html = md.render(src)
+    e('.md-dis').innerHTML = html
+  }
+
+  let bind = function() {
+    // 同步预览
+    editor.on('change', render )
+
+    // 切换编辑器皮肤
+    let themeNum = 0
+    e('.theme').addEventListener('click', function() {
+      themeNum = (themeNum+1) % themeList.length
+      let theme = themeList[themeNum]
+      editor.setOption("theme", theme)
+    })
+
+    e('.visible').addEventListener('click', function(ev) {
+        ev.target.classList.toggle('fa-eye-slash')
+        e('.ctn-display').classList.toggle('none')
+    })
+    e('.editor').addEventListener('click', function(ev) {
+        ev.target.classList.toggle('fa-ban')
+        e('.ctn-editor').classList.toggle('none')
+    })
+
+  // 这段代码解决了 A 与 B 同步时 不停互相反馈，导致滚动颤抖
+    let syncA2B = function(a, b) {
+      let prog = a.scrollTop / (a.scrollHeight - a.clientHeight)
+      b.scrollTop = (b.scrollHeight - b.clientHeight) * prog
+    }
+    let timeID
+    // 当 ev 触发时，把 a 上监听的 funA 阻塞掉，直到 200ms 之后 再重新监听
+    let blockA = function(ev, a, funA) {
+      a.removeEventListener('scroll', funA)
+      syncA2B(ev.target, a)
+      clearTimeout(timeID)
+      timeID = setTimeout(() => {
+        a.addEventListener('scroll', funA)
+      }, 200)
+    }
+
+    let editorSync = (ev) => {blockA(ev, e('.ctn-display'), disSync)}
+    let disSync = (ev) => {blockA(ev, e('.CodeMirror-scroll'), editorSync)}
+
+    e('.CodeMirror-scroll').addEventListener('scroll', editorSync)
+    e('.ctn-display').addEventListener('scroll', disSync)
+  }
+
+  let __init = function() {
+    bind()
+    render()
+  }
+  __init()
+}
+
+let __main = function() {
+  md()
+}
+__main()
+
+</script>
+
+  </body>
+</html>
