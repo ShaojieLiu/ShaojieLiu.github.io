@@ -1,4 +1,6 @@
 const electron = require('electron')
+const dialog = require('electron')
+
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -6,6 +8,7 @@ const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
 const url = require('url')
+// console.log(url)
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,8 +17,8 @@ let mainWindow
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 1366,
-        height: 768
+        width: 1200,
+        height: 800
     })
 
     // and load the index.html of the app.
@@ -24,7 +27,8 @@ function createWindow() {
         protocol: 'file:',
         slashes: true
     }))
-
+    // console.log(app)
+    // console.log(dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
 
@@ -41,6 +45,7 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {

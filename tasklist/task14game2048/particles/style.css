@@ -1,0 +1,19 @@
+
+#particles-js{
+  width: 100%;
+  height: 100%;
+  background-color: lightblue;
+  /*background-image: url('');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;*/
+}
+#particles-js canvas{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+#particles-js .mainWindow{
+  z-index: 1;
+}

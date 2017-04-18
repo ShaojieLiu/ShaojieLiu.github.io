@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>markdown</title>
-    <link rel="stylesheet" href="../css/hf.css">
+    <link rel="stylesheet" href="./lib/hf.css">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./lib/codemirror.css">
     <link rel="stylesheet" href="./lib/duotone-light.css">
@@ -72,12 +72,12 @@
       .ctn-toolbar .tool{margin: 5px 0;}
       .none{display: none;}
 
-      @media (max-width: 1024px) {
+      /*@media (max-width: 1024px) {
         html{font-size: 35px;}
         .ctn-display img{
           width: 90%;
         }
-      }
+      }*/
 
     </style>
   </head>
@@ -156,9 +156,9 @@ ___
 
         <div class="ctn-toolbar">
           <div class="tool editor"><i class="fa fa-pencil-square-o fa-ban"></i></div>
-          <div class="tool visible"><i class="fa fa-eye"></i></div>
+          <div class="tool visible"><i class="fa fa-eye fa-eye-slash"></i></div>
           <div class="tool save"><i class="fa fa-save"></i></div>
-          <div class="tool folder"><i class="fa fa-folder-open-o"></i></div>
+          <div class="tool open"><i class="fa fa-folder-open-o"></i></div>
           <div class="tool theme"><i class="fa fa-font"></i></div>
         </div>
 
@@ -239,10 +239,48 @@ let md = function() {
 
     e('.CodeMirror-scroll').addEventListener('scroll', editorSync)
     e('.ctn-display').addEventListener('scroll', disSync)
+
+  }
+
+  let mainBind = function() {
+    const remote = require('electron').remote
+    const fs = require('fs')
+    const dia = remote.dialog
+    // console.log(dia.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))
+    e('.open').addEventListener('click', function(ev) {
+      let options = {
+        defaultPath: `/Users/liushaojie/Documents/md/一个MD.md`,
+        properties: ['openFile', 'openDirectory', 'showHiddenFiles'],
+        filters: [{name: 'Markdown', extensions: ['md']}]
+      }
+      let path = dia.showOpenDialog(options)
+      if (path) {
+        console.log('读取路径', path[0])
+        fs.readFile(path[0], 'utf-8', (err, data) => {
+          editor.setValue(data)
+        })
+      }
+    })
+    e('.save').addEventListener('click', function(ev) {
+      let options = {
+        title: `保存Markdown`,
+        defaultPath: `/Users/liushaojie/Documents/md/新建Markdown文件`,
+        filters: [{name: 'Markdown', extensions: ['md']}]
+      }
+      let path = dia.showSaveDialog(options)
+      if (path) {
+        console.log('保存路径', path)
+        let data = editor.getValue()
+        fs. writeFile(path, data, (err) => {
+          if (err) {console.log(err)}
+        })
+      }
+    })
   }
 
   let __init = function() {
     bind()
+    if(window.require){mainBind()}
     render()
   }
   __init()
