@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="./css/hf.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+        <i class="fa fa-comments-o"></i>
+        <span>ChatRoom</span>
+    </header>
+
+    <mainCont class="">
+      <div class="mainWindow ">
+        <div class="left">
+          <div class="usr-area">
+              <div class="usr-li">
+                <div class="usr-li-icon">
+                  <img class="icon" src="./src/1.jpg" alt="">
+                </div>
+                <div class="usr-li-name">二狗</div>
+              </div>
+          </div>
+        </div>
+        <div class="right ">
+          <div class="chat-area">
+            <div class="chat-li">
+              <div class="chat-li-icon">
+                <img class="icon" src="./src/1.jpg" alt="">
+              </div>
+              <div class="">
+                <div class="chat-li-prop">
+                  <div class="chat-li-name">二狗</div>
+                  <div class="chat-li-time">12:09:30</div>
+                </div>
+                <div class="chat-li-content rect">你让我说啥好呢</div>
+              </div>
+            </div>
+          </div>
+          <div class="chat-tool rect">
+            <div class="btn tool send">发送按钮</div>
+          </div>
+          <textarea class="chat-textarea rect " name="name" rows="8" cols="80"> 正在打字。。。</textarea>
+        </div>
+      </div>
+    </mainCont>
+
+    <footer>By Shaojie Liu 2017-4-19</footer>
+
+<script src="https://cdn.bootcss.com/socket.io/1.7.3/socket.io.min.js"></script>
+<script src="./main.js"></script>
+<script type="text/javascript">
+  // setTimeout(() => location.reload(true), 500)
+</script>
+  </body>
+</html>

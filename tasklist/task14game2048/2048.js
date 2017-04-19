@@ -329,7 +329,7 @@ let game = function() {
 
   bindAll()
   __init()
-  testColor()
+  // testColor()
 }
 
 let __main = function() {
