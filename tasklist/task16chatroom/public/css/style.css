@@ -34,6 +34,10 @@ mainCont{
 }
 .chat-area{
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: scroll;
 }
 .chat-tool{
   flex: none;
@@ -44,12 +48,26 @@ mainCont{
   font-size: 1rem;
   width: calc(100% - 20px);
 }
+.chat-tip{
+  flex: none;
+  display: flex;
+  justify-content: center;
+  color: gray;
+  align-self: center;
+}
+.chat-tip-time{
+  margin-right: 20px;
+}
 .chat-li{
+  flex:none;
   align-items: flex-start;
   margin: 20px 0;
 }
 .chat-li-name{
   margin-right: 10px;
+}
+.chat-li-msg{
+  font-size: 30px;
 }
 .rect{
   color: black;
@@ -57,6 +75,13 @@ mainCont{
   border-radius: 10px;
   padding: 10px;
   margin: 10px 0;
+}
+.line, .line2{
+  border-top: 1px solid lightgray;
+  padding: 10px;
+}
+.line2{
+  border-bottom: 1px solid lightgray;
 }
 .icon{
   width: 40px;
@@ -75,6 +100,9 @@ mainCont{
   padding: 5px;
   border-radius: 10px;
   margin: 0 5px;
+}
+.btn:hover{
+  cursor: pointer;
 }
 .r{
   border: 1px dashed red;
