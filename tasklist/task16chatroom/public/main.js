@@ -10,26 +10,33 @@ let randName = function() {
   return nameList[rand]
 }
 
-
 let bind = function() {
 
   let sendMsg = function() {
-    let data = e('.chat-textarea').value
+    let t = e('.chat-textarea')
+    let data = t.value
     socket.emit('newMsg', data)
+    t.value = ''
   }
 
   e('.send').addEventListener('click', sendMsg)
+
+  e('.chat-textarea').addEventListener('keyup', (ev) => {
+    if (ev.key == 'Enter') {
+      sendMsg()
+    }
+  })
 }
 
 let init = function() {
 
-  let sendName = function() {
+  let createName = function() {
     alertify.set({ labels: {
         ok     : "提交昵称",
         cancel : "随机来一个"
     } })
     alertify.prompt('输入你的昵称', function(bl, value) {
-      if (bl) {} else {
+      if (!bl || value=='') {
         value = randName()
       }
       console.log(`昵称是:${value}`)
@@ -49,7 +56,6 @@ let init = function() {
   }
 
   let newMsg = function(data) {
-    console.log('newMsg')
     let name = data.name
     let time = data.time
     let msg = data.msg
@@ -71,14 +77,31 @@ let init = function() {
     ele.scrollTop = ele.scrollHeight
   }
 
+  let newList = function(usrList) {
+    let templateList = ''
+    for (let prop of usrList) {
+      let template = `
+        <div class="usr-li">
+          <div class="usr-li-icon">
+            <img class="icon" src="./src/1.jpg" alt="">
+          </div>
+          <div class="usr-li-name">${prop.name}</div>
+        </div>`
+      templateList += template
+    }
+    e('.usr-area').innerHTML = templateList
+  }
+
   socket.on('connect', () => {console.log('连接成功')})
 
   socket.on('newTip', (data) => {newTip(data)})
 
   socket.on('newMsg', (data) => {newMsg(data)})
 
+  socket.on('newList', (data) => {newList(data)})
+
   window.onload = () => {
-    sendName()
+    createName()
   }
 }
 let __main = function() {
