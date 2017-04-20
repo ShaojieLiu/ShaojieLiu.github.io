@@ -25,11 +25,13 @@ let server = app.listen(3000, function () {
 })
 
 let io = require('socket.io').listen(server)
-let usrList = [], currentID = 0
+let usrList = []
 
 io.on('connection', function (socket) {
   // 新人加入
   socket.id = Math.random()
+  let rand = Math.floor(Math.random() * 7) + 1
+  socket.src = `./src/${rand}.jpg`
 
   let allTip = function(msg) {
     let time = new Date().Format("hh:mm:ss")
@@ -59,6 +61,15 @@ io.on('connection', function (socket) {
     socket.emit('newTip', obj)
   }
 
+  let sendStatus = function() {
+    let obj = {
+      name: socket.username,
+      id: socket.id,
+      src: socket.src,
+    }
+    socket.emit('status', obj)
+  }
+
   let newList = function() {
     console.log(usrList)
     io.sockets.emit('newList', usrList)
@@ -71,12 +82,14 @@ io.on('connection', function (socket) {
     let msg = `欢迎 [${socket.username}] 加入`
     othersTip(msg)
 
-    msg = `你的昵称是 [${socket.username}]`
-    selfTip(msg)
+    sendStatus()
+    // msg = `你的昵称是 [${socket.username}]`
+    // selfTip(msg)
 
     let user = {
       id: socket.id,
-      name: username
+      name: socket.username,
+      src: socket.src
     }
     usrList.push(user)
     newList()
@@ -87,6 +100,7 @@ io.on('connection', function (socket) {
     let time = new Date().Format("hh:mm:ss")
     io.sockets.emit('newMsg', {
       name: socket.username,
+      src: socket.src,
       time: time,
       msg: data
     })

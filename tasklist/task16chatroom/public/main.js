@@ -44,6 +44,20 @@ let init = function() {
     })
   }
 
+  let status = function(obj) {
+    let template = `
+    <div class="tool status" id=${obj.id + 1}>
+      <div class="usr-li">
+        <div class="usr-li-icon">
+          <img class="icon" src="${obj.src}" alt="">
+        </div>
+        <div class="usr-li-name">${obj.name}</div>
+      </div>
+    </div>
+    `
+    e('.chat-tool').insertAdjacentHTML('afterBegin', template)
+  }
+
   let newTip = function(data) {
     let time = data.time
     let msg = data.msg
@@ -59,11 +73,12 @@ let init = function() {
     let name = data.name
     let time = data.time
     let msg = data.msg
+    let src = data.src
     let ele = e('.chat-area')
     let template = `
       <div class="chat-li">
         <div class="chat-li-icon">
-          <img class="icon" src="./src/1.jpg" alt="">
+          <img class="icon" src="${src}" alt="">
         </div>
         <div class="">
           <div class="chat-li-prop">
@@ -81,9 +96,9 @@ let init = function() {
     let templateList = ''
     for (let prop of usrList) {
       let template = `
-        <div class="usr-li">
+        <div class="usr-li" id="${prop.id}">
           <div class="usr-li-icon">
-            <img class="icon" src="./src/1.jpg" alt="">
+            <img class="icon" src="${prop.src}" alt="">
           </div>
           <div class="usr-li-name">${prop.name}</div>
         </div>`
@@ -93,6 +108,8 @@ let init = function() {
   }
 
   socket.on('connect', () => {console.log('连接成功')})
+
+  socket.on('status', (obj) => {status(obj)})
 
   socket.on('newTip', (data) => {newTip(data)})
 

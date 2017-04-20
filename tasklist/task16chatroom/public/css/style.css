@@ -41,11 +41,15 @@ mainCont{
 }
 .chat-tool{
   flex: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .chat-textarea{
   flex: none;
   resize: none;
   font-size: 1rem;
+  margin-bottom: 10px;
   width: calc(100% - 20px);
 }
 .chat-tip{
@@ -68,13 +72,14 @@ mainCont{
 }
 .chat-li-msg{
   font-size: 30px;
+  margin: 10px 0;
 }
 .rect{
   color: black;
   border: 1px solid lightgray;
   border-radius: 10px;
   padding: 10px;
-  margin: 10px 0;
+  /*margin: 10px 0;*/
 }
 .line, .line2{
   border-top: 1px solid lightgray;
@@ -96,10 +101,11 @@ mainCont{
 .btn{
   background-color: rgb(107, 168, 224);
   color: white;
-  display: inline-block;
-  padding: 5px;
+  display: flex;
+  align-items: center;
+  padding: 5px 25px;
   border-radius: 10px;
-  margin: 0 5px;
+  /*margin-top: 5px;*/
 }
 .btn:hover{
   cursor: pointer;
