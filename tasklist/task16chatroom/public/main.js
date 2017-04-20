@@ -26,6 +26,14 @@ let bind = function() {
       sendMsg()
     }
   })
+
+  e('.chat-area').addEventListener('click', function(ev) {
+    let judge = ev.target.classList.contains('chat-li-img')
+    if (judge) {
+      ev.target.classList.toggle('zoom-in')
+    }
+  })
+
 }
 
 let init = function() {
@@ -107,6 +115,31 @@ let init = function() {
     e('.usr-area').innerHTML = templateList
   }
 
+  let newImg = function(data) {
+    let name = data.name
+    let time = data.time
+    let img = data.img
+    let src = data.src
+    let ele = e('.chat-area')
+    let template = `
+      <div class="chat-li">
+        <div class="chat-li-icon">
+          <img class="icon" src="${src}" alt="">
+        </div>
+        <div class="">
+          <div class="chat-li-prop">
+            <div class="chat-li-name">${name}</div>
+            <div class="chat-li-time">${time}</div>
+          </div>
+          <div class="chat-li-msg rect">
+            <img class="chat-li-img" src=${img}>
+          </div>
+        </div>
+      </div>`
+    ele.insertAdjacentHTML('beforeend', template)
+    ele.scrollTop = ele.scrollHeight
+  }
+
   socket.on('connect', () => {console.log('连接成功')})
 
   socket.on('status', (obj) => {status(obj)})
@@ -117,7 +150,82 @@ let init = function() {
 
   socket.on('newList', (data) => {newList(data)})
 
+  socket.on('newImg', (data) => {newImg(data)})
+
+  let dragPrevent = function() {
+    let prevent = function(ev) {
+      ev.preventDefault()
+      return false
+    }
+    console.log('prevent')
+    window.addEventListener('drop', prevent)
+    // window.addEventListener('drag', prevent)
+    window.addEventListener('dragenter', prevent)
+    window.addEventListener('dragleave', prevent)
+    window.addEventListener('dragover', prevent)
+  }
+
+  let img = undefined
+
+  let dragUpload = function(getData) {
+
+    let ele = e('.chat-textarea')
+    ele.addEventListener('drop', function(ev) {
+
+      ev.preventDefault()
+
+      let fileList = ev.dataTransfer.files
+
+      if (fileList.length != 0) {
+        if (fileList[0].type.indexOf('image') != -1) {
+          let src = window.URL.createObjectURL(fileList[0])
+          let filename = fileList[0].name
+          let filesize = Math.floor((fileList[0].size)/1024)
+          let template = `
+            <img class="previewPic" src="${src}" alt="待上传的图片">
+          `
+          let reader = new FileReader()
+          reader.readAsDataURL(fileList[0])
+          reader.onload = function(){
+            // console.log(this.result)
+            img = this.result
+            getData()
+          }
+          e('#preview').innerHTML = template
+
+        } else {
+          alertify.set({ labels: {
+              ok     : "下次不敢了",
+              cancel : "你别管我"
+          } })
+          alertify.alert('只能上传图片！！')
+        }
+      } else {
+        console.warn('drop files ERROR!')
+      }
+    })
+  }
+
+  let getData = function() {
+    let ele = e('.send-img')
+    ele.addEventListener('click', sendImg)
+    ele.classList.add('send-img-active')
+    ele.classList.add('pointer')
+  }
+
+  let sendImg = function() {
+    socket.emit('newImg', img)
+    img = undefined
+    e('#preview').innerHTML = ''
+    let ele = e('.send-img')
+    ele.removeEventListener('click', sendImg)
+    ele.classList.remove('send-img-active')
+    ele.classList.remove('pointer')
+  }
+
   window.onload = () => {
+    dragPrevent()
+    dragUpload(getData)
     createName()
   }
 }

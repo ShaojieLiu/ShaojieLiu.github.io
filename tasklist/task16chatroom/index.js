@@ -96,6 +96,7 @@ io.on('connection', function (socket) {
   }
 
   let newMsg = function(data) {
+    if (data == ''){return ''}
     // 转发
     let time = new Date().Format("hh:mm:ss")
     io.sockets.emit('newMsg', {
@@ -118,9 +119,21 @@ io.on('connection', function (socket) {
     }
   }
 
+  let newImg = function(src) {
+    let time = new Date().Format("hh:mm:ss")
+    io.sockets.emit('newImg', {
+      name: socket.username,
+      src: socket.src,
+      time: time,
+      img: src
+    })
+  }
+
   socket.on('newUsr', (user) => newUsr(user))
 
   socket.on('newMsg', (data) => newMsg(data))
+
+  socket.on('newImg', (src) => newImg(src))
 
   socket.on('disconnect', leave)
 })

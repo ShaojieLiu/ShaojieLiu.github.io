@@ -45,12 +45,28 @@ mainCont{
   justify-content: space-between;
   align-items: center;
 }
-.chat-textarea{
+.chat-editor{
+  display: flex;
+  align-self: stretch;
+  justify-content: space-between;
   flex: none;
-  resize: none;
-  font-size: 1rem;
+  /*font-size: 1rem;*/
   margin-bottom: 10px;
-  width: calc(100% - 20px);
+}
+.chat-textarea{
+  flex: 1 1 200px;
+  resize: none;
+  border: none;
+  /*max-width: 200px;*/
+}
+#preview{
+  flex: 0 1 0;
+  max-height: 200px;
+  max-width: 300px;
+}
+.previewPic{
+  max-height: 200px;
+  max-width: 300px;
 }
 .chat-tip{
   flex: none;
@@ -73,6 +89,25 @@ mainCont{
 .chat-li-msg{
   font-size: 30px;
   margin: 10px 0;
+}
+.chat-li-img{
+  max-height: 400px;
+  max-width: 600px;
+}
+.chat-li-img:hover{
+  cursor: zoom-in;
+}
+.zoom-in{
+  /*display: block;*/
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 100%;
+  max-height: 100%;
+}
+.zoom-in:hover{
+  cursor: zoom-out;
 }
 .rect{
   color: black;
@@ -98,6 +133,9 @@ mainCont{
   width: 70px;
   height: 70px;
 }
+.btn-bar{
+  display: flex;
+}
 .btn{
   background-color: rgb(107, 168, 224);
   color: white;
@@ -107,11 +145,21 @@ mainCont{
   border-radius: 10px;
   /*margin-top: 5px;*/
 }
-.btn:hover{
+.send-img{
+  margin-left: 20px;
+  background-color: rgb(98, 133, 95);
+  color: lightgray;
+  cursor: not-allowed;
+}
+.send-img-active{
+  color: white;
+  background-color: rgb(100, 230, 117);
+}
+.pointer:hover{
   cursor: pointer;
 }
-.r{
-  border: 1px dashed red;
+*{
+  /*border: 1px dashed red;*/
 }
 @media (max-width: 1024px) {
   html{font-size: 35px;}
