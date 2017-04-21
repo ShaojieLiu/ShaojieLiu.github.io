@@ -214,6 +214,7 @@ let init = function() {
   }
 
   let sendImg = function() {
+    // e('.send-img').classList.add('wait')
     socket.emit('newImg', img)
     img = undefined
     e('#preview').innerHTML = ''
