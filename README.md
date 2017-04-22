@@ -1,7 +1,7 @@
 
 ## 练习集预览
 
-
+____
 
 |[轮播](http://ShaojieLiu.github.io/tasklist/task1carousel/carousel.html)|[3D横幅](https://ShaojieLiu.github.io/tasklist/task3banner3D/banner3D.html)|[魔方](https://ShaojieLiu.github.io/tasklist/task6cube/cube3D.html)|[音乐盒](https://shaojieliu.github.io/tasklist/task4player/audio.html)|[字符串](https://shaojieliu.github.io/tasklist/task5haoqing/txt_operation.html)|
 |:--:|:--:|:--:|:--:|:--:|
@@ -9,7 +9,7 @@
 
 ____
 
-|2048游戏|Markdown 编辑器|ws 聊天室|||
+|2048游戏|Markdown 编辑器(Electron)|Websocket.io 聊天室|||
 |:--:|:--:|:--:|:--:|:--:|
 |[![task14](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task14.gif)](https://ShaojieLiu.github.io/tasklist/task14game2048/2048.html)|[![task15](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task15.gif)](https://ShaojieLiu.github.io/tasklist/task15markdown/index.html)|[![task16](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task16.gif)](https://ShaojieLiu.github.io/tasklist/task16chatroom/index.html)|||
 
@@ -34,5 +34,6 @@ ____
 
 ## todo列表
 
-1. 把 markdown 利用 electron 打包成 mac 和 win 的应用
-1.
+1. ~把 markdown 利用 electron 打包成 mac 和 win 的应用~
+1. ~完成聊天室的图片上传和放大功能~
+1. 搭建服务器，完成 ws聊天室的远程测试
