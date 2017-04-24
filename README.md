@@ -9,9 +9,9 @@ ____
 
 ____
 
-|2048游戏|Markdown 编辑器(Electron)|Websocket.io 聊天室|||
-|:--:|:--:|:--:|:--:|:--:|
-|[![task14](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task14.gif)](https://ShaojieLiu.github.io/tasklist/task14game2048/2048.html)|[![task15](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task15.gif)](https://ShaojieLiu.github.io/tasklist/task15markdown/index.html)|[![task16](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task16.gif)](https://ShaojieLiu.github.io/tasklist/task16chatroom/index.html)|||
+|2048游戏|Markdown 编辑器(Electron)|Websocket.io 聊天室|
+|:--:|:--:|:--:|
+|[![task14](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task14.gif)](https://ShaojieLiu.github.io/tasklist/task14game2048/2048.html)|[![task15](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task15.gif)](https://ShaojieLiu.github.io/tasklist/task15markdown/index.html)|[![task16](https://github.com/ShaojieLiu/ShaojieLiu.github.io/blob/master/img/task16.gif)](https://ShaojieLiu.github.io/tasklist/task16chatroom/index.html)|
 
 ____
 
@@ -36,4 +36,5 @@ ____
 
 1. ~把 markdown 利用 electron 打包成 mac 和 win 的应用~
 1. ~完成聊天室的图片上传和放大功能~
-1. 搭建服务器，完成 ws聊天室的远程测试
+1. ~搭建服务器，完成 ws聊天室的远程测试，地址：http://123.207.246.186:3000/~
+1. 完成域名备案之后，实现 Nginx 反向代理
