@@ -99,3 +99,5 @@ var time = function( z ) {
     }
     return `${Year}年${Month}月${Day}日 ${Hour}时${Minute}分${Second}秒 星期${Week}`
 }
+
+module.exports.time = time

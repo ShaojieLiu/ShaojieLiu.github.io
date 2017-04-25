@@ -65,7 +65,7 @@ io.on('connection', function (socket) {
     let obj = {
       name: socket.username,
       id: socket.id,
-      src: socket.src,
+      src: socket.src
     }
     socket.emit('status', obj)
   }
